@@ -1,22 +1,49 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import toast from "react-hot-toast";
+import { AuthContext } from "../providers/AuthContext";
+import { imageUpload } from "../utils";
 
 function Register() {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
-
+const {updateUserProfileFunc,createUserFunc}=useContext(AuthContext)
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+ const location = useLocation()
+  const from = location.state || '/'
+  
+ const onSubmit = async( data) => {
+   const { name, image, email, password } = data
+    const imageFile = image[0]
+   
 
-  const onSubmit = (data) => {
-    console.log("Registration data:", data);
-    // Add registration logic here
-  };
+    try {
+      
+      const imageURL = await imageUpload(imageFile)
+      
+      const result = await createUserFunc(email, password)
 
+      
+
+    
+      await updateUserProfileFunc(name, imageURL)
+
+      navigate(from, { replace: true })
+      toast.success('Signup Successfully')
+
+      console.log(result)
+    } catch (err) {
+      console.log(err)
+      toast.error(err?.message)
+    }
+  }
   return (
     <div className="min-h-screen flex items-center justify-center py-8">
       <div className="card w-full max-w-md bg-base-100 shadow-xl">
@@ -30,7 +57,9 @@ function Register() {
               <input
                 type="text"
                 placeholder="Your name"
-                className={`input input-bordered ${errors.name ? "input-error" : ""}`}
+                className={`input input-bordered ${
+                  errors.name ? "input-error" : ""
+                }`}
                 {...register("name", {
                   required: "Name is required",
                   minLength: {
@@ -55,7 +84,9 @@ function Register() {
               <input
                 type="email"
                 placeholder="email@example.com"
-                className={`input input-bordered ${errors.email ? "input-error" : ""}`}
+                className={`input input-bordered ${
+                  errors.email ? "input-error" : ""
+                }`}
                 {...register("email", {
                   required: "Email is required",
                   pattern: {
@@ -73,29 +104,33 @@ function Register() {
               )}
             </div>
 
-            <div className="form-control mt-4">
-              <label className="label">
-                <span className="label-text">Photo URL</span>
+                    {/* Image */}
+            <div>
+              <label
+                htmlFor='image'
+                className='block mb-2 text-sm font-medium text-gray-700'
+              >
+                Profile Image
               </label>
               <input
-                type="url"
-                placeholder="https://example.com/photo.jpg"
-                className={`input input-bordered ${errors.photoURL ? "input-error" : ""}`}
-                {...register("photoURL", {
-                 
-                  pattern: {
-                    value: /^https?:\/\/.+\..+/,
-                    message: "Invalid URL format",
-                  },
-                })}
+                name='image'
+                type='file'
+                id='image'
+                accept='image/*'
+                className='block w-full text-sm text-gray-500
+      file:mr-4 file:py-2 file:px-4
+      file:rounded-md file:border-0
+      file:text-sm file:font-semibold
+      file:bg-lime-50 file:text-lime-700
+      hover:file:bg-lime-100
+      bg-gray-100 border border-dashed border-lime-300 rounded-md cursor-pointer
+      focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400
+      py-2'
+                {...register('image')}
               />
-              {errors.photoURL && (
-                <label className="label">
-                  <span className="label-text-alt text-error">
-                    {errors.photoURL.message}
-                  </span>
-                </label>
-              )}
+              <p className='mt-1 text-xs text-gray-400'>
+                PNG, JPG or JPEG (max 2MB)
+              </p>
             </div>
 
             <div className="form-control mt-4">
@@ -106,7 +141,9 @@ function Register() {
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="password"
-                  className={`input input-bordered w-full pr-12 ${errors.password ? "input-error" : ""}`}
+                  className={`input input-bordered w-full pr-12 ${
+                    errors.password ? "input-error" : ""
+                  }`}
                   {...register("password", {
                     required: "Password is required",
                     minLength: {
@@ -125,7 +162,11 @@ function Register() {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
                 >
-                  {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+                  {showPassword ? (
+                    <FaEyeSlash size={20} />
+                  ) : (
+                    <FaEye size={20} />
+                  )}
                 </button>
               </div>
               {errors.password && (
@@ -136,8 +177,6 @@ function Register() {
                 </label>
               )}
             </div>
-
-            
 
             <div className="form-control mt-6">
               <button type="submit" className="btn btn-primary">
