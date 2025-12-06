@@ -11,39 +11,33 @@ function Register() {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm();
-const {updateUserProfileFunc,createUserFunc}=useContext(AuthContext)
+  const { updateUserProfileFunc, createUserFunc } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
- const location = useLocation()
-  const from = location.state || '/'
-  
- const onSubmit = async( data) => {
-   const { name, image, email, password } = data
-    const imageFile = image[0]
-   
+  const location = useLocation();
+  const from = location.state || "/";
+
+  const onSubmit = async (data) => {
+    const { name, image, email, password } = data;
+    const imageFile = image[0];
 
     try {
-      
-      const imageURL = await imageUpload(imageFile)
-      
-      const result = await createUserFunc(email, password)
+      const imageURL = await imageUpload(imageFile);
 
-      
+      const result = await createUserFunc(email, password);
 
-    
-      await updateUserProfileFunc(name, imageURL)
+      await updateUserProfileFunc(name, imageURL);
 
-      navigate(from, { replace: true })
-      toast.success('Signup Successfully')
+      navigate(from, { replace: true });
+      toast.success("Signup Successfully");
 
-      console.log(result)
+      console.log(result);
     } catch (err) {
-      console.log(err)
-      toast.error(err?.message)
+      console.log(err);
+      toast.error(err?.message);
     }
-  }
+  };
   return (
     <div className="min-h-screen flex items-center justify-center py-8">
       <div className="card w-full max-w-md bg-base-100 shadow-xl">
@@ -104,20 +98,20 @@ const {updateUserProfileFunc,createUserFunc}=useContext(AuthContext)
               )}
             </div>
 
-                    {/* Image */}
+            {/* Image */}
             <div>
               <label
-                htmlFor='image'
-                className='block mb-2 text-sm font-medium text-gray-700'
+                htmlFor="image"
+                className="block mb-2 text-sm font-medium text-gray-700"
               >
                 Profile Image
               </label>
               <input
-                name='image'
-                type='file'
-                id='image'
-                accept='image/*'
-                className='block w-full text-sm text-gray-500
+                name="image"
+                type="file"
+                id="image"
+                accept="image/*"
+                className="block w-full text-sm text-gray-500
       file:mr-4 file:py-2 file:px-4
       file:rounded-md file:border-0
       file:text-sm file:font-semibold
@@ -125,10 +119,10 @@ const {updateUserProfileFunc,createUserFunc}=useContext(AuthContext)
       hover:file:bg-lime-100
       bg-gray-100 border border-dashed border-lime-300 rounded-md cursor-pointer
       focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400
-      py-2'
-                {...register('image')}
+      py-2"
+                {...register("image")}
               />
-              <p className='mt-1 text-xs text-gray-400'>
+              <p className="mt-1 text-xs text-gray-400">
                 PNG, JPG or JPEG (max 2MB)
               </p>
             </div>
