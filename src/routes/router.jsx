@@ -3,7 +3,8 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import RootLayout from "../layout/RootLayout/RootLayout";
+import RootLayout from "../layout/RootLayout";
+// import RootLayout from "../layout/RootLayout/RootLayout";
 
 const router = createBrowserRouter([
   {
@@ -11,7 +12,7 @@ const router = createBrowserRouter([
     element: <RootLayout></RootLayout>,
     children: [
       {
-        path: "/",
+        index: true,
         element: <Home />,
       },
       {
