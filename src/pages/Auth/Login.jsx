@@ -3,7 +3,8 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
-import { AuthContext } from "../providers/AuthContext";
+import { AuthContext } from "../../providers/AuthContext";
+// import { AuthContext } from "../../providers/AuthContext";
 
 function Login() {
   const {
