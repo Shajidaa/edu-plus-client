@@ -1,9 +1,11 @@
 import { Outlet, NavLink } from "react-router-dom";
 import { useState } from "react";
+import useRole from "../hooks/useRole";
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-
+  const [role, isRoleLoading] = useRole();
+  if (isRoleLoading) return <p>loading</p>;
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
@@ -26,15 +28,80 @@ const DashboardLayout = () => {
         {/* Navigation Links */}
         <nav className="flex-1 p-4">
           <ul className="space-y-2">
+            {/* Student Routes */}
+            {role === "student" && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/my-tuitions"
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 p-3 rounded transition ${
+                        isActive
+                          ? "bg-blue-600 text-white"
+                          : "hover:bg-gray-700"
+                      }`
+                    }
+                  >
+                    <span>📚</span>
+                    {isSidebarOpen && <span>My Tuitions</span>}
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/post-tuition"
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 p-3 rounded transition ${
+                        isActive
+                          ? "bg-blue-600 text-white"
+                          : "hover:bg-gray-700"
+                      }`
+                    }
+                  >
+                    <span>✏️</span>
+                    {isSidebarOpen && <span>Post Tuition</span>}
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/applied-tutors"
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 p-3 rounded transition ${
+                        isActive
+                          ? "bg-blue-600 text-white"
+                          : "hover:bg-gray-700"
+                      }`
+                    }
+                  >
+                    <span>👨‍🏫</span>
+                    {isSidebarOpen && <span>Applied Tutors</span>}
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/payments"
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 p-3 rounded transition ${
+                        isActive
+                          ? "bg-blue-600 text-white"
+                          : "hover:bg-gray-700"
+                      }`
+                    }
+                  >
+                    <span>💳</span>
+                    {isSidebarOpen && <span>Payments</span>}
+                  </NavLink>
+                </li>
+              </>
+            )}
+
+            {/* Common Routes */}
             <li>
               <NavLink
                 to="/dashboard"
                 end
                 className={({ isActive }) =>
                   `flex items-center gap-3 p-3 rounded transition ${
-                    isActive
-                      ? "bg-blue-600 text-white"
-                      : "hover:bg-gray-700"
+                    isActive ? "bg-blue-600 text-white" : "hover:bg-gray-700"
                   }`
                 }
               >
@@ -47,9 +114,7 @@ const DashboardLayout = () => {
                 to="/dashboard/profile"
                 className={({ isActive }) =>
                   `flex items-center gap-3 p-3 rounded transition ${
-                    isActive
-                      ? "bg-blue-600 text-white"
-                      : "hover:bg-gray-700"
+                    isActive ? "bg-blue-600 text-white" : "hover:bg-gray-700"
                   }`
                 }
               >
@@ -62,9 +127,7 @@ const DashboardLayout = () => {
                 to="/dashboard/settings"
                 className={({ isActive }) =>
                   `flex items-center gap-3 p-3 rounded transition ${
-                    isActive
-                      ? "bg-blue-600 text-white"
-                      : "hover:bg-gray-700"
+                    isActive ? "bg-blue-600 text-white" : "hover:bg-gray-700"
                   }`
                 }
               >

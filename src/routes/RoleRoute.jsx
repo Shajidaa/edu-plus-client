@@ -6,7 +6,7 @@ const RoleRoute = ({ children, allowedRoles }) => {
   if (isRoleLoading) return <p>loading.........</p>;
   if (allowedRoles.includes(role)) return children;
 
-  return <Navigate to="/" replace="true" />;
+  return <Navigate to="/" replace />;
 };
 
 export default RoleRoute;

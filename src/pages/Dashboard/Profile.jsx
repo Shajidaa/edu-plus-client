@@ -1,7 +1,9 @@
 import useAuth from "../../hooks/useAuth";
+import useRole from "../../hooks/useRole";
 
 const Profile = () => {
   const { user } = useAuth();
+  const [role] = useRole();
 
   return (
     <div>
@@ -14,7 +16,7 @@ const Profile = () => {
             <div className="w-24 h-24 rounded-full bg-blue-500 flex items-center justify-center text-white text-4xl mb-4">
               <img src={user?.photoURL} alt="" />
             </div>
-            <h3 className="text-xl text-black font-semibold">{user?.role}</h3>
+            <h3 className="text-xl text-black font-semibold">{role}</h3>
             <h3 className="text-xl text-black font-semibold">
               {user?.displayName}
             </h3>

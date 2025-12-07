@@ -9,6 +9,11 @@ import Overview from "../pages/Dashboard/Overview";
 import Profile from "../pages/Dashboard/Profile";
 import Settings from "../pages/Dashboard/Settings";
 import PrivateRoute from "./PrivateRoute";
+import RoleRoute from "./roleRoute";
+import MyTuitions from "../pages/Dashboard/studentDashboard/MyTuitions";
+import PostTuition from "../pages/Dashboard/studentDashboard/PostTuition";
+import AppliedTutors from "../pages/Dashboard/studentDashboard/AppliedTutors";
+import Payments from "../pages/Dashboard/studentDashboard/Payments";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +45,39 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Overview />,
+      },
+      // ----------------- STUDENT ROUTES -----------------
+      {
+        path: "my-tuitions",
+        element: (
+          <RoleRoute allowedRoles={["student"]}>
+            <MyTuitions />
+          </RoleRoute>
+        ),
+      },
+      {
+        path: "post-tuition",
+        element: (
+          <RoleRoute allowedRoles={["student"]}>
+            <PostTuition />
+          </RoleRoute>
+        ),
+      },
+      {
+        path: "applied-tutors",
+        element: (
+          <RoleRoute allowedRoles={["student"]}>
+            <AppliedTutors />
+          </RoleRoute>
+        ),
+      },
+      {
+        path: "payments",
+        element: (
+          <RoleRoute allowedRoles={["student"]}>
+            <Payments />
+          </RoleRoute>
+        ),
       },
       {
         path: "profile",
