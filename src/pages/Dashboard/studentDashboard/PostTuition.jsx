@@ -1,11 +1,14 @@
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+
 import toast from "react-hot-toast";
-import axios from "axios";
+// import axios from "axios";
 
 const PostTuition = () => {
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const {
     register,
     handleSubmit,
@@ -34,7 +37,7 @@ const PostTuition = () => {
     try {
       console.log("Form Data:", data);
 
-      axios
+      axiosSecure
         .post(`${import.meta.env.VITE_API_URL}/tuitions`, data)
         .then(() => {
           toast.success("Tuition posted successfully!");
