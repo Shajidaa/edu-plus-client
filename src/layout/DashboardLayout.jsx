@@ -94,21 +94,110 @@ const DashboardLayout = () => {
               </>
             )}
 
+            {/* Tutor Routes */}
+            {role === "tutor" && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/active-tuitions"
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 p-3 rounded transition ${
+                        isActive
+                          ? "bg-blue-600 text-white"
+                          : "hover:bg-gray-700"
+                      }`
+                    }
+                  >
+                    <span>📖</span>
+                    {isSidebarOpen && <span>Active Tuitions</span>}
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/manage-applications"
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 p-3 rounded transition ${
+                        isActive
+                          ? "bg-blue-600 text-white"
+                          : "hover:bg-gray-700"
+                      }`
+                    }
+                  >
+                    <span>📝</span>
+                    {isSidebarOpen && <span>Manage Applications</span>}
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/earnings"
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 p-3 rounded transition ${
+                        isActive
+                          ? "bg-blue-600 text-white"
+                          : "hover:bg-gray-700"
+                      }`
+                    }
+                  >
+                    <span>💰</span>
+                    {isSidebarOpen && <span>Earnings</span>}
+                  </NavLink>
+                </li>
+              </>
+            )}
+
+            {/* Admin Routes */}
+            {role === "admin" && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/user-management"
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 p-3 rounded transition ${
+                        isActive
+                          ? "bg-blue-600 text-white"
+                          : "hover:bg-gray-700"
+                      }`
+                    }
+                  >
+                    <span>👥</span>
+                    {isSidebarOpen && <span>User Management</span>}
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/tuition-management"
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 p-3 rounded transition ${
+                        isActive
+                          ? "bg-blue-600 text-white"
+                          : "hover:bg-gray-700"
+                      }`
+                    }
+                  >
+                    <span>📋</span>
+                    {isSidebarOpen && <span>Tuition Management</span>}
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/reports"
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 p-3 rounded transition ${
+                        isActive
+                          ? "bg-blue-600 text-white"
+                          : "hover:bg-gray-700"
+                      }`
+                    }
+                  >
+                    <span>📊</span>
+                    {isSidebarOpen && <span>Reports</span>}
+                  </NavLink>
+                </li>
+              </>
+            )}
+
             {/* Common Routes */}
-            <li>
-              <NavLink
-                to="/dashboard"
-                end
-                className={({ isActive }) =>
-                  `flex items-center gap-3 p-3 rounded transition ${
-                    isActive ? "bg-blue-600 text-white" : "hover:bg-gray-700"
-                  }`
-                }
-              >
-                <span>📊</span>
-                {isSidebarOpen && <span>Overview</span>}
-              </NavLink>
-            </li>
+
             <li>
               <NavLink
                 to="/dashboard/profile"

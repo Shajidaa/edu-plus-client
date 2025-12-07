@@ -5,7 +5,7 @@ import DashboardLayout from "../layout/DashboardLayout";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
-import Overview from "../pages/Dashboard/Overview";
+
 import Profile from "../pages/Dashboard/Profile";
 import Settings from "../pages/Dashboard/Settings";
 import PrivateRoute from "./PrivateRoute";
@@ -14,6 +14,12 @@ import MyTuitions from "../pages/Dashboard/studentDashboard/MyTuitions";
 import PostTuition from "../pages/Dashboard/studentDashboard/PostTuition";
 import AppliedTutors from "../pages/Dashboard/studentDashboard/AppliedTutors";
 import Payments from "../pages/Dashboard/studentDashboard/Payments";
+import ActiveTuitions from "../pages/Dashboard/TutorDashboard/ActiveTuitions";
+import Earnings from "../pages/Dashboard/TutorDashboard/Earnings";
+import ManageApplications from "../pages/Dashboard/TutorDashboard/ManageApplications";
+import UserManagement from "../pages/Dashboard/AdminDashboard/UserManagement";
+import TuitionManagement from "../pages/Dashboard/AdminDashboard/TuitionManagement";
+import Reports from "../pages/Dashboard/AdminDashboard/Reports";
 
 const router = createBrowserRouter([
   {
@@ -42,10 +48,6 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
-      {
-        index: true,
-        element: <Overview />,
-      },
       // ----------------- STUDENT ROUTES -----------------
       {
         path: "my-tuitions",
@@ -76,6 +78,56 @@ const router = createBrowserRouter([
         element: (
           <RoleRoute allowedRoles={["student"]}>
             <Payments />
+          </RoleRoute>
+        ),
+      },
+      // ----------------- TUTOR ROUTES -----------------
+      {
+        path: "active-tuitions",
+        element: (
+          <RoleRoute allowedRoles={["tutor"]}>
+            <ActiveTuitions />
+          </RoleRoute>
+        ),
+      },
+      {
+        path: "manage-applications",
+        element: (
+          <RoleRoute allowedRoles={["tutor"]}>
+            <ManageApplications />
+          </RoleRoute>
+        ),
+      },
+      {
+        path: "earnings",
+        element: (
+          <RoleRoute allowedRoles={["tutor"]}>
+            <Earnings />
+          </RoleRoute>
+        ),
+      },
+      // ----------------- ADMIN ROUTES -----------------
+      {
+        path: "user-management",
+        element: (
+          <RoleRoute allowedRoles={["admin"]}>
+            <UserManagement />
+          </RoleRoute>
+        ),
+      },
+      {
+        path: "tuition-management",
+        element: (
+          <RoleRoute allowedRoles={["admin"]}>
+            <TuitionManagement />
+          </RoleRoute>
+        ),
+      },
+      {
+        path: "reports",
+        element: (
+          <RoleRoute allowedRoles={["admin"]}>
+            <Reports />
           </RoleRoute>
         ),
       },
