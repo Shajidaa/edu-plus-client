@@ -43,9 +43,13 @@ function Navbar() {
             <li>
               <NavLink to="/about">About</NavLink>
             </li>
-            <li>
-              <NavLink to="/dashboard">About</NavLink>
-            </li>
+            {user && (
+              <>
+                <li>
+                  <NavLink to="/dashboard">Dashboard</NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </div>
 
