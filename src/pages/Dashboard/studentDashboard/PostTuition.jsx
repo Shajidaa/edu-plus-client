@@ -1,14 +1,17 @@
 import { useForm } from "react-hook-form";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import StudTuitionGetRow from "../../../components/TableRows/StudTuitionGetRow";
+import TuitionEdit from "../../../components/Modal/TuitionEdit";
 
 const PostTuition = () => {
   const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedTuition, setSelectedTuition] = useState(null);
   const {
     register,
     handleSubmit,
@@ -65,6 +68,24 @@ const PostTuition = () => {
         .get(`${import.meta.env.VITE_API_URL}/tuitions`)
         .then((res) => res.data),
   });
+
+  // Handle edit button click
+  const handleEdit = (tuition) => {
+    setSelectedTuition(tuition);
+    setIsEditModalOpen(true);
+  };
+
+  // Handle modal close
+  const handleCloseModal = () => {
+    setIsEditModalOpen(false);
+    setSelectedTuition(null);
+  };
+
+  // Handle update tuition
+  const handleUpdate = () => {
+    refetch();
+  };
+
   if (loading || tuitionDataLoading) return <p>loading======</p>;
   if (error) return <p>error</p>;
   return (
@@ -274,7 +295,16 @@ const PostTuition = () => {
       <StudTuitionGetRow
         tuitionData={tuitionData}
         refetch={refetch}
+        onEdit={handleEdit}
       ></StudTuitionGetRow>
+
+      {/* Edit Modal */}
+      <TuitionEdit
+        isOpen={isEditModalOpen}
+        onClose={handleCloseModal}
+        tuitionData={selectedTuition}
+        onUpdate={handleUpdate}
+      />
     </>
   );
 };

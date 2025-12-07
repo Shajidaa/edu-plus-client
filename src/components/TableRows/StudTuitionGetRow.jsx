@@ -4,7 +4,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useMutation } from "@tanstack/react-query";
 
-const StudTuitionGetRow = ({ tuitionData, refetch }) => {
+const StudTuitionGetRow = ({ tuitionData, refetch, onEdit }) => {
   const axiosSecure = useAxiosSecure();
   const deleteMutation = useMutation({
     mutationFn: async (id) => {
@@ -40,6 +40,12 @@ const StudTuitionGetRow = ({ tuitionData, refetch }) => {
         deleteMutation.mutate(id);
       }
     });
+  };
+
+  const handleEdit = (tuition) => {
+    if (onEdit) {
+      onEdit(tuition);
+    }
   };
 
   return (
@@ -78,7 +84,10 @@ const StudTuitionGetRow = ({ tuitionData, refetch }) => {
                   </span>
                 </td>
                 <td>
-                  <button className="btn btn-sm mr-2">
+                  <button
+                    className="btn btn-sm mr-2"
+                    onClick={() => handleEdit(tuition)}
+                  >
                     <FiEdit2 size={18} />
                   </button>
                   <button
