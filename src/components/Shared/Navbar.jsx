@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FaSun, FaMoon } from "react-icons/fa";
-// import { AuthContext } from "../../providers/AuthContext";
+
 import toast from "react-hot-toast";
 import { AuthContext } from "../../providers/AuthContext";
 import Container from "./Container";
