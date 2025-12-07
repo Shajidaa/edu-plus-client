@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { AuthContext } from "../../providers/AuthContext";
 import { imageUpload } from "../../utils";
 import axios from "axios";
+// import axios from "axios";
 
 function Register() {
   const {
@@ -41,6 +42,7 @@ function Register() {
         email,
         role,
       });
+      // saveOrUpdateUser({ name, image: photoURL, email, role });
 
       navigate(from, { replace: true });
       toast.success("Signup Successfully");

@@ -43,6 +43,9 @@ function Navbar() {
             <li>
               <NavLink to="/about">About</NavLink>
             </li>
+            <li>
+              <NavLink to="/dashboard">About</NavLink>
+            </li>
           </ul>
         </div>
 

@@ -1,4 +1,5 @@
 import axios from "axios";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 export const imageUpload = async (imageData) => {
   const formData = new FormData();
@@ -9,4 +10,25 @@ export const imageUpload = async (imageData) => {
     formData
   );
   return data?.data?.display_url;
+};
+
+// export const saveOrUpdateUser = async (userData) => {
+//   const { data } = await useAxiosSecure.post(
+//     `${import.meta.env.VITE_API_URL}/users`,
+//     userData
+//   );
+//   return data;
+// };
+export const useSaveOrUpdateUser = () => {
+  const axiosSecure = useAxiosSecure();
+
+  const saveOrUpdateUser = async (userData) => {
+    const { data } = await axiosSecure.post(
+      `${import.meta.env.VITE_API_URL}/users`,
+      userData
+    );
+    return data;
+  };
+
+  return saveOrUpdateUser;
 };
