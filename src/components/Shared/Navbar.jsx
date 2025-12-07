@@ -22,6 +22,7 @@ function Navbar() {
     logOutFunc();
     toast.success("Logout successfully");
   };
+
   return (
     <div className="bg-base-100 shadow-lg px-4">
       <Container className="navbar">

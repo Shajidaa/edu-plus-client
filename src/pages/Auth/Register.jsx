@@ -5,8 +5,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../providers/AuthContext";
 import { imageUpload } from "../../utils";
-// import { AuthContext } from "../../providers/AuthContext";
-// import { imageUpload } from "../../utils";
+import axios from "axios";
 
 function Register() {
   const {
@@ -14,22 +13,34 @@ function Register() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { updateUserProfileFunc, createUserFunc } = useContext(AuthContext);
+  const { updateUserProfileFunc, user, createUserFunc } =
+    useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state || "/";
+  console.log(user);
 
   const onSubmit = async (data) => {
-    const { name, image, email, password } = data;
+    // console.log(data);
+    // return;
+
+    const { name, image, email, role, password } = data;
     const imageFile = image[0];
 
     try {
-      const imageURL = await imageUpload(imageFile);
+      const photoURL = await imageUpload(imageFile);
 
       const result = await createUserFunc(email, password);
 
-      await updateUserProfileFunc(name, imageURL);
+      await updateUserProfileFunc(name, photoURL);
+
+      axios.post(`${import.meta.env.VITE_API_URL}/users`, {
+        name,
+        image: photoURL,
+        email,
+        role,
+      });
 
       navigate(from, { replace: true });
       toast.success("Signup Successfully");
@@ -47,6 +58,40 @@ function Register() {
           <h2 className="card-title text-2xl font-bold mb-4">Register</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-control">
+              <label className="label">
+                <span className="label-text">Register as</span>
+              </label>
+              <div className="flex gap-4">
+                <label className="label cursor-pointer gap-2">
+                  <input
+                    type="radio"
+                    className="radio radio-primary"
+                    value="student"
+                    {...register("role", { required: "Please select a role" })}
+                    defaultChecked
+                  />
+                  <span className="label-text">Student</span>
+                </label>
+                <label className="label cursor-pointer gap-2">
+                  <input
+                    type="radio"
+                    className="radio radio-primary"
+                    value="tutor"
+                    {...register("role", { required: "Please select a role" })}
+                  />
+                  <span className="label-text">Tutor</span>
+                </label>
+              </div>
+              {errors.role && (
+                <label className="label">
+                  <span className="label-text-alt text-error">
+                    {errors.role.message}
+                  </span>
+                </label>
+              )}
+            </div>
+
+            <div className="form-control mt-4">
               <label className="label">
                 <span className="label-text">Name</span>
               </label>
