@@ -36,11 +36,25 @@ const PostTuition = () => {
     }
   }, [user, reset]);
 
+  const {
+    data: tuitionData,
+    isLoading: tuitionDataLoading,
+    error,
+    refetch,
+  } = useQuery({
+    queryKey: ["tuitions", user?.email],
+    queryFn: () =>
+      axiosSecure
+        .get(`${import.meta.env.VITE_API_URL}/tuitions`)
+        .then((res) => res.data),
+  });
+
   const onSubmit = async (data) => {
     try {
       axiosSecure
         .post(`${import.meta.env.VITE_API_URL}/tuitions`, data)
         .then(() => {
+          refetch();
           toast.success("Tuition posted successfully!");
         })
         .catch((error) => {
@@ -55,20 +69,6 @@ const PostTuition = () => {
       toast.error("Failed to post tuition. Please try again.");
     }
   };
-
-  const {
-    data: tuitionData,
-    isLoading: tuitionDataLoading,
-    error,
-    refetch,
-  } = useQuery({
-    queryKey: ["tuitions", user?.email],
-    queryFn: () =>
-      axiosSecure
-        .get(`${import.meta.env.VITE_API_URL}/tuitions`)
-        .then((res) => res.data),
-  });
-
   // Handle edit button click
   const handleEdit = (tuition) => {
     setSelectedTuition(tuition);

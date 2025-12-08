@@ -30,6 +30,7 @@ const TuitionEdit = ({ isOpen, onClose, tuitionData, onUpdate }) => {
         `${import.meta.env.VITE_API_URL}/tuitions/${tuitionData._id}`,
         data
       );
+
       toast.success("Tuition updated successfully!");
       onClose();
       if (onUpdate) {
