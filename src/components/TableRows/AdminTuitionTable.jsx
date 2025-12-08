@@ -1,27 +1,38 @@
 import { FiCheck, FiX, FiEye } from "react-icons/fi";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 
-const AdminTuitionTable = ({ data, onApprove, onReject, onView }) => {
-  const handleApprove = (tuition) => {
-    if (onApprove) {
-      onApprove(tuition);
-    } else {
-      toast.success(`Approved tuition for ${tuition.subject}`);
+const AdminTuitionTable = ({ data }) => {
+  const axiosSecure = useAxiosSecure();
+
+  const handleApprove = async ({ id, status }) => {
+    try {
+      await axiosSecure.patch(
+        `${import.meta.env.VITE_API_URL}/tuition-status/${id}`,
+        { status }
+      );
+      toast.success(`Tuition ${status} updated successfully!`);
+    } catch (error) {
+      toast.error("Failed to update tuition status");
+      console.error(error);
     }
   };
 
-  const handleReject = (tuition) => {
-    if (onReject) {
-      onReject(tuition);
-    } else {
-      toast.error(`Rejected tuition for ${tuition.subject}`);
+  const handleReject = async ({ id, status }) => {
+    try {
+      await axiosSecure.patch(
+        `${import.meta.env.VITE_API_URL}/tuition-status/${id}`,
+        { status }
+      );
+      toast.success(`Tuition ${status} updated successfully!`);
+    } catch (error) {
+      toast.error("Failed to update tuition status");
+      console.error(error);
     }
   };
 
-  const handleView = (tuition) => {
-    if (onView) {
-      onView(tuition);
-    }
+  const handleView = (id) => {
+    console.log(id);
   };
 
   return (
@@ -111,8 +122,8 @@ const AdminTuitionTable = ({ data, onApprove, onReject, onView }) => {
                       tuition.status === "approved"
                         ? "badge-success"
                         : tuition.status === "rejected"
-                          ? "badge-error"
-                          : "badge-warning"
+                        ? "badge-error"
+                        : "badge-warning"
                     }`}
                   >
                     {tuition.status || "pending"}
@@ -124,7 +135,7 @@ const AdminTuitionTable = ({ data, onApprove, onReject, onView }) => {
                   <div className="flex gap-2">
                     {/* View Button */}
                     <button
-                      onClick={() => handleView(tuition)}
+                      onClick={() => handleView(tuition._id)}
                       className="btn btn-ghost btn-sm text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-gray-700"
                       title="View Details"
                     >
@@ -134,7 +145,9 @@ const AdminTuitionTable = ({ data, onApprove, onReject, onView }) => {
                     {/* Approve Button */}
                     {tuition.status !== "approved" && (
                       <button
-                        onClick={() => handleApprove(tuition)}
+                        onClick={() =>
+                          handleApprove({ id: tuition._id, status: "approved" })
+                        }
                         className="btn btn-ghost btn-sm text-green-600 dark:text-green-400 hover:bg-green-100 dark:hover:bg-gray-700"
                         title="Approve"
                       >
@@ -145,7 +158,9 @@ const AdminTuitionTable = ({ data, onApprove, onReject, onView }) => {
                     {/* Reject Button */}
                     {tuition.status !== "rejected" && (
                       <button
-                        onClick={() => handleReject(tuition)}
+                        onClick={() =>
+                          handleReject({ id: tuition._id, status: "rejected" })
+                        }
                         className="btn btn-ghost btn-sm text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-gray-700"
                         title="Reject"
                       >
