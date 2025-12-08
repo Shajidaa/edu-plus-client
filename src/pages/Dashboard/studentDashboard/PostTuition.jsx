@@ -45,7 +45,7 @@ const PostTuition = () => {
     queryKey: ["tuitions", user?.email],
     queryFn: () =>
       axiosSecure
-        .get(`${import.meta.env.VITE_API_URL}/tuitions`)
+        .get(`${import.meta.env.VITE_API_URL}/tuitions?status=pending`)
         .then((res) => res.data),
   });
 

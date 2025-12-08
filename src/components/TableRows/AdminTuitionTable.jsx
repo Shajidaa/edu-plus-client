@@ -74,9 +74,7 @@ const AdminTuitionTable = ({ data, refetch }) => {
                       <div className="mask mask-squircle h-12 w-12 ring-2 ring-blue-400 dark:ring-blue-500">
                         <img
                           src={
-                            tuition.studentPhoto ||
-                            "https://via.placeholder.com/150"
-                          }
+                            tuition.studentPhoto}
                           alt={tuition.studentName}
                         />
                       </div>
