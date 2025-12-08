@@ -1,25 +1,45 @@
 import { Outlet, NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { FiSun, FiMoon } from "react-icons/fi";
 import useRole from "../hooks/useRole";
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [theme, setTheme] = useState("light");
   const [role, isRoleLoading] = useRole();
+
+  // Load theme from localStorage on mount
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") || "light";
+    setTheme(savedTheme);
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  }, []);
+
+  // Toggle theme
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.setAttribute("data-theme", newTheme);
+  };
+
   if (isRoleLoading) return <p>loading</p>;
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-gray-100 dark:bg-gray-900">
       {/* Sidebar */}
       <aside
         className={`${
           isSidebarOpen ? "w-64" : "w-20"
-        } bg-gray-800 text-white transition-all duration-300 flex flex-col`}
+        } bg-gray-800 dark:bg-gray-950 text-white transition-all duration-300 flex flex-col shadow-xl`}
       >
         {/* Sidebar Header */}
-        <div className="p-4 flex items-center justify-between border-b border-gray-700">
-          {isSidebarOpen && <h2 className="text-xl font-bold">Dashboard</h2>}
+        <div className="p-4 flex items-center justify-between border-b border-gray-700 dark:border-gray-800">
+          {isSidebarOpen && (
+            <h2 className="text-xl font-bold text-white">Dashboard</h2>
+          )}
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="p-2 rounded hover:bg-gray-700"
+            className="p-2 rounded hover:bg-gray-700 dark:hover:bg-gray-800 transition-colors"
           >
             {isSidebarOpen ? "←" : "→"}
           </button>
@@ -37,8 +57,8 @@ const DashboardLayout = () => {
                     className={({ isActive }) =>
                       `flex items-center gap-3 p-3 rounded transition ${
                         isActive
-                          ? "bg-blue-600 text-white"
-                          : "hover:bg-gray-700"
+                          ? "bg-blue-600 text-white shadow-lg"
+                          : "hover:bg-gray-700 dark:hover:bg-gray-800"
                       }`
                     }
                   >
@@ -52,8 +72,8 @@ const DashboardLayout = () => {
                     className={({ isActive }) =>
                       `flex items-center gap-3 p-3 rounded transition ${
                         isActive
-                          ? "bg-blue-600 text-white"
-                          : "hover:bg-gray-700"
+                          ? "bg-blue-600 text-white shadow-lg"
+                          : "hover:bg-gray-700 dark:hover:bg-gray-800"
                       }`
                     }
                   >
@@ -67,8 +87,8 @@ const DashboardLayout = () => {
                     className={({ isActive }) =>
                       `flex items-center gap-3 p-3 rounded transition ${
                         isActive
-                          ? "bg-blue-600 text-white"
-                          : "hover:bg-gray-700"
+                          ? "bg-blue-600 text-white shadow-lg"
+                          : "hover:bg-gray-700 dark:hover:bg-gray-800"
                       }`
                     }
                   >
@@ -82,8 +102,8 @@ const DashboardLayout = () => {
                     className={({ isActive }) =>
                       `flex items-center gap-3 p-3 rounded transition ${
                         isActive
-                          ? "bg-blue-600 text-white"
-                          : "hover:bg-gray-700"
+                          ? "bg-blue-600 text-white shadow-lg"
+                          : "hover:bg-gray-700 dark:hover:bg-gray-800"
                       }`
                     }
                   >
@@ -103,8 +123,8 @@ const DashboardLayout = () => {
                     className={({ isActive }) =>
                       `flex items-center gap-3 p-3 rounded transition ${
                         isActive
-                          ? "bg-blue-600 text-white"
-                          : "hover:bg-gray-700"
+                          ? "bg-blue-600 text-white shadow-lg"
+                          : "hover:bg-gray-700 dark:hover:bg-gray-800"
                       }`
                     }
                   >
@@ -118,8 +138,8 @@ const DashboardLayout = () => {
                     className={({ isActive }) =>
                       `flex items-center gap-3 p-3 rounded transition ${
                         isActive
-                          ? "bg-blue-600 text-white"
-                          : "hover:bg-gray-700"
+                          ? "bg-blue-600 text-white shadow-lg"
+                          : "hover:bg-gray-700 dark:hover:bg-gray-800"
                       }`
                     }
                   >
@@ -133,8 +153,8 @@ const DashboardLayout = () => {
                     className={({ isActive }) =>
                       `flex items-center gap-3 p-3 rounded transition ${
                         isActive
-                          ? "bg-blue-600 text-white"
-                          : "hover:bg-gray-700"
+                          ? "bg-blue-600 text-white shadow-lg"
+                          : "hover:bg-gray-700 dark:hover:bg-gray-800"
                       }`
                     }
                   >
@@ -154,8 +174,8 @@ const DashboardLayout = () => {
                     className={({ isActive }) =>
                       `flex items-center gap-3 p-3 rounded transition ${
                         isActive
-                          ? "bg-blue-600 text-white"
-                          : "hover:bg-gray-700"
+                          ? "bg-blue-600 text-white shadow-lg"
+                          : "hover:bg-gray-700 dark:hover:bg-gray-800"
                       }`
                     }
                   >
@@ -169,8 +189,8 @@ const DashboardLayout = () => {
                     className={({ isActive }) =>
                       `flex items-center gap-3 p-3 rounded transition ${
                         isActive
-                          ? "bg-blue-600 text-white"
-                          : "hover:bg-gray-700"
+                          ? "bg-blue-600 text-white shadow-lg"
+                          : "hover:bg-gray-700 dark:hover:bg-gray-800"
                       }`
                     }
                   >
@@ -184,8 +204,8 @@ const DashboardLayout = () => {
                     className={({ isActive }) =>
                       `flex items-center gap-3 p-3 rounded transition ${
                         isActive
-                          ? "bg-blue-600 text-white"
-                          : "hover:bg-gray-700"
+                          ? "bg-blue-600 text-white shadow-lg"
+                          : "hover:bg-gray-700 dark:hover:bg-gray-800"
                       }`
                     }
                   >
@@ -203,7 +223,9 @@ const DashboardLayout = () => {
                 to="/dashboard/profile"
                 className={({ isActive }) =>
                   `flex items-center gap-3 p-3 rounded transition ${
-                    isActive ? "bg-blue-600 text-white" : "hover:bg-gray-700"
+                    isActive
+                      ? "bg-blue-600 text-white shadow-lg"
+                      : "hover:bg-gray-700 dark:hover:bg-gray-800"
                   }`
                 }
               >
@@ -216,7 +238,9 @@ const DashboardLayout = () => {
                 to="/dashboard/settings"
                 className={({ isActive }) =>
                   `flex items-center gap-3 p-3 rounded transition ${
-                    isActive ? "bg-blue-600 text-white" : "hover:bg-gray-700"
+                    isActive
+                      ? "bg-blue-600 text-white shadow-lg"
+                      : "hover:bg-gray-700 dark:hover:bg-gray-800"
                   }`
                 }
               >
@@ -228,10 +252,10 @@ const DashboardLayout = () => {
         </nav>
 
         {/* Back to Home */}
-        <div className="p-4 border-t border-gray-700">
+        <div className="p-4 border-t border-gray-700 dark:border-gray-800">
           <NavLink
             to="/"
-            className="flex items-center gap-3 p-3 rounded hover:bg-gray-700 transition"
+            className="flex items-center gap-3 p-3 rounded hover:bg-gray-700 dark:hover:bg-gray-800 transition"
           >
             <span>🏠</span>
             {isSidebarOpen && <span>Back to Home</span>}
@@ -242,18 +266,34 @@ const DashboardLayout = () => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top Bar */}
-        <header className="bg-white shadow-sm p-4 flex items-center justify-between">
-          <h1 className="text-2xl font-semibold text-gray-800">Dashboard</h1>
+        <header className="bg-white dark:bg-gray-800 shadow-lg p-4 flex items-center justify-between">
+          <h1 className="text-2xl font-semibold text-gray-800 dark:text-gray-100">
+            Dashboard
+          </h1>
           <div className="flex items-center gap-4">
-            <button className="p-2 rounded hover:bg-gray-100">🔔</button>
-            <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white">
+            {/* Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+            >
+              {theme === "light" ? (
+                <FiMoon className="text-gray-600" size={20} />
+              ) : (
+                <FiSun className="text-yellow-400" size={20} />
+              )}
+            </button>
+            <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+              🔔
+            </button>
+            <div className="w-10 h-10 rounded-full bg-blue-500 dark:bg-blue-600 flex items-center justify-center text-white font-bold shadow-lg">
               U
             </div>
           </div>
         </header>
 
         {/* Content Area */}
-        <main className="flex-1 overflow-y-auto p-6">
+        <main className="flex-1 overflow-y-auto p-6 bg-gray-100 dark:bg-gray-900">
           <Outlet />
         </main>
       </div>

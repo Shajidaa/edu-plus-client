@@ -21,6 +21,7 @@ import UserManagement from "../pages/Dashboard/AdminDashboard/UserManagement";
 import TuitionManagement from "../pages/Dashboard/AdminDashboard/TuitionManagement";
 import Reports from "../pages/Dashboard/AdminDashboard/Reports";
 
+import AllTuitions from "../pages/Tuitions/AllTuitions";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,6 +31,11 @@ const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
+      {
+        path: "/all-tuitions",
+        element: <AllTuitions></AllTuitions>,
+      },
+
       {
         path: "/login",
         element: <Login />,

@@ -1,2 +1,17 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+@theme {
+    /* Neutral theme with blue accents */
+    --color-primary: oklch(0.6 0.2 240);
+    --color-primary-content: oklch(0.98 0 0);
+    --color-secondary: oklch(0.65 0.18 250);
+    --color-secondary-content: oklch(0.98 0 0);
+    --color-accent: oklch(0.7 0.15 260);
+    --color-accent-content: oklch(0.98 0 0);
+}
+
+/* Custom utility classes for theme colors */
+.bg-gradient-primary {
+    background: linear-gradient(135deg, oklch(0.6 0.2 240) 0%, oklch(0.65 0.18 250) 100%);
+}
