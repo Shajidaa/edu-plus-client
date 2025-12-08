@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FiSearch, FiEye } from "react-icons/fi";
@@ -8,6 +9,7 @@ import toast from "react-hot-toast";
 const MyTuitions = () => {
   const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
 
   const {
@@ -206,6 +208,13 @@ const MyTuitions = () => {
                             title="Apply for this tuition"
                           >
                             Apply
+                          </button>
+                          <button
+                            onClick={() => navigate(`/tuition/${tuition._id}`)}
+                            className="btn btn-ghost btn-sm text-blue-600 dark:text-blue-400"
+                            title="View Details"
+                          >
+                            <FiEye size={18} />
                           </button>
                         </div>
                       </td>

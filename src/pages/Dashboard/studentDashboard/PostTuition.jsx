@@ -90,11 +90,11 @@ const PostTuition = () => {
   if (error) return <p>error</p>;
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-br from-base-100 to-base-200 py-8 px-4">
+      <div className="min-h-screen bg-linear-t-to-br from-base-100 to-base-200 py-8 px-4">
         <div className="max-w-5xl mx-auto">
           {/* Header Section */}
           <div className="text-center mb-8">
-            <h2 className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2">
+            <h2 className="text-4xl font-bold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent mb-2">
               Post a Tuition Request
             </h2>
             <p className="text-base-content/70">
@@ -115,7 +115,7 @@ const PostTuition = () => {
                     </h3>
                   </div>
 
-                  <div className="bg-gradient-to-br from-primary/5 to-secondary/5 p-6 rounded-xl border border-primary/10">
+                  <div className="bg-linear-to-br from-primary/5 to-secondary/5 p-6 rounded-xl border border-primary/10">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="form-control">
                         <label className="label">

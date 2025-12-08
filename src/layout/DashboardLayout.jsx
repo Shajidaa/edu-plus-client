@@ -1,31 +1,16 @@
 import { Outlet, NavLink } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FiSun, FiMoon } from "react-icons/fi";
 import useRole from "../hooks/useRole";
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [theme, setTheme] = useState("light");
+
   const [role, isRoleLoading] = useRole();
-
-  // Load theme from localStorage on mount
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "light";
-    setTheme(savedTheme);
-    document.documentElement.setAttribute("data-theme", savedTheme);
-  }, []);
-
-  // Toggle theme
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    document.documentElement.setAttribute("data-theme", newTheme);
-  };
 
   if (isRoleLoading) return <p>loading</p>;
   return (
-    <div className="flex h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="flex h-screen bg-gray-100! dark:bg-gray-900">
       {/* Sidebar */}
       <aside
         className={`${
@@ -271,18 +256,6 @@ const DashboardLayout = () => {
             Dashboard
           </h1>
           <div className="flex items-center gap-4">
-            {/* Theme Toggle Button */}
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-              title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-            >
-              {theme === "light" ? (
-                <FiMoon className="text-gray-600" size={20} />
-              ) : (
-                <FiSun className="text-yellow-400" size={20} />
-              )}
-            </button>
             <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
               🔔
             </button>

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import TuitionCard from "../../components/tuitionCard";
-
+import Container from "../../components/Shared/Container";
 const AllTuitions = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["allTuitions"],
@@ -17,11 +17,11 @@ const AllTuitions = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div>
+    <Container className="grid gap-5 grid-cols-1 lg:grid-cols-4 md:grid-cols-3">
       {data?.map((tuition) => (
         <TuitionCard key={tuition._id} tuition={tuition}></TuitionCard>
       ))}
-    </div>
+    </Container>
   );
 };
 

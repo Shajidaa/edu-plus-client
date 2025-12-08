@@ -1,13 +1,7 @@
-import {
-  FiBookOpen,
-  FiMapPin,
-  FiDollarSign,
-  FiUser,
-  FiMail,
-  FiCalendar,
-} from "react-icons/fi";
+import { FiBookOpen, FiMapPin, FiDollarSign, FiCalendar } from "react-icons/fi";
+import { Link } from "react-router";
 
-const TuitionCard = ({ tuition, onApply }) => {
+const TuitionCard = ({ tuition }) => {
   const {
     subject,
     class: tuitionClass,
@@ -15,7 +9,7 @@ const TuitionCard = ({ tuition, onApply }) => {
     budget,
 
     status = "pending",
-    additionalDetails,
+
     createdAt,
   } = tuition;
 
@@ -47,7 +41,7 @@ const TuitionCard = ({ tuition, onApply }) => {
         {/* Header with Status Badge */}
         <div className="flex justify-between items-start mb-4">
           <div className="flex-1">
-            <h3 className="card-title text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            <h3 className="card-title text-2xl font-bold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
               {subject}
             </h3>
             <div className="flex items-center gap-2 mt-2 text-base-content/70">
@@ -100,28 +94,18 @@ const TuitionCard = ({ tuition, onApply }) => {
           </div>
         </div>
 
-        {/* Additional Details */}
-        {additionalDetails && (
-          <div className="mb-4">
-            <p className="text-sm text-base-content/70 line-clamp-2">
-              {additionalDetails}
-            </p>
-          </div>
-        )}
-
         <div className="divider my-2"></div>
 
         {/* Student Information */}
         <div className="flex items-center justify-between">
           {/* Action Button */}
-          {onApply && (
-            <button
-              onClick={() => onApply(tuition)}
-              className="btn btn-primary btn-sm gap-2"
-            >
-              Apply
-            </button>
-          )}
+
+          <Link
+            to={`/tuitions-details/${tuition._id}`}
+            className="btn btn-primary btn-sm gap-2"
+          >
+            see more
+          </Link>
         </div>
       </div>
     </div>

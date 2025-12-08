@@ -22,6 +22,8 @@ import TuitionManagement from "../pages/Dashboard/AdminDashboard/TuitionManageme
 import Reports from "../pages/Dashboard/AdminDashboard/Reports";
 
 import AllTuitions from "../pages/Tuitions/AllTuitions";
+import TuitionDetails from "../pages/TuitionDetails";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -35,7 +37,10 @@ const router = createBrowserRouter([
         path: "/all-tuitions",
         element: <AllTuitions></AllTuitions>,
       },
-
+      {
+        path: "/tuitions-details/:id",
+        element: <TuitionDetails />,
+      },
       {
         path: "/login",
         element: <Login />,
