@@ -4,7 +4,7 @@ import axios from "axios";
 import AdminTuitionTable from "../../../components/TableRows/AdminTuitionTable";
 
 const TuitionManagement = () => {
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["allTuitionsAdmin"],
     queryFn: async () => {
       const res = await axios.get(
@@ -19,7 +19,7 @@ const TuitionManagement = () => {
 
   return (
     <div>
-      <AdminTuitionTable data={data}></AdminTuitionTable>
+      <AdminTuitionTable data={data} refetch={refetch}></AdminTuitionTable>
     </div>
   );
 };

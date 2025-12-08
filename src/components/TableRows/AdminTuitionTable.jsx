@@ -2,7 +2,7 @@ import { FiCheck, FiX, FiEye } from "react-icons/fi";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 
-const AdminTuitionTable = ({ data }) => {
+const AdminTuitionTable = ({ data, refetch }) => {
   const axiosSecure = useAxiosSecure();
 
   const handleApprove = async ({ id, status }) => {
@@ -11,6 +11,7 @@ const AdminTuitionTable = ({ data }) => {
         `${import.meta.env.VITE_API_URL}/tuition-status/${id}`,
         { status }
       );
+      refetch();
       toast.success(`Tuition ${status} updated successfully!`);
     } catch (error) {
       toast.error("Failed to update tuition status");
@@ -24,6 +25,7 @@ const AdminTuitionTable = ({ data }) => {
         `${import.meta.env.VITE_API_URL}/tuition-status/${id}`,
         { status }
       );
+      refetch();
       toast.success(`Tuition ${status} updated successfully!`);
     } catch (error) {
       toast.error("Failed to update tuition status");
