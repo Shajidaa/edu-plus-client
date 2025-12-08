@@ -15,10 +15,10 @@ const DashboardLayout = () => {
       <aside
         className={`${
           isSidebarOpen ? "w-64" : "w-20"
-        } bg-gray-800 dark:bg-gray-950 text-white transition-all duration-300 flex flex-col shadow-xl`}
+        } bg-gray-800  text-white transition-all duration-300 flex flex-col shadow-xl`}
       >
         {/* Sidebar Header */}
-        <div className="p-4 flex items-center justify-between border-b border-gray-700 dark:border-gray-800">
+        <div className="p-4 flex items-center justify-between border-b border-gray-700 ">
           {isSidebarOpen && (
             <h2 className="text-xl font-bold text-white">Dashboard</h2>
           )}

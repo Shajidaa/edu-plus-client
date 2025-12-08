@@ -4,11 +4,12 @@ import { useQuery } from "@tanstack/react-query";
 import { FiArrowLeft } from "react-icons/fi";
 import toast from "react-hot-toast";
 import axios from "axios";
+import useRole from "../hooks/useRole";
 
 const TuitionDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
+  const [role, isRoleLoading] = useRole();
   const {
     data: tuition,
     isLoading,
@@ -27,7 +28,7 @@ const TuitionDetails = () => {
     toast.success(`Applied for ${tuition.subject} tuition!`);
   };
 
-  if (isLoading) {
+  if (isLoading || isRoleLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <span className="loading loading-spinner loading-lg text-primary"></span>
@@ -55,7 +56,7 @@ const TuitionDetails = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4">
+    <div className="min-h-screen bg-gray-50 py-8 px-4">
       <div className="max-w-5xl mx-auto">
         <button
           onClick={() => navigate(-1)}
@@ -68,7 +69,7 @@ const TuitionDetails = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* LEFT */}
           <div>
-            <div className="card bg-white dark:bg-gray-800 shadow-2xl">
+            <div className="card bg-white  shadow-2xl">
               <div className="card-body items-center text-center p-8">
                 <div className="avatar">
                   <div className="w-32 h-32 rounded-full ring ring-primary">
@@ -80,34 +81,24 @@ const TuitionDetails = () => {
                   {tuition.studentName}
                 </h3>
 
-                <div
-                  className={`badge badge-lg mt-2 ${
-                    tuition.status === "approved"
-                      ? "badge-success"
-                      : tuition.status === "rejected"
-                      ? "badge-error"
-                      : "badge-warning"
-                  }`}
-                >
+                <div className={"badge badge-lg mt-2 badge-success"}>
                   {tuition.status}
                 </div>
 
                 <div className="divider"></div>
 
                 <p className="text-sm">{tuition.studentEmail}</p>
-                {tuition.studentPhone && <p>{tuition.studentPhone}</p>}
+
                 <p>Posted: {formatDate(tuition.createdAt)}</p>
 
-                {tuition.status === "approved" && (
-                  <>
-                    <div className="divider"></div>
-                    <button
-                      onClick={handleApply}
-                      className="btn btn-primary btn-block"
-                    >
-                      Apply for this Tuition
-                    </button>
-                  </>
+                <div className="divider"></div>
+                {role === "tutor" && (
+                  <button
+                    onClick={handleApply}
+                    className="btn btn-primary btn-block"
+                  >
+                    Apply
+                  </button>
                 )}
               </div>
             </div>
@@ -115,7 +106,7 @@ const TuitionDetails = () => {
 
           {/* RIGHT */}
           <div className="lg:col-span-2">
-            <div className="card bg-white dark:bg-gray-800 shadow-2xl">
+            <div className="card bg-white  shadow-2xl">
               <div className="card-body p-8">
                 <h2 className="text-3xl font-bold mb-6">Tuition Details</h2>
 
@@ -125,14 +116,6 @@ const TuitionDetails = () => {
                 <p className="text-2xl font-bold text-blue-600">
                   ৳{tuition.budget}
                 </p>
-
-                {tuition.daysPerWeek && (
-                  <p>{tuition.daysPerWeek} days per week</p>
-                )}
-
-                {tuition.additionalDetails && (
-                  <p className="mt-4">{tuition.additionalDetails}</p>
-                )}
               </div>
             </div>
           </div>

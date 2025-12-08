@@ -9,9 +9,13 @@ const useRole = () => {
     enabled: !loading && !!user?.email,
     queryKey: ["role", user?.email],
     queryFn: async () => {
-      const result = await axiosSecure(`/user/role`);
-
-      return result.data.role;
+      try {
+        const result = await axiosSecure(`/user/role?email=${user.email}`);
+        return result.data?.role || null;
+      } catch (error) {
+        console.error("Error fetching role:", error);
+        return null;
+      }
     },
   });
 
