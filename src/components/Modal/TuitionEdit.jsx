@@ -49,7 +49,7 @@ const TuitionEdit = ({ isOpen, onClose, tuitionData, onUpdate }) => {
       <div className="modal-box max-w-2xl">
         {/* Modal Header */}
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          <h3 className="text-2xl font-bold  bg-clip-text text-transparent">
             Edit Tuition Request
           </h3>
           <button onClick={onClose} className="btn btn-sm btn-circle btn-ghost">
