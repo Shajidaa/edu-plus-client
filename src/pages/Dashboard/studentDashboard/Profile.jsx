@@ -1,5 +1,5 @@
-import useAuth from "../../hooks/useAuth";
-import useRole from "../../hooks/useRole";
+import useAuth from "../../../hooks/useAuth";
+import useRole from "../../../hooks/useRole";
 import { FiMail, FiUser, FiShield, FiCalendar, FiEdit2 } from "react-icons/fi";
 
 const Profile = () => {
@@ -214,7 +214,9 @@ const Profile = () => {
                         <div className="avatar placeholder">
                           <div className="bg-primary text-primary-content rounded-full w-12">
                             <span className="text-xl">
-                              {user?.providerData?.[0]?.providerId?.charAt(0).toUpperCase()}
+                              {user?.providerData?.[0]?.providerId
+                                ?.charAt(0)
+                                .toUpperCase()}
                             </span>
                           </div>
                         </div>

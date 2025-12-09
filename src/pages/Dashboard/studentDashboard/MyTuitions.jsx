@@ -29,7 +29,7 @@ const MyTuitions = () => {
       <div className="flex items-center justify-center min-h-screen">
         <div className="flex flex-col items-center gap-4">
           <span className="loading loading-spinner loading-lg text-primary"></span>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-gray-600">
             Loading approved tuitions...
           </p>
         </div>
@@ -65,20 +65,20 @@ const MyTuitions = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4">
+    <div className="min-h-screen bg-gray-50 py-8 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">
             Approved Tuitions
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-gray-600">
             Browse and apply for approved tuition opportunities
           </p>
         </div>
 
         {/* Search Section */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
+        <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             {/* Search Bar */}
             <div className="flex-1 relative w-full">
@@ -91,12 +91,12 @@ const MyTuitions = () => {
                 placeholder="Search by subject, location, class, or student name..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="input input-bordered w-full pl-10 bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600"
+                className="input input-bordered w-full pl-10 bg-gray-50 border-gray-300"
               />
             </div>
 
             {/* Results Count */}
-            <div className="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">
+            <div className="text-sm text-gray-600 whitespace-nowrap">
               Showing {filteredTuitions?.length || 0} of{" "}
               {tuitionData?.length || 0} tuitions
             </div>
@@ -105,26 +105,26 @@ const MyTuitions = () => {
 
         {/* Table Section */}
         {filteredTuitions && filteredTuitions.length > 0 ? (
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
+          <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
             <div className="overflow-x-auto">
               <table className="table table-zebra">
                 {/* Table Head */}
-                <thead className="bg-gray-200 dark:bg-gray-700">
+                <thead className="bg-gray-200">
                   <tr>
-                    <th className="text-gray-900 dark:text-gray-100">#</th>
-                    <th className="text-gray-900 dark:text-gray-100">
+                    <th className="text-gray-900">#</th>
+                    <th className="text-gray-900">
                       Student
                     </th>
-                    <th className="text-gray-900 dark:text-gray-100">
+                    <th className="text-gray-900">
                       Subject
                     </th>
-                    <th className="text-gray-900 dark:text-gray-100">Class</th>
-                    <th className="text-gray-900 dark:text-gray-100">
+                    <th className="text-gray-900">Class</th>
+                    <th className="text-gray-900">
                       Location
                     </th>
-                    <th className="text-gray-900 dark:text-gray-100">Budget</th>
-                    <th className="text-gray-900 dark:text-gray-100">Status</th>
-                    <th className="text-gray-900 dark:text-gray-100">
+                    <th className="text-gray-900">Budget</th>
+                    <th className="text-gray-900">Status</th>
+                    <th className="text-gray-900">
                       Actions
                     </th>
                   </tr>
@@ -135,10 +135,10 @@ const MyTuitions = () => {
                   {filteredTuitions.map((tuition, index) => (
                     <tr
                       key={tuition._id || index}
-                      className="hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                      className="hover:bg-gray-100 transition-colors"
                     >
                       {/* Index */}
-                      <th className="text-gray-900 dark:text-gray-200">
+                      <th className="text-gray-900">
                         {index + 1}
                       </th>
 
@@ -146,7 +146,7 @@ const MyTuitions = () => {
                       <td>
                         <div className="flex items-center gap-3">
                           <div className="avatar">
-                            <div className="mask mask-squircle h-12 w-12 ring-2 ring-blue-400 dark:ring-blue-500">
+                            <div className="mask mask-squircle h-12 w-12 ring-2 ring-blue-400">
                               <img
                                 src={
                                   tuition.studentPhoto ||
@@ -157,10 +157,10 @@ const MyTuitions = () => {
                             </div>
                           </div>
                           <div>
-                            <div className="font-bold text-gray-900 dark:text-gray-100">
+                            <div className="font-bold text-gray-900">
                               {tuition.studentName}
                             </div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400">
+                            <div className="text-sm text-gray-600">
                               {tuition.studentEmail}
                             </div>
                           </div>
@@ -168,26 +168,26 @@ const MyTuitions = () => {
                       </td>
 
                       {/* Subject */}
-                      <td className="font-semibold text-gray-900 dark:text-gray-100">
+                      <td className="font-semibold text-gray-900">
                         {tuition.subject}
                       </td>
 
                       {/* Class */}
-                      <td className="text-gray-800 dark:text-gray-300">
+                      <td className="text-gray-800">
                         {tuition.class}
                       </td>
 
                       {/* Location */}
-                      <td className="text-gray-800 dark:text-gray-300">
+                      <td className="text-gray-800">
                         {tuition.location}
                       </td>
 
                       {/* Budget */}
                       <td>
-                        <span className="font-bold text-blue-600 dark:text-blue-400">
+                        <span className="font-bold text-blue-600">
                           ৳{tuition.budget}
                         </span>
-                        <span className="text-xs text-gray-600 dark:text-gray-400">
+                        <span className="text-xs text-gray-600">
                           /month
                         </span>
                       </td>
@@ -211,7 +211,7 @@ const MyTuitions = () => {
                           </button>
                           <button
                             onClick={() => navigate(`/tuition/${tuition._id}`)}
-                            className="btn btn-ghost btn-sm text-blue-600 dark:text-blue-400"
+                            className="btn btn-ghost btn-sm text-blue-600"
                             title="View Details"
                           >
                             <FiEye size={18} />
@@ -225,13 +225,13 @@ const MyTuitions = () => {
             </div>
           </div>
         ) : (
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-12">
+          <div className="bg-white rounded-xl shadow-lg p-12">
             <div className="flex flex-col items-center justify-center text-center">
               <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">
                 No Approved Tuitions Found
               </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
+              <p className="text-gray-600 mb-6">
                 {searchTerm
                   ? "Try adjusting your search"
                   : "No approved tuitions available at the moment"}

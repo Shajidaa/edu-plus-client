@@ -39,18 +39,18 @@ const AdminTuitionTable = ({ data, refetch }) => {
 
   return (
     <div className="overflow-x-auto rounded-xl shadow-2xl">
-      <table className="table table-zebra bg-white dark:bg-gray-800">
+      <table className="table table-zebra bg-white">
         {/* Table Head */}
-        <thead className="bg-gray-200 dark:bg-gray-700">
+        <thead className="bg-gray-200">
           <tr>
-            <th className="text-gray-900 dark:text-gray-100">#</th>
-            <th className="text-gray-900 dark:text-gray-100">Student</th>
-            <th className="text-gray-900 dark:text-gray-100">Subject</th>
-            <th className="text-gray-900 dark:text-gray-100">Class</th>
-            <th className="text-gray-900 dark:text-gray-100">Location</th>
-            <th className="text-gray-900 dark:text-gray-100">Budget</th>
-            <th className="text-gray-900 dark:text-gray-100">Status</th>
-            <th className="text-gray-900 dark:text-gray-100">Actions</th>
+            <th className="text-gray-900">#</th>
+            <th className="text-gray-900">Student</th>
+            <th className="text-gray-900">Subject</th>
+            <th className="text-gray-900">Class</th>
+            <th className="text-gray-900">Location</th>
+            <th className="text-gray-900">Budget</th>
+            <th className="text-gray-900">Status</th>
+            <th className="text-gray-900">Actions</th>
           </tr>
         </thead>
 
@@ -60,10 +60,10 @@ const AdminTuitionTable = ({ data, refetch }) => {
             data.map((tuition, index) => (
               <tr
                 key={tuition._id || index}
-                className="hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                className="hover:bg-gray-100 transition-colors"
               >
                 {/* Index */}
-                <th className="text-gray-900 dark:text-gray-200">
+                <th className="text-gray-900">
                   {index + 1}
                 </th>
 
@@ -71,7 +71,7 @@ const AdminTuitionTable = ({ data, refetch }) => {
                 <td>
                   <div className="flex items-center gap-3">
                     <div className="avatar">
-                      <div className="mask mask-squircle h-12 w-12 ring-2 ring-blue-400 dark:ring-blue-500">
+                      <div className="mask mask-squircle h-12 w-12 ring-2 ring-blue-400">
                         <img
                           src={
                             tuition.studentPhoto}
@@ -80,10 +80,10 @@ const AdminTuitionTable = ({ data, refetch }) => {
                       </div>
                     </div>
                     <div>
-                      <div className="font-bold text-gray-900 dark:text-gray-100">
+                      <div className="font-bold text-gray-900">
                         {tuition.studentName}
                       </div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400">
+                      <div className="text-sm text-gray-600">
                         {tuition.studentEmail}
                       </div>
                     </div>
@@ -91,26 +91,26 @@ const AdminTuitionTable = ({ data, refetch }) => {
                 </td>
 
                 {/* Subject */}
-                <td className="font-semibold text-gray-900 dark:text-gray-100">
+                <td className="font-semibold text-gray-900">
                   {tuition.subject}
                 </td>
 
                 {/* Class */}
-                <td className="text-gray-800 dark:text-gray-300">
+                <td className="text-gray-800">
                   {tuition.class}
                 </td>
 
                 {/* Location */}
-                <td className="text-gray-800 dark:text-gray-300">
+                <td className="text-gray-800">
                   {tuition.location}
                 </td>
 
                 {/* Budget */}
                 <td>
-                  <span className="font-bold text-blue-600 dark:text-blue-400">
+                  <span className="font-bold text-blue-600">
                     ৳{tuition.budget}
                   </span>
-                  <span className="text-xs text-gray-600 dark:text-gray-400">
+                  <span className="text-xs text-gray-600">
                     /month
                   </span>
                 </td>
@@ -136,7 +136,7 @@ const AdminTuitionTable = ({ data, refetch }) => {
                     {/* View Button */}
                     <button
                       onClick={() => handleView(tuition._id)}
-                      className="btn btn-ghost btn-sm text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-gray-700"
+                      className="btn btn-ghost btn-sm text-blue-600 hover:bg-blue-100"
                       title="View Details"
                     >
                       <FiEye size={18} />
@@ -148,7 +148,7 @@ const AdminTuitionTable = ({ data, refetch }) => {
                         onClick={() =>
                           handleApprove({ id: tuition._id, status: "approved" })
                         }
-                        className="btn btn-ghost btn-sm text-green-600 dark:text-green-400 hover:bg-green-100 dark:hover:bg-gray-700"
+                        className="btn btn-ghost btn-sm text-green-600 hover:bg-green-100"
                         title="Approve"
                       >
                         <FiCheck size={18} />
@@ -161,7 +161,7 @@ const AdminTuitionTable = ({ data, refetch }) => {
                         onClick={() =>
                           handleReject({ id: tuition._id, status: "rejected" })
                         }
-                        className="btn btn-ghost btn-sm text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-gray-700"
+                        className="btn btn-ghost btn-sm text-red-600 hover:bg-red-100"
                         title="Reject"
                       >
                         <FiX size={18} />
@@ -175,7 +175,7 @@ const AdminTuitionTable = ({ data, refetch }) => {
             <tr>
               <td
                 colSpan="8"
-                className="text-center py-8 text-gray-600 dark:text-gray-400"
+                className="text-center py-8 text-gray-600"
               >
                 <div className="flex flex-col items-center gap-2">
                   <span className="text-4xl">📚</span>

@@ -13,25 +13,22 @@ const useAxiosSecure = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!loading && user?.accessToken) {
-      // Add request interceptor
+    if (!loading && user) {
+      //  REQUEST INTERCEPTOR (ALWAYS GET FRESH TOKEN)
       const requestInterceptor = axiosInstance.interceptors.request.use(
-        (config) => {
-          config.headers.Authorization = `Bearer ${user.accessToken}`;
+        async (config) => {
+          const token = await user.getIdToken(true);
+          config.headers.Authorization = `Bearer ${token}`;
           return config;
         }
       );
 
-      // Add response interceptor
+      //  RESPONSE INTERCEPTOR
       const responseInterceptor = axiosInstance.interceptors.response.use(
         (res) => res,
-        (err) => {
+        async (err) => {
           if (err?.response?.status === 401 || err?.response?.status === 403) {
-            logOutFunc()
-              .then(() => {
-                console.log("Logged out successfully.");
-              })
-              .catch(console.error);
+            await logOutFunc();
             navigate("/login");
           }
           return Promise.reject(err);
@@ -47,4 +44,5 @@ const useAxiosSecure = () => {
 
   return axiosInstance;
 };
+
 export default useAxiosSecure;

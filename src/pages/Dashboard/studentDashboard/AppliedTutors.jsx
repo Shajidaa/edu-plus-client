@@ -41,6 +41,23 @@ const AppliedTutors = () => {
       console.error("Reject Error:", error);
     }
   };
+  const handlePayment = async (app) => {
+    const paymentInfo = {
+      price: app.salary,
+      tuitionId: app.tuitionId,
+      tutorEmail: app.tutorEmail,
+      tutorName: app.tutorName,
+      studentEmail: app.studentEmail,
+      subject: app.tuitionSubject,
+    };
+
+    const res = await axiosSecure.post(
+      `${import.meta.env.VITE_API_URL}/create-checkout-session`,
+      paymentInfo
+    );
+
+    window.location.href = res.data.url;
+  };
 
   return (
     <div className="p-6 ">
@@ -63,62 +80,74 @@ const AppliedTutors = () => {
             </tr>
           </thead>
           <tbody>
-            {myApplications.map((app, index) => (
-              <tr key={app._id}>
-                <td>{index + 1}</td>
-                <td>{app.tutorName}</td>
-                <td>{app.tutorEmail}</td>
-                <td>{app.tuitionSubject}</td>
-                <td>{app.qualification}</td>
-                <td>{app.salary}</td>
-                <td>
-                  <span
-                    className={`px-3 py-1 rounded-full text-sm ${
-                      app.status === "approved"
-                        ? "bg-green-100 text-green-600"
-                        : "bg-yellow-100 text-yellow-600"
-                    }`}
-                  >
-                    {app.status}
-                  </span>
-                </td>
-                {/* Actions */}
-                <td>
-                  <div className="flex gap-2">
-                    {/* View Button */}
-                    <button
-                      onClick={() => handleView(app._id)}
-                      className="btn btn-ghost btn-sm text-blue-600"
-                      title="View Details"
+            {myApplications
+              .filter((app) => app.status !== "rejected")
+              .map((app, index) => (
+                <tr key={app._id}>
+                  <td>{index + 1}</td>
+                  <td>{app.tutorName}</td>
+                  <td>{app.tutorEmail}</td>
+                  <td>{app.tuitionSubject}</td>
+                  <td>{app.qualification}</td>
+                  <td>{app.salary}</td>
+                  <td>
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm ${
+                        app.status === "approved"
+                          ? "bg-green-100 text-green-600"
+                          : "bg-yellow-100 text-yellow-600"
+                      }`}
                     >
-                      <FiEye size={18} />
-                    </button>
+                      {app.status}
+                    </span>
+                  </td>
+                  {/* Actions */}
 
-                    {/* Approve Button */}
-                    {app.status !== "approved" && (
+                  <td>
+                    <div className="flex gap-2">
+                      {/* View Button */}
                       <button
-                        onClick={() => handleApprove(app._id)}
-                        className="btn btn-ghost btn-sm text-green-600"
-                        title="Approve"
+                        onClick={() => handleView(app._id)}
+                        className="btn btn-ghost btn-sm text-blue-600"
+                        title="View Details"
                       >
-                        <FiCheckCircle size={18} />
+                        <FiEye size={18} />
+                      </button>
+
+                      {app.status !== "approved" && (
+                        <button
+                          onClick={() => handleApprove(app._id)}
+                          className="btn btn-ghost btn-sm text-green-600"
+                          title="Approve"
+                        >
+                          <FiCheckCircle size={18} />
+                        </button>
+                      )}
+
+                      {app.status !== "approved" && (
+                        <button
+                          onClick={() => handleReject(app._id)}
+                          className="btn btn-ghost btn-sm text-red-600"
+                          title="Reject"
+                        >
+                          <FiX size={18} />
+                        </button>
+                      )}
+                    </div>
+                  </td>
+
+                  <td>
+                    {app.status === "approved" && (
+                      <button
+                        onClick={() => handlePayment(app)}
+                        className="btn btn-success btn-sm"
+                      >
+                        Pay
                       </button>
                     )}
-
-                    {/* Reject Button */}
-                    {app.status !== "rejected" && (
-                      <button
-                        onClick={() => handleReject(app._id)}
-                        className="btn btn-ghost btn-sm text-red-600"
-                        title="Reject"
-                      >
-                        <FiX size={18} />
-                      </button>
-                    )}
-                  </div>
-                </td>
-              </tr>
-            ))}
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

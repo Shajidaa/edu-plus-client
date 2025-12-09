@@ -1,6 +1,5 @@
 import { Outlet, NavLink } from "react-router-dom";
 import { useState } from "react";
-import { FiSun, FiMoon } from "react-icons/fi";
 import useRole from "../hooks/useRole";
 
 const DashboardLayout = () => {
@@ -10,7 +9,7 @@ const DashboardLayout = () => {
 
   if (isRoleLoading) return <p>loading</p>;
   return (
-    <div className="flex h-screen bg-gray-100! dark:bg-gray-900">
+    <div className="flex h-screen bg-gray-100!">
       {/* Sidebar */}
       <aside
         className={`${
@@ -24,7 +23,7 @@ const DashboardLayout = () => {
           )}
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="p-2 rounded hover:bg-gray-700 dark:hover:bg-gray-800 transition-colors"
+            className="p-2 rounded hover:bg-gray-700 transition-colors"
           >
             {isSidebarOpen ? "←" : "→"}
           </button>
@@ -43,7 +42,7 @@ const DashboardLayout = () => {
                       `flex items-center gap-3 p-3 rounded transition ${
                         isActive
                           ? "bg-blue-600 text-white shadow-lg"
-                          : "hover:bg-gray-700 dark:hover:bg-gray-800"
+                          : "hover:bg-gray-700"
                       }`
                     }
                   >
@@ -58,7 +57,7 @@ const DashboardLayout = () => {
                       `flex items-center gap-3 p-3 rounded transition ${
                         isActive
                           ? "bg-blue-600 text-white shadow-lg"
-                          : "hover:bg-gray-700 dark:hover:bg-gray-800"
+                          : "hover:bg-gray-700"
                       }`
                     }
                   >
@@ -73,7 +72,7 @@ const DashboardLayout = () => {
                       `flex items-center gap-3 p-3 rounded transition ${
                         isActive
                           ? "bg-blue-600 text-white shadow-lg"
-                          : "hover:bg-gray-700 dark:hover:bg-gray-800"
+                          : "hover:bg-gray-700"
                       }`
                     }
                   >
@@ -88,7 +87,7 @@ const DashboardLayout = () => {
                       `flex items-center gap-3 p-3 rounded transition ${
                         isActive
                           ? "bg-blue-600 text-white shadow-lg"
-                          : "hover:bg-gray-700 dark:hover:bg-gray-800"
+                          : "hover:bg-gray-700"
                       }`
                     }
                   >
@@ -109,7 +108,7 @@ const DashboardLayout = () => {
                       `flex items-center gap-3 p-3 rounded transition ${
                         isActive
                           ? "bg-blue-600 text-white shadow-lg"
-                          : "hover:bg-gray-700 dark:hover:bg-gray-800"
+                          : "hover:bg-gray-700"
                       }`
                     }
                   >
@@ -124,7 +123,7 @@ const DashboardLayout = () => {
                       `flex items-center gap-3 p-3 rounded transition ${
                         isActive
                           ? "bg-blue-600 text-white shadow-lg"
-                          : "hover:bg-gray-700 dark:hover:bg-gray-800"
+                          : "hover:bg-gray-700"
                       }`
                     }
                   >
@@ -139,7 +138,7 @@ const DashboardLayout = () => {
                       `flex items-center gap-3 p-3 rounded transition ${
                         isActive
                           ? "bg-blue-600 text-white shadow-lg"
-                          : "hover:bg-gray-700 dark:hover:bg-gray-800"
+                          : "hover:bg-gray-700"
                       }`
                     }
                   >
@@ -160,7 +159,7 @@ const DashboardLayout = () => {
                       `flex items-center gap-3 p-3 rounded transition ${
                         isActive
                           ? "bg-blue-600 text-white shadow-lg"
-                          : "hover:bg-gray-700 dark:hover:bg-gray-800"
+                          : "hover:bg-gray-700"
                       }`
                     }
                   >
@@ -175,7 +174,7 @@ const DashboardLayout = () => {
                       `flex items-center gap-3 p-3 rounded transition ${
                         isActive
                           ? "bg-blue-600 text-white shadow-lg"
-                          : "hover:bg-gray-700 dark:hover:bg-gray-800"
+                          : "hover:bg-gray-700"
                       }`
                     }
                   >
@@ -190,7 +189,7 @@ const DashboardLayout = () => {
                       `flex items-center gap-3 p-3 rounded transition ${
                         isActive
                           ? "bg-blue-600 text-white shadow-lg"
-                          : "hover:bg-gray-700 dark:hover:bg-gray-800"
+                          : "hover:bg-gray-700"
                       }`
                     }
                   >
@@ -210,7 +209,7 @@ const DashboardLayout = () => {
                   `flex items-center gap-3 p-3 rounded transition ${
                     isActive
                       ? "bg-blue-600 text-white shadow-lg"
-                      : "hover:bg-gray-700 dark:hover:bg-gray-800"
+                      : "hover:bg-gray-700"
                   }`
                 }
               >
@@ -225,7 +224,7 @@ const DashboardLayout = () => {
                   `flex items-center gap-3 p-3 rounded transition ${
                     isActive
                       ? "bg-blue-600 text-white shadow-lg"
-                      : "hover:bg-gray-700 dark:hover:bg-gray-800"
+                      : "hover:bg-gray-700"
                   }`
                 }
               >
@@ -237,10 +236,10 @@ const DashboardLayout = () => {
         </nav>
 
         {/* Back to Home */}
-        <div className="p-4 border-t border-gray-700 dark:border-gray-800">
+        <div className="p-4 border-t border-gray-700">
           <NavLink
             to="/"
-            className="flex items-center gap-3 p-3 rounded hover:bg-gray-700 dark:hover:bg-gray-800 transition"
+            className="flex items-center gap-3 p-3 rounded hover:bg-gray-700 transition"
           >
             <span>🏠</span>
             {isSidebarOpen && <span>Back to Home</span>}
@@ -251,22 +250,22 @@ const DashboardLayout = () => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top Bar */}
-        <header className="bg-white dark:bg-gray-800 shadow-lg p-4 flex items-center justify-between">
-          <h1 className="text-2xl font-semibold text-gray-800 dark:text-gray-100">
+        <header className="bg-white shadow-lg p-4 flex items-center justify-between">
+          <h1 className="text-2xl font-semibold text-gray-800">
             Dashboard
           </h1>
           <div className="flex items-center gap-4">
-            <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
               🔔
             </button>
-            <div className="w-10 h-10 rounded-full bg-blue-500 dark:bg-blue-600 flex items-center justify-center text-white font-bold shadow-lg">
+            <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold shadow-lg">
               U
             </div>
           </div>
         </header>
 
         {/* Content Area */}
-        <main className="flex-1 overflow-y-auto p-6 bg-gray-100 dark:bg-gray-900">
+        <main className="flex-1 overflow-y-auto p-6 bg-gray-100">
           <Outlet />
         </main>
       </div>

@@ -6,7 +6,7 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 
-import Profile from "../pages/Dashboard/Profile";
+import Profile from "../pages/Dashboard/studentDashboard/Profile";
 import Settings from "../pages/Dashboard/Settings";
 import PrivateRoute from "./PrivateRoute";
 import RoleRoute from "./roleRoute";
@@ -23,11 +23,14 @@ import Reports from "../pages/Dashboard/AdminDashboard/Reports";
 
 import AllTuitions from "../pages/Tuitions/AllTuitions";
 import TuitionDetails from "../pages/TuitionDetails";
+import PaymentSuccess from "../pages/Dashboard/studentDashboard/PaymentSuccess";
+import Spinner from "../components/Shared/Spinner";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout></RootLayout>,
+    hydrateFallbackElement: <Spinner></Spinner>,
     children: [
       {
         index: true,
@@ -48,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/payment-success",
+        element: <PaymentSuccess></PaymentSuccess>,
       },
     ],
   },
@@ -92,6 +99,15 @@ const router = createBrowserRouter([
           </RoleRoute>
         ),
       },
+      {
+        path: "profile",
+        element: (
+          <RoleRoute allowedRoles={["student"]}>
+            <Profile />,
+          </RoleRoute>
+        ),
+      },
+
       // ----------------- TUTOR ROUTES -----------------
       {
         path: "active-tuitions",
@@ -142,10 +158,7 @@ const router = createBrowserRouter([
           </RoleRoute>
         ),
       },
-      {
-        path: "profile",
-        element: <Profile />,
-      },
+
       {
         path: "settings",
         element: <Settings />,

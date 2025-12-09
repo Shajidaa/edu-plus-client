@@ -1,17 +1,27 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-@theme {
-    /* Neutral theme with blue accents */
-    --color-primary: oklch(0.6 0.2 240);
-    --color-primary-content: oklch(0.98 0 0);
-    --color-secondary: oklch(0.65 0.18 250);
-    --color-secondary-content: oklch(0.98 0 0);
-    --color-accent: oklch(0.7 0.15 260);
-    --color-accent-content: oklch(0.98 0 0);
-}
+:root {
+    /* Brand Colors */
+    --color-primary: #1E3A8A;
+    /* Deep Blue */
+    --color-primary-hover: #1E40AF;
 
-/* Custom utility classes for theme colors */
-.bg-gradient-primary {
-    background: linear-gradient(135deg, oklch(0.6 0.2 240) 0%, oklch(0.65 0.18 250) 100%);
+    --color-secondary: #F97316;
+    /* Bright Orange */
+    --color-secondary-hover: #EA580C;
+
+    /* Background Colors */
+    --color-bg-main: #FFFFFF;
+    --color-bg-soft: #EFF6FF;
+    --color-bg-light: #F3F4F6;
+
+    /* Text Colors */
+    --color-text-dark: #111827;
+    --color-text-muted: #374151;
+    --color-text-light: #FFFFFF;
+
+    /* Border & Card */
+    --color-border: #E5E7EB;
+    --color-card-bg: #FFFFFF;
 }
