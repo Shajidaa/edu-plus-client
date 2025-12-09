@@ -1,12 +1,18 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import {
+  FaEye,
+  FaEyeSlash,
+  FaUser,
+  FaEnvelope,
+  FaLock,
+  FaImage,
+} from "react-icons/fa";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../providers/AuthContext";
 import { imageUpload } from "../../utils";
 import axios from "axios";
-// import axios from "axios";
 
 function Register() {
   const {
@@ -17,23 +23,21 @@ function Register() {
   const { updateUserProfileFunc, user, createUserFunc } =
     useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
+  const [setSelectedRole] = useState("student");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state || "/";
   console.log(user);
 
   const onSubmit = async (data) => {
-    // console.log(data);
-    // return;
-
     const { name, image, email, role, password } = data;
     const imageFile = image[0];
 
+    setIsLoading(true);
     try {
       const photoURL = await imageUpload(imageFile);
-
       const result = await createUserFunc(email, password);
-
       await updateUserProfileFunc(name, photoURL);
 
       axios.post(`${import.meta.env.VITE_API_URL}/users`, {
@@ -42,150 +46,218 @@ function Register() {
         email,
         role,
       });
-      // saveOrUpdateUser({ name, image: photoURL, email, role });
 
       navigate(from, { replace: true });
       toast.success("Signup Successfully");
-
       console.log(result);
     } catch (err) {
       console.log(err);
       toast.error(err?.message);
+    } finally {
+      setIsLoading(false);
     }
   };
+
   return (
-    <div className="min-h-screen flex items-center justify-center py-8">
-      <div className="card w-full max-w-md bg-base-100 shadow-xl">
-        <div className="card-body">
-          <h2 className="card-title text-2xl font-bold mb-4">Register</h2>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Register as</span>
+    <div
+      className="min-h-screen flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8"
+      style={{ backgroundColor: "var(--color-bg-soft)" }}
+    >
+      <div className="w-full max-w-md">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h2
+            className="text-3xl sm:text-4xl font-extrabold mb-2"
+            style={{ color: "var(--color-text-dark)" }}
+          >
+            Create Account
+          </h2>
+          <p
+            className="text-sm sm:text-base"
+            style={{ color: "var(--color-text-muted)" }}
+          >
+            Join our learning community today
+          </p>
+        </div>
+
+        {/* Card */}
+        <div
+          className="rounded-2xl shadow-2xl p-6 sm:p-8 border"
+          style={{
+            backgroundColor: "var(--color-card-bg)",
+            borderColor: "var(--color-border)",
+          }}
+        >
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+            {/* Role Selection - Simple */}
+            <div>
+              <label
+                className="block text-sm font-medium mb-2"
+                style={{ color: "var(--color-text-dark)" }}
+              >
+                Register as
               </label>
               <div className="flex gap-4">
-                <label className="label cursor-pointer gap-2">
+                <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="radio"
                     className="radio radio-primary"
                     value="student"
                     {...register("role", { required: "Please select a role" })}
                     defaultChecked
+                    onChange={(e) => setSelectedRole(e.target.value)}
                   />
-                  <span className="label-text">Student</span>
+                  <span
+                    className="text-sm font-medium"
+                    style={{ color: "var(--color-text-dark)" }}
+                  >
+                    Student
+                  </span>
                 </label>
-                <label className="label cursor-pointer gap-2">
+
+                <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="radio"
                     className="radio radio-primary"
                     value="tutor"
                     {...register("role", { required: "Please select a role" })}
+                    onChange={(e) => setSelectedRole(e.target.value)}
                   />
-                  <span className="label-text">Tutor</span>
+                  <span
+                    className="text-sm font-medium"
+                    style={{ color: "var(--color-text-dark)" }}
+                  >
+                    Teacher
+                  </span>
                 </label>
               </div>
               {errors.role && (
-                <label className="label">
-                  <span className="label-text-alt text-error">
-                    {errors.role.message}
-                  </span>
-                </label>
+                <p className="text-error text-xs mt-1">{errors.role.message}</p>
               )}
             </div>
 
-            <div className="form-control mt-4">
-              <label className="label">
-                <span className="label-text">Name</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Your name"
-                className={`input input-bordered ${
-                  errors.name ? "input-error" : ""
-                }`}
-                {...register("name", {
-                  required: "Name is required",
-                  minLength: {
-                    value: 3,
-                    message: "Name must be at least 3 characters",
-                  },
-                })}
-              />
-              {errors.name && (
-                <label className="label">
-                  <span className="label-text-alt text-error">
-                    {errors.name.message}
-                  </span>
-                </label>
-              )}
-            </div>
-
-            <div className="form-control mt-4">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                placeholder="email@example.com"
-                className={`input input-bordered ${
-                  errors.email ? "input-error" : ""
-                }`}
-                {...register("email", {
-                  required: "Email is required",
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "Invalid email address",
-                  },
-                })}
-              />
-              {errors.email && (
-                <label className="label">
-                  <span className="label-text-alt text-error">
-                    {errors.email.message}
-                  </span>
-                </label>
-              )}
-            </div>
-
-            {/* Image */}
+            {/* Name Input */}
             <div>
               <label
-                htmlFor="image"
-                className="block mb-2 text-sm font-medium text-gray-700"
+                className="block text-sm font-medium mb-2"
+                style={{ color: "var(--color-text-dark)" }}
+              >
+                Full Name
+              </label>
+              <div className="relative">
+                <FaUser
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  size={16}
+                />
+                <input
+                  type="text"
+                  placeholder="Enter your full name"
+                  className={`input input-bordered w-full pl-10 transition-all ${
+                    errors.name ? "input-error" : "focus:border-primary"
+                  }`}
+                  {...register("name", {
+                    required: "Name is required",
+                    minLength: {
+                      value: 3,
+                      message: "Name must be at least 3 characters",
+                    },
+                  })}
+                />
+              </div>
+              {errors.name && (
+                <p className="text-error text-xs mt-1">{errors.name.message}</p>
+              )}
+            </div>
+
+            {/* Email Input */}
+            <div>
+              <label
+                className="block text-sm font-medium mb-2"
+                style={{ color: "var(--color-text-dark)" }}
+              >
+                Email Address
+              </label>
+              <div className="relative">
+                <FaEnvelope
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  size={16}
+                />
+                <input
+                  type="email"
+                  placeholder="email@example.com"
+                  className={`input input-bordered w-full pl-10 transition-all ${
+                    errors.email ? "input-error" : "focus:border-primary"
+                  }`}
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: "Invalid email address",
+                    },
+                  })}
+                />
+              </div>
+              {errors.email && (
+                <p className="text-error text-xs mt-1">
+                  {errors.email.message}
+                </p>
+              )}
+            </div>
+
+            {/* Profile Image */}
+            <div>
+              <label
+                className="block text-sm font-medium mb-2"
+                style={{ color: "var(--color-text-dark)" }}
               >
                 Profile Image
               </label>
-              <input
-                name="image"
-                type="file"
-                id="image"
-                accept="image/*"
-                className="block w-full text-sm text-gray-500
-      file:mr-4 file:py-2 file:px-4
-      file:rounded-md file:border-0
-      file:text-sm file:font-semibold
-      file:bg-lime-50 file:text-lime-700
-      hover:file:bg-lime-100
-      bg-gray-100 border border-dashed border-lime-300 rounded-md cursor-pointer
-      focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400
-      py-2"
-                {...register("image")}
-              />
-              <p className="mt-1 text-xs text-gray-400">
+              <div className="relative">
+                <label
+                  htmlFor="image"
+                  className="flex items-center justify-center w-full px-4 py-3 border-2 border-dashed rounded-lg cursor-pointer transition-all hover:border-primary hover:bg-primary/5"
+                  style={{ borderColor: "var(--color-border)" }}
+                >
+                  <FaImage className="mr-2 text-gray-400" size={18} />
+                  <span
+                    className="text-sm"
+                    style={{ color: "var(--color-text-muted)" }}
+                  >
+                    Choose profile picture
+                  </span>
+                  <input
+                    name="image"
+                    type="file"
+                    id="image"
+                    accept="image/*"
+                    className="hidden"
+                    {...register("image", { required: "Image is required" })}
+                  />
+                </label>
+              </div>
+              <p className="text-xs text-gray-400 mt-1">
                 PNG, JPG or JPEG (max 2MB)
               </p>
             </div>
 
-            <div className="form-control mt-4">
-              <label className="label">
-                <span className="label-text">Password</span>
+            {/* Password Input */}
+            <div>
+              <label
+                className="block text-sm font-medium mb-2"
+                style={{ color: "var(--color-text-dark)" }}
+              >
+                Password
               </label>
               <div className="relative">
+                <FaLock
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  size={16}
+                />
                 <input
                   type={showPassword ? "text" : "password"}
-                  placeholder="password"
-                  className={`input input-bordered w-full pr-12 ${
-                    errors.password ? "input-error" : ""
+                  placeholder="Create a strong password"
+                  className={`input input-bordered w-full pl-10 pr-12 transition-all ${
+                    errors.password ? "input-error" : "focus:border-primary"
                   }`}
                   {...register("password", {
                     required: "Password is required",
@@ -203,36 +275,56 @@ function Register() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                  className="absolute right-3 z-40 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                 >
                   {showPassword ? (
-                    <FaEyeSlash size={20} />
+                    <FaEyeSlash size={18} />
                   ) : (
-                    <FaEye size={20} />
+                    <FaEye size={18} />
                   )}
                 </button>
               </div>
               {errors.password && (
-                <label className="label">
-                  <span className="label-text-alt text-error">
-                    {errors.password.message}
-                  </span>
-                </label>
+                <p className="text-error text-xs mt-1">
+                  {errors.password.message}
+                </p>
               )}
             </div>
 
-            <div className="form-control mt-6">
-              <button type="submit" className="btn btn-primary">
-                Register
-              </button>
-            </div>
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full btn text-white font-bold py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-95 border-none disabled:opacity-70 disabled:cursor-not-allowed"
+              style={{
+                background:
+                  "linear-gradient(to right, var(--color-primary), var(--color-secondary))",
+              }}
+            >
+              {isLoading ? (
+                <span className="flex items-center gap-2">
+                  <span className="loading loading-spinner loading-sm"></span>
+                  Creating Account...
+                </span>
+              ) : (
+                "Create Account"
+              )}
+            </button>
           </form>
-          <p className="text-center mt-4">
-            Already have an account?{" "}
-            <Link to="/login" className="link link-primary">
-              Login
-            </Link>
-          </p>
+
+          {/* Footer */}
+          <div className="mt-6 text-center">
+            <p className="text-sm" style={{ color: "var(--color-text-muted)" }}>
+              Already have an account?{" "}
+              <Link
+                to="/login"
+                className="font-semibold hover:underline transition-all"
+                style={{ color: "var(--color-primary)" }}
+              >
+                Sign In
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>

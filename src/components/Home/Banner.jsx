@@ -12,7 +12,7 @@ const Banner = () => {
         color: "var(--color-text-dark)",
       }}
     >
-      <div className="container mx-auto  sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-20 xl:py-24">
+      <div className="container mx-auto  px-6 lg:px-8  ">
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
           {/* Left Content */}
           <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8 order-1">
