@@ -12,15 +12,17 @@ import {
 } from "react-icons/fi";
 import { FaCreditCard } from "react-icons/fa";
 import Spinner from "../../../components/Shared/Spinner";
+import useAuth from "../../../hooks/useAuth";
 
 const AppliedTutors = () => {
+  const { user, loading: userLoading } = useAuth();
   const axiosSecure = useAxiosSecure();
   const {
     data: myApplications = [],
     refetch,
     isLoading,
   } = useQuery({
-    queryKey: ["myApplications"],
+    queryKey: ["myApplications", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(
         `${import.meta.env.VITE_API_URL}/my-applications`
@@ -28,9 +30,15 @@ const AppliedTutors = () => {
       return res.data;
     },
   });
-  console.log(myApplications);
+  const { data: paymentData = [], isLoading: paymentLoading } = useQuery({
+    queryKey: ["payment", user?.email],
+    queryFn: () =>
+      axiosSecure
+        .get(`${import.meta.env.VITE_API_URL}/payment`)
+        .then((res) => res.data),
+  });
 
-  if (isLoading) return <Spinner />;
+  if (isLoading || paymentLoading || userLoading) return <Spinner />;
   const handleView = () => {};
   const handleApprove = async (id) => {
     try {
@@ -57,6 +65,7 @@ const AppliedTutors = () => {
       console.error("Reject Error:", error);
     }
   };
+
   const handlePayment = async (app) => {
     const paymentInfo = {
       price: app.salary,
@@ -312,31 +321,55 @@ const AppliedTutors = () => {
 
                       {/* Payment */}
                       <td>
-                        <button
-                          onClick={() =>
-                            app.status === "approved" && handlePayment(app)
+                        {(() => {
+                          const isPaid = paymentData.some(
+                            (payment) =>
+                              payment.tuitionId === app.tuitionId &&
+                              payment.tutorEmail === app.tutorEmail &&
+                              payment.paymentStatus === "paid"
+                          );
+
+                          if (isPaid) {
+                            return (
+                              <button
+                                disabled
+                                className="btn btn-sm font-bold gap-2 border-none bg-success text-white cursor-not-allowed"
+                                title="Payment completed"
+                              >
+                                <FiCheckCircle size={16} />
+                                <span>Paid</span>
+                              </button>
+                            );
                           }
-                          disabled={app.status !== "approved"}
-                          className={`btn btn-sm font-bold gap-2 border-none transition-all shadow-md ${
-                            app.status === "approved"
-                              ? "text-white hover:scale-105 hover:shadow-lg cursor-pointer"
-                              : " cursor-not-allowed"
-                          }`}
-                          style={{
-                            background:
-                              app.status === "approved"
-                                ? "linear-gradient(to right, var(--color-primary), var(--color-secondary))"
-                                : "linear-gradient(to right, var(--color-primary), var(--color-secondary))",
-                          }}
-                          title={
-                            app.status === "approved"
-                              ? "Proceed to Payment"
-                              : "Approve application first"
-                          }
-                        >
-                          <FaCreditCard size={16} />
-                          <span>Pay Now</span>
-                        </button>
+
+                          return (
+                            <button
+                              onClick={() =>
+                                app.status === "approved" && handlePayment(app)
+                              }
+                              disabled={app.status !== "approved"}
+                              className={`btn btn-sm font-bold gap-2 border-none transition-all shadow-md ${
+                                app.status === "approved"
+                                  ? "text-white hover:scale-105 hover:shadow-lg cursor-pointer"
+                                  : "opacity-50 cursor-not-allowed"
+                              }`}
+                              style={{
+                                background:
+                                  app.status === "approved"
+                                    ? "linear-gradient(to right, var(--color-primary), var(--color-secondary))"
+                                    : "var(--color-text-muted)",
+                              }}
+                              title={
+                                app.status === "approved"
+                                  ? "Proceed to Payment"
+                                  : "Approve application first"
+                              }
+                            >
+                              <FaCreditCard size={16} />
+                              <span>Pay Now</span>
+                            </button>
+                          );
+                        })()}
                       </td>
                     </tr>
                   ))}

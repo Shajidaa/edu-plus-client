@@ -12,11 +12,9 @@ import {
   FaTasks,
   FaChartBar,
   FaUser,
-  FaCog,
   FaHome,
   FaBars,
   FaTimes,
-  FaBell,
 } from "react-icons/fa";
 import useRole from "../hooks/useRole";
 import Spinner from "../components/Shared/Spinner";
@@ -153,6 +151,24 @@ const DashboardLayout = () => {
                     )}
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/profile"
+                    onClick={() => setIsMobileSidebarOpen(false)}
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 p-3 rounded-lg transition-all duration-200 ${
+                        isActive
+                          ? "bg-white/20 text-white shadow-lg"
+                          : "text-white/80 hover:bg-white/10 hover:text-white"
+                      }`
+                    }
+                  >
+                    <FaUser size={18} className="shrink-0" />
+                    {isSidebarOpen && (
+                      <span className="font-medium">Profile</span>
+                    )}
+                  </NavLink>
+                </li>
               </>
             )}
 
@@ -278,40 +294,6 @@ const DashboardLayout = () => {
 
             {/* Divider */}
             <li className="pt-4 mt-4 border-t border-white/20"></li>
-
-            {/* Common Routes */}
-            <li>
-              <NavLink
-                to="/dashboard/profile"
-                onClick={() => setIsMobileSidebarOpen(false)}
-                className={({ isActive }) =>
-                  `flex items-center gap-3 p-3 rounded-lg transition-all duration-200 ${
-                    isActive
-                      ? "bg-white/20 text-white shadow-lg"
-                      : "text-white/80 hover:bg-white/10 hover:text-white"
-                  }`
-                }
-              >
-                <FaUser size={18} className="shrink-0" />
-                {isSidebarOpen && <span className="font-medium">Profile</span>}
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/settings"
-                onClick={() => setIsMobileSidebarOpen(false)}
-                className={({ isActive }) =>
-                  `flex items-center gap-3 p-3 rounded-lg transition-all duration-200 ${
-                    isActive
-                      ? "bg-white/20 text-white shadow-lg"
-                      : "text-white/80 hover:bg-white/10 hover:text-white"
-                  }`
-                }
-              >
-                <FaCog size={18} className="shrink-0" />
-                {isSidebarOpen && <span className="font-medium">Settings</span>}
-              </NavLink>
-            </li>
           </ul>
         </nav>
 
