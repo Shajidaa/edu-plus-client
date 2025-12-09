@@ -69,7 +69,6 @@ const router = createBrowserRouter([
       // ----------------- STUDENT ROUTES -----------------
       {
         index: true,
-
         element: (
           <RoleRoute allowedRoles={["student"]}>
             <MyTuitions />

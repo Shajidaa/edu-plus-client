@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+// import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
@@ -8,7 +8,7 @@ import router from "./routes/router.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  <div>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <RouterProvider router={router} />
@@ -38,5 +38,5 @@ createRoot(document.getElementById("root")).render(
         />
       </AuthProvider>
     </QueryClientProvider>
-  </StrictMode>
+  </div>
 );

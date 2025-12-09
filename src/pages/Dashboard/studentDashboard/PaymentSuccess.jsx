@@ -20,12 +20,6 @@ const PaymentSuccess = () => {
           Payment Successful!
         </h1>
         <p className="text-gray-600 mb-6">Thank you .</p>
-        {/* <Link
-          to="/dashboard/my-orders"
-          className="inline-block bg-lime-500 text-white font-semibold py-2 px-4 rounded hover:bg-lime-600 transition duration-300"
-        >
-          Go to My Orders
-        </Link> */}
       </div>
     </div>
   );

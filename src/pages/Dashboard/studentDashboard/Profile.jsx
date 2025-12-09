@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import useAuth from "../../../hooks/useAuth";
 import useRole from "../../../hooks/useRole";
 import { FiMail, FiUser, FiShield, FiCalendar, FiEdit2 } from "react-icons/fi";
@@ -5,7 +6,9 @@ import { FiMail, FiUser, FiShield, FiCalendar, FiEdit2 } from "react-icons/fi";
 const Profile = () => {
   const { user } = useAuth();
   const [role] = useRole();
-
+  const handleClick = () => {
+    return toast("This feature is progress.");
+  };
   const formatDate = (timestamp) => {
     if (!timestamp) return "N/A";
     const date = new Date(timestamp);
@@ -17,11 +20,11 @@ const Profile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-base-100 to-base-200 py-8 px-4">
+    <div className="min-h-screen  py-8 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2">
+          <h2 className="text-4xl font-bold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent mb-2">
             My Profile
           </h2>
           <p className="text-base-content/70">
@@ -38,13 +41,7 @@ const Profile = () => {
                 <div className="relative">
                   <div className="avatar online">
                     <div className="w-32 h-32 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                      <img
-                        src={
-                          user?.photoURL ||
-                          "https://via.placeholder.com/150?text=User"
-                        }
-                        alt={user?.displayName}
-                      />
+                      <img src={user?.photoURL} alt={user?.displayName} />
                     </div>
                   </div>
                   <div className="absolute bottom-0 right-0 bg-primary text-primary-content rounded-full p-2 shadow-lg">
@@ -71,12 +68,12 @@ const Profile = () => {
 
                 {/* Action Buttons */}
                 <div className="flex flex-col gap-2 w-full mt-6">
-                  <button className="btn btn-primary btn-block gap-2">
+                  <button
+                    onClick={handleClick}
+                    className="btn btn-primary btn-block gap-2"
+                  >
                     <FiEdit2 size={18} />
                     Edit Profile
-                  </button>
-                  <button className="btn btn-outline btn-block">
-                    Change Password
                   </button>
                 </div>
 
@@ -109,7 +106,7 @@ const Profile = () => {
                         Personal Information
                       </h4>
                     </div>
-                    <div className="bg-gradient-to-br from-primary/5 to-secondary/5 p-6 rounded-xl border border-primary/10">
+                    <div className="bg-linear-to-br from-primary/5 to-secondary/5 p-6 rounded-xl border border-primary/10">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                           <label className="text-sm font-semibold text-base-content/70">
@@ -153,7 +150,7 @@ const Profile = () => {
                       <div className="w-1 h-6 bg-secondary rounded-full"></div>
                       <h4 className="text-lg font-semibold">Account Status</h4>
                     </div>
-                    <div className="bg-gradient-to-br from-secondary/5 to-accent/5 p-6 rounded-xl border border-secondary/10">
+                    <div className="bg-linear-to-br from-secondary/5 to-accent/5 p-6 rounded-xl border border-secondary/10">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                           <label className="text-sm font-semibold text-base-content/70">
@@ -209,7 +206,7 @@ const Profile = () => {
                         Authentication Provider
                       </h4>
                     </div>
-                    <div className="bg-gradient-to-br from-accent/5 to-primary/5 p-6 rounded-xl border border-accent/10">
+                    <div className="bg-linear-to-br from-accent/5 to-primary/5 p-6 rounded-xl border border-accent/10">
                       <div className="flex items-center gap-4">
                         <div className="avatar placeholder">
                           <div className="bg-primary text-primary-content rounded-full w-12">

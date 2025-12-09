@@ -73,10 +73,10 @@ const PostTuition = () => {
     error,
     refetch,
   } = useQuery({
-    queryKey: ["tuitionsPadding", user?.email],
+    queryKey: ["tuitionsPending", user?.email],
     queryFn: () =>
       axiosSecure
-        .get(`${import.meta.env.VITE_API_URL}/tuitions?status=padding`)
+        .get(`${import.meta.env.VITE_API_URL}/tuitions?status=pending`)
         .then((res) => res.data),
   });
 

@@ -145,7 +145,7 @@ const MyTuitions = () => {
                 >
                   <tr>
                     <th style={{ color: "var(--color-text-dark)" }}>#</th>
-                    <th style={{ color: "var(--color-text-dark)" }}>Student</th>
+                    <th style={{ color: "var(--color-text-dark)" }}>Tuto</th>
                     <th style={{ color: "var(--color-text-dark)" }}>Subject</th>
                     <th style={{ color: "var(--color-text-dark)" }}>Class</th>
                     <th style={{ color: "var(--color-text-dark)" }}>

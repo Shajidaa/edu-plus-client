@@ -1,4 +1,4 @@
-import { FaStar, FaArrowRight, FaCheckCircle } from "react-icons/fa";
+import { FaStar, FaCheckCircle } from "react-icons/fa";
 import Container from "../Shared/Container";
 import BannerRight from "./BannerRight";
 import GradientButton from "../Shared/GradientButton";
@@ -63,12 +63,12 @@ const Banner = () => {
               className="text-sm sm:text-base lg:text-lg max-w-full lg:max-w-lg leading-relaxed"
               style={{ color: "var(--color-text-muted)" }}
             >
-              Connect with verified, experienced tutors for personalized
-              one-on-one lessons.{" "}
+              Unlock your full potential with expert tutors and customized
+              private lessons made just for you .
               <span
                 style={{ color: "var(--color-primary)", fontWeight: "600" }}
               >
-                Transform your learning journey
+                Achieve your goals faster
               </span>{" "}
               with expert guidance.
             </p>
@@ -99,36 +99,6 @@ const Banner = () => {
                   </span>
                 </div>
               ))}
-            </div>
-
-            {/* Trusted By */}
-            <div className="flex flex-col xs:flex-row items-start xs:items-center gap-3 xs:gap-4 pt-4 sm:pt-6">
-              <div className="flex -space-x-2">
-                {["A", "B", "C", "D", "E"].map((letter, i) => (
-                  <div
-                    key={i}
-                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold border-2 border-white text-xs sm:text-sm"
-                    style={{
-                      backgroundColor: "var(--color-primary-hover)",
-                      color: "var(--color-text-light)",
-                    }}
-                  >
-                    {letter}
-                  </div>
-                ))}
-              </div>
-              <span
-                className="text-xs sm:text-sm lg:text-base"
-                style={{ color: "var(--color-text-muted)" }}
-              >
-                Trusted by{" "}
-                <span
-                  style={{ color: "var(--color-text-dark)", fontWeight: "700" }}
-                >
-                  10,000+
-                </span>{" "}
-                students
-              </span>
             </div>
           </div>
 
