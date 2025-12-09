@@ -1,11 +1,22 @@
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
+import {
+  FaUser,
+  FaEnvelope,
+  FaBook,
+  FaGraduationCap,
+  FaMapMarkerAlt,
+  FaMoneyBillWave,
+  FaRedo,
+  FaPaperPlane,
+} from "react-icons/fa";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import StudTuitionGetRow from "../../../components/TableRows/StudTuitionGetRow";
 import TuitionEdit from "../../../components/Modal/TuitionEdit";
+import Spinner from "../../../components/Shared/Spinner";
 
 const PostTuition = () => {
   const { user, loading } = useAuth();
@@ -36,39 +47,39 @@ const PostTuition = () => {
     }
   }, [user, reset]);
 
+  const onSubmit = async (data) => {
+    try {
+      await axiosSecure.post(`${import.meta.env.VITE_API_URL}/tuitions`, data);
+      toast.success("Tuition posted successfully!");
+      reset({
+        studentName: user.displayName || "",
+        studentEmail: user.email || "",
+        studentPhoto: user.photoURL || "",
+        subject: "",
+        class: "",
+        location: "",
+        budget: "",
+      });
+      refetch();
+    } catch (error) {
+      console.error("Error posting tuition:", error);
+      toast.error("Failed to post tuition. Please try again.");
+    }
+  };
+
   const {
     data: tuitionData,
     isLoading: tuitionDataLoading,
     error,
     refetch,
   } = useQuery({
-    queryKey: ["tuitions", user?.email],
+    queryKey: ["tuitionsPadding", user?.email],
     queryFn: () =>
       axiosSecure
-        .get(`${import.meta.env.VITE_API_URL}/tuitions?status=pending`)
+        .get(`${import.meta.env.VITE_API_URL}/tuitions?status=padding`)
         .then((res) => res.data),
   });
 
-  const onSubmit = async (data) => {
-    try {
-      axiosSecure
-        .post(`${import.meta.env.VITE_API_URL}/tuitions`, data)
-        .then(() => {
-          refetch();
-          toast.success("Tuition posted successfully!");
-        })
-        .catch((error) => {
-          {
-            console.error("Error posting tuition:", error);
-            toast.error("Failed to post tuition. Please try again.");
-          }
-        });
-
-      reset();
-    } catch (e) {
-      toast.error("Failed to post tuition. Please try again.");
-    }
-  };
   // Handle edit button click
   const handleEdit = (tuition) => {
     setSelectedTuition(tuition);
@@ -86,18 +97,51 @@ const PostTuition = () => {
     refetch();
   };
 
-  if (loading || tuitionDataLoading) return <p>loading======</p>;
-  if (error) return <p>error</p>;
+  // Handle delete tuition
+  const handleDelete = async (id) => {
+    if (window.confirm("Are  you want to delete this tuition?")) {
+      try {
+        await axiosSecure.delete(
+          `${import.meta.env.VITE_API_URL}/tuitions/${id}`
+        );
+        toast.success("Tuition deleted successfully!");
+        refetch();
+      } catch (error) {
+        console.error("Error deleting tuition:", error);
+        toast.error("Failed to delete tuition. Please try again.");
+      }
+    }
+  };
+
+  if (loading || tuitionDataLoading) return <Spinner />;
+  if (error)
+    return (
+      <div className="text-center py-8">
+        <p className="text-error">Error loading data. Please try again.</p>
+      </div>
+    );
   return (
     <>
-      <div className="min-h-screen bg-linear-t-to-br from-base-100 to-base-200 py-8 px-4">
+      <div className="min-h-screen py-6 px-4">
         <div className="max-w-5xl mx-auto">
           {/* Header Section */}
-          <div className="text-center mb-8">
-            <h2 className="text-4xl font-bold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent mb-2">
+          <div className="text-center mb-6 sm:mb-8">
+            <h1
+              className="text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-2"
+              style={{
+                background:
+                  "linear-gradient(to right, var(--color-primary), var(--color-secondary))",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
               Post a Tuition Request
-            </h2>
-            <p className="text-base-content/70">
+            </h1>
+            <p
+              className="text-sm sm:text-base"
+              style={{ color: "var(--color-text-muted)" }}
+            >
               Fill in the details to find your perfect tutor
             </p>
           </div>
@@ -119,8 +163,8 @@ const PostTuition = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="form-control">
                         <label className="label">
-                          <span className="label-text font-semibold text-base">
-                            👤 Student Name
+                          <span className="label-text font-semibold text-base flex items-center gap-2">
+                            <FaUser /> Student Name
                           </span>
                         </label>
                         <input
@@ -133,15 +177,15 @@ const PostTuition = () => {
                         />
                         {errors.studentName && (
                           <span className="text-error text-sm mt-1 flex items-center gap-1">
-                            ⚠️ {errors.studentName.message}
+                            {errors.studentName.message}
                           </span>
                         )}
                       </div>
 
                       <div className="form-control">
                         <label className="label">
-                          <span className="label-text font-semibold text-base">
-                            📧 Student Email
+                          <span className="label-text font-semibold text-base flex items-center gap-2">
+                            <FaEnvelope /> Student Email
                           </span>
                         </label>
                         <input
@@ -154,7 +198,7 @@ const PostTuition = () => {
                         />
                         {errors.studentEmail && (
                           <span className="text-error text-sm mt-1 flex items-center gap-1">
-                            ⚠️ {errors.studentEmail.message}
+                            {errors.studentEmail.message}
                           </span>
                         )}
                       </div>
@@ -171,12 +215,12 @@ const PostTuition = () => {
                     </h3>
                   </div>
 
-                  <div className="bg-gradient-to-br from-secondary/5 to-accent/5 p-6 rounded-xl border border-secondary/10">
+                  <div className="bg-linear-to-br from-secondary/5 to-accent/5 p-6 rounded-xl border border-secondary/10">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="form-control">
                         <label className="label">
-                          <span className="label-text font-semibold text-base">
-                            📚 Subject
+                          <span className="label-text font-semibold text-base flex items-center gap-2">
+                            <FaBook /> Subject
                           </span>
                         </label>
                         <input
@@ -189,15 +233,15 @@ const PostTuition = () => {
                         />
                         {errors.subject && (
                           <span className="text-error text-sm mt-1 flex items-center gap-1">
-                            ⚠️ {errors.subject.message}
+                            {errors.subject.message}
                           </span>
                         )}
                       </div>
 
                       <div className="form-control">
                         <label className="label">
-                          <span className="label-text font-semibold text-base">
-                            🎓 Class/Grade
+                          <span className="label-text font-semibold text-base flex items-center gap-2">
+                            <FaGraduationCap /> Class/Grade
                           </span>
                         </label>
                         <input
@@ -210,15 +254,15 @@ const PostTuition = () => {
                         />
                         {errors.class && (
                           <span className="text-error text-sm mt-1 flex items-center gap-1">
-                            ⚠️ {errors.class.message}
+                            {errors.class.message}
                           </span>
                         )}
                       </div>
 
                       <div className="form-control">
                         <label className="label">
-                          <span className="label-text font-semibold text-base">
-                            📍 Location
+                          <span className="label-text font-semibold text-base flex items-center gap-2">
+                            <FaMapMarkerAlt /> Location
                           </span>
                         </label>
                         <input
@@ -231,15 +275,15 @@ const PostTuition = () => {
                         />
                         {errors.location && (
                           <span className="text-error text-sm mt-1 flex items-center gap-1">
-                            ⚠️ {errors.location.message}
+                            {errors.location.message}
                           </span>
                         )}
                       </div>
 
                       <div className="form-control">
                         <label className="label">
-                          <span className="label-text font-semibold text-base">
-                            💰 Budget (per month)
+                          <span className="label-text font-semibold text-base flex items-center gap-2">
+                            <FaMoneyBillWave /> Budget (month)
                           </span>
                         </label>
                         <div className="relative">
@@ -261,7 +305,7 @@ const PostTuition = () => {
                         </div>
                         {errors.budget && (
                           <span className="text-error text-sm mt-1 flex items-center gap-1">
-                            ⚠️ {errors.budget.message}
+                            {errors.budget.message}
                           </span>
                         )}
                       </div>
@@ -276,14 +320,18 @@ const PostTuition = () => {
                     onClick={() => reset()}
                     className="btn btn-outline btn-lg gap-2 hover:scale-105 transition-transform"
                   >
-                    <span>🔄</span>
+                    <FaRedo />
                     Reset
                   </button>
                   <button
                     type="submit"
-                    className="btn btn-primary btn-lg gap-2 hover:scale-105 transition-transform shadow-lg"
+                    className="btn text-white font-bold btn-lg gap-2 hover:scale-105 transition-transform shadow-lg border-none"
+                    style={{
+                      background:
+                        "linear-gradient(to right, var(--color-primary), var(--color-secondary))",
+                    }}
                   >
-                    <span>📤</span>
+                    <FaPaperPlane />
                     Post Tuition
                   </button>
                 </div>
@@ -292,10 +340,12 @@ const PostTuition = () => {
           </div>
         </div>
       </div>
+
       <StudTuitionGetRow
         tuitionData={tuitionData}
         refetch={refetch}
         onEdit={handleEdit}
+        onDelete={handleDelete}
       ></StudTuitionGetRow>
 
       {/* Edit Modal */}
