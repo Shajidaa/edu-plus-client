@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { FiCheck, FiX, FiEye } from "react-icons/fi";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import AdminViewTuitionDetails from "../Modal/AdminViewTuitionDetails";
 import toast from "react-hot-toast";
 
 const AdminTuitionTable = ({ data, refetch }) => {
   const axiosSecure = useAxiosSecure();
+  const [selectedTuitionId, setSelectedTuitionId] = useState(null);
+  const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
 
   const handleApprove = async ({ id, status }) => {
     try {
@@ -33,8 +37,14 @@ const AdminTuitionTable = ({ data, refetch }) => {
     }
   };
 
-  const handleView = (id) => {
-    console.log(id);
+  const handleView = (tuitionId) => {
+    setSelectedTuitionId(tuitionId);
+    setIsDetailsModalOpen(true);
+  };
+
+  const closeDetailsModal = () => {
+    setIsDetailsModalOpen(false);
+    setSelectedTuitionId(null);
   };
 
   return (
@@ -63,9 +73,7 @@ const AdminTuitionTable = ({ data, refetch }) => {
                 className="hover:bg-gray-100 transition-colors"
               >
                 {/* Index */}
-                <th className="text-gray-900">
-                  {index + 1}
-                </th>
+                <th className="text-gray-900">{index + 1}</th>
 
                 {/* Student Info */}
                 <td>
@@ -73,8 +81,7 @@ const AdminTuitionTable = ({ data, refetch }) => {
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12 ring-2 ring-blue-400">
                         <img
-                          src={
-                            tuition.studentPhoto}
+                          src={tuition.studentPhoto}
                           alt={tuition.studentName}
                         />
                       </div>
@@ -96,23 +103,17 @@ const AdminTuitionTable = ({ data, refetch }) => {
                 </td>
 
                 {/* Class */}
-                <td className="text-gray-800">
-                  {tuition.class}
-                </td>
+                <td className="text-gray-800">{tuition.class}</td>
 
                 {/* Location */}
-                <td className="text-gray-800">
-                  {tuition.location}
-                </td>
+                <td className="text-gray-800">{tuition.location}</td>
 
                 {/* Budget */}
                 <td>
                   <span className="font-bold text-blue-600">
                     ৳{tuition.budget}
                   </span>
-                  <span className="text-xs text-gray-600">
-                    /month
-                  </span>
+                  <span className="text-xs text-gray-600">/month</span>
                 </td>
 
                 {/* Status */}
@@ -143,40 +144,45 @@ const AdminTuitionTable = ({ data, refetch }) => {
                     </button>
 
                     {/* Approve Button */}
-                    {tuition.status !== "approved" && (
-                      <button
-                        onClick={() =>
-                          handleApprove({ id: tuition._id, status: "approved" })
-                        }
-                        className="btn btn-ghost btn-sm text-green-600 hover:bg-green-100"
-                        title="Approve"
-                      >
-                        <FiCheck size={18} />
-                      </button>
-                    )}
+                    {tuition.status !== "approved" &&
+                      tuition.status !== "rejected" && (
+                        <button
+                          onClick={() =>
+                            handleApprove({
+                              id: tuition._id,
+                              status: "approved",
+                            })
+                          }
+                          className="btn btn-ghost btn-sm text-green-600 hover:bg-green-100"
+                          title="Approve"
+                        >
+                          <FiCheck size={18} />
+                        </button>
+                      )}
 
                     {/* Reject Button */}
-                    {tuition.status !== "rejected" && (
-                      <button
-                        onClick={() =>
-                          handleReject({ id: tuition._id, status: "rejected" })
-                        }
-                        className="btn btn-ghost btn-sm text-red-600 hover:bg-red-100"
-                        title="Reject"
-                      >
-                        <FiX size={18} />
-                      </button>
-                    )}
+                    {tuition.status !== "rejected" &&
+                      tuition.status !== "approved" && (
+                        <button
+                          onClick={() =>
+                            handleReject({
+                              id: tuition._id,
+                              status: "rejected",
+                            })
+                          }
+                          className="btn btn-ghost btn-sm text-red-600 hover:bg-red-100"
+                          title="Reject"
+                        >
+                          <FiX size={18} />
+                        </button>
+                      )}
                   </div>
                 </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td
-                colSpan="8"
-                className="text-center py-8 text-gray-600"
-              >
+              <td colSpan="8" className="text-center py-8 text-gray-600">
                 <div className="flex flex-col items-center gap-2">
                   <span className="text-4xl">📚</span>
                   <p>No tuition requests found</p>
@@ -186,6 +192,13 @@ const AdminTuitionTable = ({ data, refetch }) => {
           )}
         </tbody>
       </table>
+
+      {/* Tuition Details Modal */}
+      <AdminViewTuitionDetails
+        isOpen={isDetailsModalOpen}
+        onClose={closeDetailsModal}
+        tuitionId={selectedTuitionId}
+      />
     </div>
   );
 };
