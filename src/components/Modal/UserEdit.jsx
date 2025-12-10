@@ -32,10 +32,9 @@ const UserEdit = ({ isOpen, onClose, user, refetch }) => {
     if (user && isOpen) {
       setValue("name", user.name || "");
       setValue("email", user.email || "");
-     
+
       setValue("role", user.role || "student");
-      
-      
+
       // Set image preview to current user image
       setImagePreview(user.image || user.photo || null);
       setImageFile(null);
@@ -47,19 +46,13 @@ const UserEdit = ({ isOpen, onClose, user, refetch }) => {
     const file = e.target.files[0];
     if (file) {
       // Validate file type
-      if (!file.type.startsWith('image/')) {
-        toast.error('Please select a valid image file');
-        return;
-      }
-      
-      // Validate file size (max 5MB)
-      if (file.size > 5 * 1024 * 1024) {
-        toast.error('Image size should be less than 5MB');
+      if (!file.type.startsWith("image/")) {
+        toast.error("Please select a valid image file");
         return;
       }
 
       setImageFile(file);
-      
+
       // Create preview
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -72,25 +65,27 @@ const UserEdit = ({ isOpen, onClose, user, refetch }) => {
   // Upload image to ImgBB
   const uploadImage = async (imageFile) => {
     const formData = new FormData();
-    formData.append('image', imageFile);
-    
+    formData.append("image", imageFile);
+
     try {
       const response = await fetch(
-        `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`,
+        `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_IMGBB_API_KEY
+        }`,
         {
-          method: 'POST',
+          method: "POST",
           body: formData,
         }
       );
-      
+
       const data = await response.json();
       if (data.success) {
         return data.data.url;
       } else {
-        throw new Error('Image upload failed');
+        throw new Error("Image upload failed");
       }
     } catch (error) {
-      console.error('Error uploading image:', error);
+      console.error("Error uploading image:", error);
       throw error;
     }
   };
@@ -98,15 +93,15 @@ const UserEdit = ({ isOpen, onClose, user, refetch }) => {
   const onSubmit = async (data) => {
     try {
       setIsUploading(true);
-      
+
       let imageUrl = user.image || user.photo;
-      
+
       // Upload new image if selected
       if (imageFile) {
         try {
           imageUrl = await uploadImage(imageFile);
-        } catch (error) {
-          toast.error('Failed to upload image. Please try again.');
+        } catch (e) {
+          toast.error("Failed to upload image. Please try again.");
           setIsUploading(false);
           return;
         }
@@ -115,9 +110,9 @@ const UserEdit = ({ isOpen, onClose, user, refetch }) => {
       const updateData = {
         name: data.name,
         email: data.email,
-       
+
         role: data.role,
-       
+
         image: imageUrl,
       };
 
@@ -253,14 +248,6 @@ const UserEdit = ({ isOpen, onClose, user, refetch }) => {
                       </button>
                     )}
                   </div>
-                  <div className="label">
-                    <span
-                      className="label-text-alt"
-                      style={{ color: "var(--color-text-muted)" }}
-                    >
-                      Supported formats: JPG, PNG, GIF (Max 5MB)
-                    </span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -349,8 +336,6 @@ const UserEdit = ({ isOpen, onClose, user, refetch }) => {
                   </span>
                 )}
               </div>
-
-           
             </div>
           </div>
 
@@ -405,9 +390,6 @@ const UserEdit = ({ isOpen, onClose, user, refetch }) => {
               )}
             </div>
           </div>
-
-         
-         
 
           {/* Action Buttons */}
           <div className="modal-action">
