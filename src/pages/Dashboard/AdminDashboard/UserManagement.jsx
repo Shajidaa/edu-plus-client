@@ -14,6 +14,7 @@ import {
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Spinner from "../../../components/Shared/Spinner";
 import UserDetails from "../../../components/Modal/UserDetails";
+import UserEdit from "../../../components/Modal/UserEdit";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
@@ -22,6 +23,7 @@ const UserManagement = () => {
 
   const [selectedUser, setSelectedUser] = useState(null);
   const [isUserDetailsOpen, setIsUserDetailsOpen] = useState(false);
+  const [isUserEditOpen, setIsUserEditOpen] = useState(false);
 
   const {
     data: userData = [],
@@ -74,8 +76,9 @@ const UserManagement = () => {
     setIsUserDetailsOpen(true);
   };
 
-  const handleEdit = (userId) => {
-    console.log("Edit user:", userId);
+  const handleEdit = (user) => {
+    setSelectedUser(user);
+    setIsUserEditOpen(true);
   };
 
   const handleDelete = async (userId) => {
@@ -83,16 +86,21 @@ const UserManagement = () => {
       await axiosSecure.delete(
         `${import.meta.env.VITE_API_URL}/users/${userId}`
       );
-      toast.success("Tuition deleted successfully!");
+      toast.success("User deleted successfully!");
       refetch();
     } catch (error) {
-      console.error("Error deleting tuition:", error);
-      toast.error("Failed to delete tuition. Please try again.");
+      console.error("Error deleting user:", error);
+      toast.error("Failed to delete user. Please try again.");
     }
   };
 
   const closeUserDetails = () => {
     setIsUserDetailsOpen(false);
+    setSelectedUser(null);
+  };
+
+  const closeUserEdit = () => {
+    setIsUserEditOpen(false);
     setSelectedUser(null);
   };
 
@@ -290,7 +298,7 @@ const UserManagement = () => {
 
                       {/* Edit Button */}
                       <button
-                        onClick={() => handleEdit(user._id)}
+                        onClick={() => handleEdit(user)}
                         className="btn btn-ghost btn-sm text-warning hover:scale-105 transition-transform"
                         title="Edit User"
                       >
@@ -319,6 +327,14 @@ const UserManagement = () => {
         isOpen={isUserDetailsOpen}
         onClose={closeUserDetails}
         user={selectedUser}
+      />
+
+      {/* User Edit Modal */}
+      <UserEdit
+        isOpen={isUserEditOpen}
+        onClose={closeUserEdit}
+        user={selectedUser}
+        refetch={refetch}
       />
     </div>
   );

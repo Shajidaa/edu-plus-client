@@ -1,12 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+
 import TuitionCard from "../../components/tuitionCard";
 import Container from "../../components/Shared/Container";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 const AllTuitions = () => {
+  const axiosSecure = useAxiosSecure();
   const { data, isLoading, error } = useQuery({
     queryKey: ["allTuitions"],
     queryFn: async () => {
-      const res = await axios.get(
+      const res = await axiosSecure.get(
         `${import.meta.env.VITE_API_URL}/all-tuitions`
       );
       return res.data;
