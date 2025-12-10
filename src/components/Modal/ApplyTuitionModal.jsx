@@ -42,7 +42,7 @@ const ApplyTuitionModal = ({
     };
 
     onSubmit(applicationData);
-    reset(); // ✅ clear after submit
+    reset();
   };
 
   if (!isOpen) return null;
