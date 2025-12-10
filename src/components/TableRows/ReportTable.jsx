@@ -1,8 +1,5 @@
 import { FaExchangeAlt } from "react-icons/fa";
 import {
-  FiEye,
-  FiDownload,
-  FiSearch,
   FiCalendar,
   FiDollarSign,
   FiUser,
@@ -10,8 +7,8 @@ import {
   FiBook,
   FiCreditCard,
   FiTrendingUp,
-  FiTrendingDown,
 } from "react-icons/fi";
+import Chart from "../Chart/Chart";
 
 const ReportTable = ({ allPaymentData = [] }) => {
   // Format date
@@ -103,10 +100,10 @@ const ReportTable = ({ allPaymentData = [] }) => {
           </div>
         </div>
       </div>
-
+      <Chart allPaymentData={allPaymentData}></Chart>
       {/* Table */}
       <div
-        className="rounded-xl shadow-2xl overflow-hidden border"
+        className="rounded-xl  shadow-2xl overflow-hidden border"
         style={{
           backgroundColor: "var(--color-card-bg)",
           borderColor: "var(--color-border)",
@@ -148,10 +145,7 @@ const ReportTable = ({ allPaymentData = [] }) => {
                           backgroundColor: "var(--color-primary-hover)",
                         }}
                       >
-                        <FiCreditCard
-                          size={16}
-                          style={{ color: "var(--color-primary)" }}
-                        />
+                        <FiCreditCard size={16} />
                       </div>
                       <div>
                         <div
@@ -229,7 +223,7 @@ const ReportTable = ({ allPaymentData = [] }) => {
                         className="font-bold text-lg"
                         style={{ color: "var(--color-primary)" }}
                       >
-                        {(payment.amount, payment.currency)}
+                        {payment.amount}
                       </span>
                     </div>
                   </td>
