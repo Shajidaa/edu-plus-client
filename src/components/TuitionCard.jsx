@@ -1,6 +1,6 @@
 import { FiBookOpen, FiMapPin, FiDollarSign, FiCalendar } from "react-icons/fi";
 import { Link } from "react-router";
-
+import { MdOutlineDoubleArrow } from "react-icons/md";
 const TuitionCard = ({ tuition }) => {
   const {
     subject,
@@ -8,23 +8,8 @@ const TuitionCard = ({ tuition }) => {
     location,
     budget,
 
-    status = "pending",
-
-    createdAt,
+    created_at,
   } = tuition;
-
-  const getStatusColor = () => {
-    switch (status) {
-      case "approved":
-        return "badge-success";
-      case "rejected":
-        return "badge-error";
-      case "pending":
-        return "badge-warning";
-      default:
-        return "badge-ghost";
-    }
-  };
 
   const formatDate = (date) => {
     if (!date) return "Recently";
@@ -46,10 +31,9 @@ const TuitionCard = ({ tuition }) => {
             </h3>
             <div className="flex items-center gap-2 mt-2 text-base-content/70">
               <FiCalendar size={14} />
-              <span className="text-sm">Posted {formatDate(createdAt)}</span>
+              <span className="text-sm">Posted {formatDate(created_at)}</span>
             </div>
           </div>
-          <div className={`badge ${getStatusColor()} badge-lg`}>{status}</div>
         </div>
 
         {/* Tuition Details */}
@@ -102,9 +86,16 @@ const TuitionCard = ({ tuition }) => {
 
           <Link
             to={`/tuitions-details/${tuition._id}`}
-            className="btn btn-primary btn-sm gap-2"
+            className="w-full text-base btn text-white font-bold py-3 
+            rounded-lg shadow-lg hover:shadow-xl transition-all
+             duration-300 hover:scale-[1.02] active:scale-95 border-none 
+             hover:opacity-70 "
+            style={{
+              background:
+                "linear-gradient(to right, var(--color-primary), var(--color-secondary))",
+            }}
           >
-            see more
+            see more <MdOutlineDoubleArrow />
           </Link>
         </div>
       </div>
