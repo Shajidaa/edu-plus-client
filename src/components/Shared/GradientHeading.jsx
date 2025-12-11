@@ -17,14 +17,6 @@ const GradientHeading = ({
         >
           {text}
         </span>
-
-        <span
-          className="absolute bottom-0 left-0 w-full h-0.5 sm:h-1 rounded"
-          style={{
-            background: `linear-gradient(to right, ${from}, ${to})`,
-            transform: "translateY(0.25rem)",
-          }}
-        />
       </span>
     </h1>
   );

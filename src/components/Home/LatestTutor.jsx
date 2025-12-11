@@ -1,28 +1,29 @@
-import { Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay, Navigation } from "swiper/modules";
-import { FiArrowRight, FiBookOpen, FiZap } from "react-icons/fi";
-
+import React from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import Container from "../Shared/Container";
-import TuitionCard from "../TuitionCard";
-import Spinner from "../Shared/Spinner";
-
+import { useQuery } from "@tanstack/react-query";
+import { Pagination, Autoplay, Navigation } from "swiper/modules";
+import { Link } from "react-router";
+import { Swiper, SwiperSlide } from "swiper/react";
 // Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+
+import TuitionCard from "../TuitionCard";
+import { FiArrowRight, FiZap } from "react-icons/fi";
+import Container from "../Shared/Container";
+import Spinner from "../Shared/Spinner";
+import LatestTutorCard from "../LatestTutorCard";
 import GradientHeading from "../Shared/GradientHeading";
 
-const LatestTuition = () => {
+const LatestTutor = () => {
   const axiosSecure = useAxiosSecure();
 
-  const { data: latestTuitions, isLoading } = useQuery({
-    queryKey: ["allLatestTuitions"],
+  const { data: latestTutorData, isLoading } = useQuery({
+    queryKey: ["allLatestTutor"],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `${import.meta.env.VITE_API_URL}/latest-tuitions`
+        `${import.meta.env.VITE_API_URL}/latest-tutors`
       );
       return res.data;
     },
@@ -31,7 +32,6 @@ const LatestTuition = () => {
   if (isLoading) {
     return <Spinner></Spinner>;
   }
-
   return (
     <section className="py-16">
       <Container className={"px-5"}>
@@ -46,18 +46,18 @@ const LatestTuition = () => {
           }}
         >
           <FiZap className="text-sm sm:text-base" />
-          <span className="xs:hidden">New</span>
+          <span className="xs:hidden">Meet the Team Passionate People</span>
         </div>
         {/* Tuitions Carousel */}
 
-        {latestTuitions && (
+        {latestTutorData && (
           <div className="relative">
             {/* Custom Navigation Buttons */}
             <div className="flex justify-between items-center mb-6">
               {/* Heading */}
-              <GradientHeading text={"Latest Tuitions"}></GradientHeading>
+              <GradientHeading text={"  Latest Tutor"}></GradientHeading>
 
-              <Link to="/all-tuitions" className=" gap-2 ">
+              <Link to="/tutor" className=" gap-2 ">
                 <p className="flex  text-orange-500 font-bold items-center justify-center">
                   more
                   <FiArrowRight size={16} />
@@ -66,7 +66,7 @@ const LatestTuition = () => {
             </div>
 
             <Swiper
-              loop={latestTuitions.length > 3}
+              loop={latestTutorData.length > 3}
               autoplay={{
                 delay: 3000,
                 disableOnInteraction: false,
@@ -105,9 +105,9 @@ const LatestTuition = () => {
               modules={[Pagination, Autoplay, Navigation]}
               className="latest-tuitions-swiper pb-12"
             >
-              {latestTuitions.map((tuition) => (
-                <SwiperSlide key={tuition._id}>
-                  <TuitionCard tuition={tuition} />
+              {latestTutorData.map((tutor) => (
+                <SwiperSlide key={tutor._id}>
+                  <LatestTutorCard tutor={tutor} />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -138,4 +138,4 @@ const LatestTuition = () => {
   );
 };
 
-export default LatestTuition;
+export default LatestTutor;
