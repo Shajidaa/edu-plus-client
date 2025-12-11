@@ -24,7 +24,10 @@ const Profile = () => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h2 className="text-4xl font-bold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent mb-2">
+          <h2
+            className="text-2xl sm:text-3xl lg:text-4xl 
+          font-extrabold mb-2 text-orange-600"
+          >
             My Profile
           </h2>
           <p className="text-base-content/70">
@@ -70,7 +73,14 @@ const Profile = () => {
                 <div className="flex flex-col gap-2 w-full mt-6">
                   <button
                     onClick={handleClick}
-                    className="btn btn-primary btn-block gap-2"
+                    className="w-full text-base btn text-white font-bold py-3 
+            rounded-lg shadow-lg hover:shadow-xl transition-all
+             duration-300 hover:scale-[1.02] active:scale-95 border-none 
+             hover:opacity-70 "
+                    style={{
+                      background:
+                        "linear-gradient(to right, var(--color-primary), var(--color-secondary))",
+                    }}
                   >
                     <FiEdit2 size={18} />
                     Edit Profile

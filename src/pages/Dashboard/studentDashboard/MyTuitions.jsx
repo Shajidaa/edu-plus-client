@@ -70,16 +70,10 @@ const MyTuitions = () => {
     <div className="min-h-screen py-6 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
-        <div className="mb-6 sm:mb-8">
+        <div className="mb-6 text-center sm:mb-8">
           <h1
-            className="text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-2"
-            style={{
-              background:
-                "linear-gradient(to right, var(--color-primary), var(--color-secondary))",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
+            className="text-2xl sm:text-3xl lg:text-4xl 
+          font-extrabold mb-2 text-orange-600 text-center"
           >
             Approved Tuitions
           </h1>

@@ -127,14 +127,8 @@ const PostTuition = () => {
           {/* Header Section */}
           <div className="text-center mb-6 sm:mb-8">
             <h1
-              className="text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-2"
-              style={{
-                background:
-                  "linear-gradient(to right, var(--color-primary), var(--color-secondary))",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
+              className="text-2xl sm:text-3xl lg:text-4xl 
+          font-extrabold mb-2 text-orange-600 text-center"
             >
               Post a Tuition Request
             </h1>

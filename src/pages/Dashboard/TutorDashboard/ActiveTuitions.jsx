@@ -30,16 +30,10 @@ const TutorOngoingTuitions = () => {
     <div className="min-h-screen py-6 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
-        <div className="mb-6 sm:mb-8">
+        <div className="mb-6 text-center sm:mb-8">
           <h2
-            className="text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-2"
-            style={{
-              background:
-                "linear-gradient(to right, var(--color-primary), var(--color-secondary))",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
+            className="text-2xl sm:text-3xl lg:text-4xl 
+          font-extrabold mb-2 text-orange-600"
           >
             Active Tuitions
           </h2>
@@ -78,10 +72,7 @@ const TutorOngoingTuitions = () => {
               className="p-4 rounded-full"
               style={{ backgroundColor: "var(--color-primary-hover)" }}
             >
-              <FiBookOpen
-                size={32}
-                style={{ color: "var(--color-primary)" }}
-              />
+              <FiBookOpen size={32} style={{ color: "var(--color-primary)" }} />
             </div>
           </div>
         </div>

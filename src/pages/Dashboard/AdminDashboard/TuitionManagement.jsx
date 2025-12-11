@@ -21,6 +21,21 @@ const TuitionManagement = () => {
 
   return (
     <div>
+      {/* Header Section */}
+      <div className="mb-6 text-center sm:mb-8">
+        <h1
+          className="text-2xl sm:text-3xl lg:text-4xl 
+          font-extrabold mb-2 text-orange-600"
+        >
+          Tuition Management
+        </h1>
+        <p
+          className="text-sm text-center sm:text-base"
+          style={{ color: "var(--color-text-muted)" }}
+        >
+          Manage all tuition in the system
+        </p>
+      </div>
       <AdminTuitionTable data={data} refetch={refetch}></AdminTuitionTable>
     </div>
   );

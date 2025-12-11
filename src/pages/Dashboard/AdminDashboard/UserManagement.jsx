@@ -107,21 +107,15 @@ const UserManagement = () => {
   return (
     <div className="max-w-7xl mx-auto">
       {/* Header Section */}
-      <div className="mb-6 sm:mb-8">
+      <div className="mb-6 text-center sm:mb-8">
         <h1
-          className="text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-2"
-          style={{
-            background:
-              "linear-gradient(to right, var(--color-primary), var(--color-secondary))",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}
+          className="text-2xl sm:text-3xl lg:text-4xl 
+          font-extrabold mb-2 text-orange-600"
         >
           User Management
         </h1>
         <p
-          className="text-sm sm:text-base"
+          className="text-sm text-center sm:text-base"
           style={{ color: "var(--color-text-muted)" }}
         >
           Manage all users in the system
@@ -155,7 +149,7 @@ const UserManagement = () => {
             className="p-4 rounded-full"
             style={{ backgroundColor: "var(--color-primary-hover)" }}
           >
-            <FiUsers size={32} style={{ color: "var(--color-primary)" }} />
+            <FiUsers size={32} />
           </div>
         </div>
       </div>
