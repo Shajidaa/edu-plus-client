@@ -162,7 +162,7 @@ const AllTuitions = () => {
       className="min-h-screen py-8"
       style={{ backgroundColor: "var(--color-bg-soft)" }}
     >
-      <Container>
+      <Container className={"px-2.5"}>
         {/* Header Section */}
         <div className="text-center mb-12">
           <GradientHeading className="text-center mb-4" text="All Tuitions" />
@@ -256,19 +256,18 @@ const AllTuitions = () => {
         {/* Tuitions Grid */}
         {currentTuitions.length > 0 ? (
           <>
-            <div className="grid gap-5 grid-cols-1 lg:grid-cols-4 md:grid-cols-3">
+            <Container className="grid gap-5 grid-cols-1 lg:grid-cols-4 md:grid-cols-3">
               {currentTuitions.map((tuition) => (
                 <TuitionCard key={tuition._id} tuition={tuition} />
               ))}
-            </div>
+            </Container>
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <div
-                className="rounded-xl shadow-lg p-6 mt-8 border"
+              <Container
+                className="rounded-xl shadow-lg p-6 mt-8 "
                 style={{
                   backgroundColor: "var(--color-card-bg)",
-                  borderColor: "var(--color-border)",
                 }}
               >
                 <div className="flex justify-center items-center gap-2">
@@ -336,11 +335,11 @@ const AllTuitions = () => {
                     <FiChevronRight size={16} />
                   </button>
                 </div>
-              </div>
+              </Container>
             )}
           </>
         ) : (
-          <div
+          <Container
             className="text-center py-20 rounded-xl shadow-lg border"
             style={{
               backgroundColor: "var(--color-card-bg)",
@@ -387,7 +386,7 @@ const AllTuitions = () => {
                 </button>
               )}
             </div>
-          </div>
+          </Container>
         )}
       </Container>
     </div>
