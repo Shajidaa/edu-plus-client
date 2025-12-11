@@ -26,7 +26,7 @@ const TuitionCard = ({ tuition }) => {
         {/* Header with Status Badge */}
         <div className="flex justify-between items-start mb-4">
           <div className="flex-1">
-            <h3 className="card-title text-2xl font-bold text-primary">
+            <h3 className="card-title text-2xl font-bold line-clamp-1 text-primary">
               {subject}
             </h3>
             <div className="flex items-center gap-2 mt-2 text-base-content/70">
@@ -47,7 +47,9 @@ const TuitionCard = ({ tuition }) => {
               <p className="text-xs text-base-content/60 font-semibold">
                 Class/Grade
               </p>
-              <p className="font-semibold text-base">{tuitionClass}</p>
+              <p className="font-semibold line-clamp-1 text-base">
+                {tuitionClass}
+              </p>
             </div>
           </div>
 
@@ -60,7 +62,7 @@ const TuitionCard = ({ tuition }) => {
               <p className="text-xs text-base-content/60 font-semibold">
                 Location
               </p>
-              <p className="font-semibold text-base">{location}</p>
+              <p className="font-semibold line-clamp-1 text-base">{location}</p>
             </div>
           </div>
 
@@ -73,7 +75,9 @@ const TuitionCard = ({ tuition }) => {
               <p className="text-xs text-base-content/60 font-semibold">
                 Budget (per month)
               </p>
-              <p className="font-bold text-lg text-accent">৳{budget}</p>
+              <p className="font-bold line-clamp-1 text-lg text-accent">
+                ৳{budget}
+              </p>
             </div>
           </div>
         </div>
