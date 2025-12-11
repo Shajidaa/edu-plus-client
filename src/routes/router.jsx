@@ -26,6 +26,8 @@ import TuitionDetails from "../pages/TuitionDetails";
 import PaymentSuccess from "../pages/Dashboard/studentDashboard/PaymentSuccess";
 import Spinner from "../components/Shared/Spinner";
 import DashboardIndex from "./DashboardIndex";
+import Tutor from "../pages/Tutor/Tutor";
+import TutorDetails from "../pages/Tutor/TutorDetails";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +54,14 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/tutor",
+        element: <Tutor></Tutor>,
+      },
+      {
+        path: "/tutor-details/:id",
+        element: <TutorDetails></TutorDetails>,
       },
       {
         path: "/payment-success",

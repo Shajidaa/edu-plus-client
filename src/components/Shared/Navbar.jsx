@@ -53,6 +53,9 @@ function Navbar() {
         <MyLink path="/all-tuitions">Tuitions</MyLink>
       </li>
       <li onClick={closeMenu}>
+        <MyLink path="/tutor">Tutor</MyLink>
+      </li>
+      <li onClick={closeMenu}>
         <MyLink path="/about">About</MyLink>
       </li>
       {user && (
