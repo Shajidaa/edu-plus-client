@@ -28,6 +28,8 @@ import Spinner from "../components/Shared/Spinner";
 import DashboardIndex from "./DashboardIndex";
 import Tutor from "../pages/Tutor/Tutor";
 import TutorDetails from "../pages/Tutor/TutorDetails";
+import About from "../pages/about";
+
 
 const router = createBrowserRouter([
   {
@@ -62,6 +64,10 @@ const router = createBrowserRouter([
       {
         path: "/tutor",
         element: <Tutor></Tutor>,
+      },
+      {
+        path: "/about",
+        element: <About/>,
       },
       {
         path: "/tutors/:id",
