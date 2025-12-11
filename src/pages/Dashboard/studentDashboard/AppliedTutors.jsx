@@ -13,6 +13,7 @@ import {
 import { FaCreditCard } from "react-icons/fa";
 import Spinner from "../../../components/Shared/Spinner";
 import useAuth from "../../../hooks/useAuth";
+import GradientHeading from "../../../components/Shared/GradientHeading";
 
 const AppliedTutors = () => {
   const { user, loading: userLoading } = useAuth();
@@ -93,14 +94,9 @@ const AppliedTutors = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="mb-6 text-center sm:mb-8">
-          <h2
-            className="text-2xl sm:text-3xl lg:text-4xl 
-          font-extrabold mb-2 text-orange-600 text-center"
-          >
-            Applied Tutors
-          </h2>
+          <GradientHeading text={"Applied Tutors"}></GradientHeading>
           <p
-            className="text-sm sm:text-base"
+            className="text-lg sm:text-base"
             style={{ color: "var(--color-text-muted)" }}
           >
             Manage tutor applications for your tuition requests

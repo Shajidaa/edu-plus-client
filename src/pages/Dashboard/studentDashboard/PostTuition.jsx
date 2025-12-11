@@ -17,6 +17,7 @@ import toast from "react-hot-toast";
 import StudTuitionGetRow from "../../../components/TableRows/StudTuitionGetRow";
 import TuitionEdit from "../../../components/Modal/TuitionEdit";
 import Spinner from "../../../components/Shared/Spinner";
+import GradientHeading from "../../../components/Shared/GradientHeading";
 
 const PostTuition = () => {
   const { user, loading } = useAuth();
@@ -126,12 +127,7 @@ const PostTuition = () => {
         <div className="max-w-5xl mx-auto">
           {/* Header Section */}
           <div className="text-center mb-6 sm:mb-8">
-            <h1
-              className="text-2xl sm:text-3xl lg:text-4xl 
-          font-extrabold mb-2 text-orange-600 text-center"
-            >
-              Post a Tuition Request
-            </h1>
+            <GradientHeading text={" Post a Tuition Request"}></GradientHeading>
             <p
               className="text-sm sm:text-base"
               style={{ color: "var(--color-text-muted)" }}

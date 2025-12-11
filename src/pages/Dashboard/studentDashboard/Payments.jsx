@@ -11,6 +11,7 @@ import {
 } from "react-icons/fi";
 import { FaReceipt } from "react-icons/fa";
 import Spinner from "../../../components/Shared/Spinner";
+import GradientHeading from "../../../components/Shared/GradientHeading";
 
 const Payments = () => {
   const { user, loading } = useAuth();
@@ -67,12 +68,7 @@ const Payments = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="mb-6 text-center sm:mb-8">
-          <h2
-            className="text-2xl sm:text-3xl lg:text-4xl 
-          font-extrabold mb-2 text-orange-600 text-center"
-          >
-            Payment History
-          </h2>
+          <GradientHeading text={" Payment History"}></GradientHeading>
           <p
             className="text-sm sm:text-base"
             style={{ color: "var(--color-text-muted)" }}

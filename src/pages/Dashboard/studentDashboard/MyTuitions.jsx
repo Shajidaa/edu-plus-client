@@ -14,6 +14,7 @@ import {
 import { FaPaperPlane } from "react-icons/fa";
 
 import Spinner from "../../../components/Shared/Spinner";
+import GradientHeading from "../../../components/Shared/GradientHeading";
 
 const MyTuitions = () => {
   const { user, loading } = useAuth();
@@ -71,12 +72,7 @@ const MyTuitions = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="mb-6 text-center sm:mb-8">
-          <h1
-            className="text-2xl sm:text-3xl lg:text-4xl 
-          font-extrabold mb-2 text-orange-600 text-center"
-          >
-            Approved Tuitions
-          </h1>
+          <GradientHeading text={"Approved Tuitions"}></GradientHeading>
           <p
             className="text-sm sm:text-base"
             style={{ color: "var(--color-text-muted)" }}

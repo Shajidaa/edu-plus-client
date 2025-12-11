@@ -8,6 +8,7 @@ import {
   FiBookOpen,
 } from "react-icons/fi";
 import Spinner from "../../../components/Shared/Spinner";
+import GradientHeading from "../../../components/Shared/GradientHeading";
 
 const TutorOngoingTuitions = () => {
   const axiosSecure = useAxiosSecure();
@@ -31,12 +32,7 @@ const TutorOngoingTuitions = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="mb-6 text-center sm:mb-8">
-          <h2
-            className="text-2xl sm:text-3xl lg:text-4xl 
-          font-extrabold mb-2 text-orange-600"
-          >
-            Active Tuitions
-          </h2>
+          <GradientHeading text={"Active Tuitions"}></GradientHeading>
           <p
             className="text-sm sm:text-base"
             style={{ color: "var(--color-text-muted)" }}

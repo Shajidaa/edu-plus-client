@@ -17,6 +17,7 @@ import UserDetails from "../../../components/Modal/UserDetails";
 import UserEdit from "../../../components/Modal/UserEdit";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import GradientHeading from "../../../components/Shared/GradientHeading";
 
 const UserManagement = () => {
   const axiosSecure = useAxiosSecure();
@@ -108,12 +109,7 @@ const UserManagement = () => {
     <div className="max-w-7xl mx-auto">
       {/* Header Section */}
       <div className="mb-6 text-center sm:mb-8">
-        <h1
-          className="text-2xl sm:text-3xl lg:text-4xl 
-          font-extrabold mb-2 text-orange-600"
-        >
-          User Management
-        </h1>
+        <GradientHeading text={" User Management"}></GradientHeading>
         <p
           className="text-sm text-center sm:text-base"
           style={{ color: "var(--color-text-muted)" }}

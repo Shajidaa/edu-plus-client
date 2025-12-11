@@ -51,7 +51,7 @@ const AdminTuitionTable = ({ data, refetch }) => {
     <div className="overflow-x-auto rounded-xl shadow-2xl">
       <table className="table table-zebra bg-white">
         {/* Table Head */}
-        <thead className="bg-gray-200">
+        <thead className="bg-primary">
           <tr>
             <th className="text-gray-900">#</th>
             <th className="text-gray-900">Student</th>

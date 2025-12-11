@@ -2,6 +2,7 @@ import toast from "react-hot-toast";
 import useAuth from "../../../hooks/useAuth";
 import useRole from "../../../hooks/useRole";
 import { FiMail, FiUser, FiShield, FiCalendar, FiEdit2 } from "react-icons/fi";
+import GradientHeading from "../../../components/Shared/GradientHeading";
 
 const Profile = () => {
   const { user } = useAuth();
@@ -24,12 +25,7 @@ const Profile = () => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h2
-            className="text-2xl sm:text-3xl lg:text-4xl 
-          font-extrabold mb-2 text-orange-600"
-          >
-            My Profile
-          </h2>
+          <GradientHeading text={"My Profile"}></GradientHeading>
           <p className="text-base-content/70">
             Manage your account information
           </p>
