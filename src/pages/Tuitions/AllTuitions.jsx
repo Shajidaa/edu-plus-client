@@ -1,16 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { FiSearch } from "react-icons/fi";
+import {
+  FiChevronLeft,
+  FiChevronRight,
+  FiMoreHorizontal,
+} from "react-icons/fi";
 
 import Container from "../../components/Shared/Container";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import TuitionCard from "../../components/TuitionCard";
 import Spinner from "../../components/Shared/Spinner";
+import GradientButton from "../../components/Shared/GradientButton";
 import GradientHeading from "../../components/Shared/GradientHeading";
+
 const AllTuitions = () => {
   const axiosSecure = useAxiosSecure();
-  const [searchTerm, setSearchTerm] = useState("");
-  // const [tuition, setTuition] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+
+  // Fetch all tuitions
   const { data, isLoading, error } = useQuery({
     queryKey: ["allTuitions"],
     queryFn: async () => {
@@ -20,39 +28,81 @@ const AllTuitions = () => {
       return res.data;
     },
   });
-  // const sortByBudgetHighToLow = () => {
-  //   const sorted = [...data].sort((a, b) => b.amount - a.amount);
-  //   setTuition(sorted);
-  // };
 
-  // const sortByNewest = () => {
-  //   const sorted = [...data].sort(
-  //     (a, b) => new Date(b.created_at) - new Date(a.created_at)
-  //   );
-  //   setTuition(sorted);
-  // };
+  // Ensure data is an array
+  const tuitions = Array.isArray(data) ? data : [];
 
-  if (isLoading) return <Spinner />;
-  if (error) return <div>Error: {error.message}</div>;
+  // Pagination calculations
+  const totalPages = Math.ceil(tuitions.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentTuitions = tuitions.slice(startIndex, endIndex);
 
-  // Filter tuitions based on search
-  const filteredTuitions = data?.filter((tuition) => {
-    const matchesSearch =
-      tuition.subject?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      tuition.location?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      tuition.class?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      tuition.studentName?.toLowerCase().includes(searchTerm.toLowerCase());
+  const goToPage = (page) => {
+    if (page !== "..." && page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
 
-    return matchesSearch;
-  });
+  const getPageNumbers = () => {
+    const pages = [];
+    const maxPages = 5;
+
+    if (totalPages <= maxPages) {
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
+    } else {
+      if (currentPage <= 3) {
+        pages.push(1, 2, 3, 4, "...", totalPages);
+      } else if (currentPage >= totalPages - 2) {
+        pages.push(
+          1,
+          "...",
+          totalPages - 3,
+          totalPages - 2,
+          totalPages - 1,
+          totalPages
+        );
+      } else {
+        pages.push(
+          1,
+          "...",
+          currentPage - 1,
+          currentPage,
+          currentPage + 1,
+          "...",
+          totalPages
+        );
+      }
+    }
+    return pages;
+  };
+
+  if (isLoading) {
+    return (
+      <Container>
+        <div className="flex justify-center py-12">
+          <Spinner />
+        </div>
+      </Container>
+    );
+  }
+
+  if (error) {
+    return (
+      <Container>
+        <div>Error: {error.message}</div>
+      </Container>
+    );
+  }
+
   return (
     <Container>
       <div>
         <GradientHeading
           className={"text-center"}
-          text={"All tuitions"}
+          text={"All Tuitions"}
         ></GradientHeading>
-
         <p>
           Find the tuition that suits your skills! Explore every listing with
           detailed info so you can choose the best opportunity for your teaching
@@ -60,50 +110,63 @@ const AllTuitions = () => {
         </p>
       </div>
 
-      <div>
-        {/* Search Section */}
-        <div
-          className="rounded-xl shadow-lg p-4 sm:p-6 mb-6 sm:mb-8 border"
-          style={{
-            backgroundColor: "var(--color-card-bg)",
-            borderColor: "var(--color-border)",
-          }}
-        >
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-            {/* Search Bar */}
-            <div className="flex-1 relative">
-              <FiSearch
-                className="absolute left-3 z-10 top-1/2 -translate-y-1/2"
-                style={{ color: "var(--color-text-muted)" }}
-                size={20}
-              />
-              <input
-                type="text"
-                placeholder="Search by subject, location, class, or student name..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="input input-bordered pl-10 transition-all focus:border-primary"
-                style={{ backgroundColor: "var(--color-bg-soft)" }}
-              />
-            </div>
-
-            {/* Results Count */}
-            <div
-              className="text-xs sm:text-sm whitespace-nowrap font-medium"
-              style={{ color: "var(--color-text-muted)" }}
-            >
-              Showing {filteredTuitions?.length || 0} of {data?.length || 0}{" "}
-              tuitions
-            </div>
+      {/* Tuitions Grid */}
+      {currentTuitions.length > 0 ? (
+        <>
+          <div className="grid gap-5 grid-cols-1 lg:grid-cols-4 md:grid-cols-3">
+            {currentTuitions.map((tuition) => (
+              <TuitionCard key={tuition._id} tuition={tuition} />
+            ))}
           </div>
-        </div>
-      </div>
 
-      <div className="grid gap-5 grid-cols-1 lg:grid-cols-4 md:grid-cols-3">
-        {filteredTuitions?.map((tuition) => (
-          <TuitionCard key={tuition._id} tuition={tuition} />
-        ))}
-      </div>
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center gap-2 mt-8">
+              <button
+                className="btn btn-outline btn-sm"
+                disabled={currentPage === 1}
+                onClick={() => goToPage(currentPage - 1)}
+              >
+                <FiChevronLeft size={16} />
+                Previous
+              </button>
+
+              {getPageNumbers().map((page, index) => (
+                <div key={index}>
+                  {page === "..." ? (
+                    <span className="px-3 py-2">
+                      <FiMoreHorizontal size={16} />
+                    </span>
+                  ) : (
+                    <button
+                      onClick={() => goToPage(page)}
+                      className={`btn btn-sm ${
+                        currentPage === page ? "btn-primary" : "btn-outline"
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  )}
+                </div>
+              ))}
+
+              <button
+                className="btn btn-outline btn-sm"
+                disabled={currentPage === totalPages}
+                onClick={() => goToPage(currentPage + 1)}
+              >
+                Next
+                <FiChevronRight size={16} />
+              </button>
+            </div>
+          )}
+        </>
+      ) : (
+        <div className="text-center py-12">
+          <h3>No tuitions available</h3>
+          <p>Check back later for new opportunities.</p>
+        </div>
+      )}
     </Container>
   );
 };
