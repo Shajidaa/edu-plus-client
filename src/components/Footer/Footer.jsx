@@ -16,6 +16,7 @@ import {
   FaLinkedinIn,
   FaYoutube,
   FaGithub,
+  FaGraduationCap,
 } from "react-icons/fa";
 import { RiTwitterXLine } from "react-icons/ri";
 import Container from "../Shared/Container";
@@ -92,10 +93,8 @@ const Footer = () => {
                       className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center"
                       style={{ backgroundColor: "var(--color-primary)" }}
                     >
-                      <FiBook
-                        size={16}
-                        className="text-white sm:w-[18px] sm:h-[18px]"
-                      />
+                      
+                      <FaGraduationCap   className="text-white "/>
                     </div>
                     EduPlus
                   </h3>

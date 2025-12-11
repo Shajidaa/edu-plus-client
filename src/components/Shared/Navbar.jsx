@@ -6,6 +6,7 @@ import Container from "./Container";
 import MyLink from "./MyLink";
 import Spinner from "./Spinner";
 import GradientButton from "./GradientButton";
+import { FaGraduationCap } from "react-icons/fa";
 
 function Navbar() {
   const { user, loading, logOutFunc } = useContext(AuthContext);
@@ -112,8 +113,8 @@ function Navbar() {
             {/* Logo */}
             <Link
               to="/"
-              className="text-lg sm:text-xl lg:text-2xl font-bold tracking-wide text-white hover:scale-105 transition-transform duration-200"
-            >
+              className="text-lg flex  justify-center items-center gap-2 sm:text-xl lg:text-2xl font-bold tracking-wide text-white hover:scale-105 transition-transform duration-200"
+            ><FaGraduationCap className="" />
               Edu Plus
             </Link>
           </div>
@@ -220,7 +221,7 @@ function Navbar() {
               to="/"
               className="text-xl font-bold text-white"
               onClick={closeMenu}
-            >
+            > 
               Edu Plus
             </Link>
             <button
