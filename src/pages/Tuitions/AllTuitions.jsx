@@ -4,18 +4,20 @@ import {
   FiChevronLeft,
   FiChevronRight,
   FiMoreHorizontal,
+  FiSearch,
 } from "react-icons/fi";
 
 import Container from "../../components/Shared/Container";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import TuitionCard from "../../components/TuitionCard";
 import Spinner from "../../components/Shared/Spinner";
-import GradientButton from "../../components/Shared/GradientButton";
+
 import GradientHeading from "../../components/Shared/GradientHeading";
 
 const AllTuitions = () => {
   const axiosSecure = useAxiosSecure();
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
   const itemsPerPage = 8;
 
   // Fetch all tuitions
@@ -32,11 +34,22 @@ const AllTuitions = () => {
   // Ensure data is an array
   const tuitions = Array.isArray(data) ? data : [];
 
+  // Filter tuitions by search term (subject/location only)
+  const filteredTuitions = tuitions.filter((tuition) => {
+    if (!searchTerm) return true;
+    
+    const searchLower = searchTerm.toLowerCase();
+    return (
+      tuition.subject?.toLowerCase().includes(searchLower) ||
+      tuition.location?.toLowerCase().includes(searchLower)
+    );
+  });
+
   // Pagination calculations
-  const totalPages = Math.ceil(tuitions.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredTuitions.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentTuitions = tuitions.slice(startIndex, endIndex);
+  const currentTuitions = filteredTuitions.slice(startIndex, endIndex);
 
   const goToPage = (page) => {
     if (page !== "..." && page >= 1 && page <= totalPages) {
@@ -81,9 +94,7 @@ const AllTuitions = () => {
   if (isLoading) {
     return (
       <Container>
-        <div className="flex justify-center py-12">
-          <Spinner />
-        </div>
+        <Spinner />
       </Container>
     );
   }
@@ -108,6 +119,26 @@ const AllTuitions = () => {
           detailed info so you can choose the best opportunity for your teaching
           journey.
         </p>
+      </div>
+
+      {/* Search Section */}
+      <div className="mb-6">
+        <div className="relative">
+          <FiSearch
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+            size={20}
+          />
+          <input
+            type="text"
+            placeholder="Search tuitions by subject or location..."
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1); // Reset to first page when searching
+            }}
+            className="input input-bordered w-full pl-10"
+          />
+        </div>
       </div>
 
       {/* Tuitions Grid */}
