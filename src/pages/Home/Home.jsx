@@ -1,10 +1,12 @@
 import Banner from "../../components/Home/Banner";
+import LatestTuition from "../../components/Home/LatestTuition";
 import Container from "../../components/Shared/Container";
 
 function Home() {
   return (
-    <Container className="min-h-screen flex items-center justify-center">
+    <Container>
       <Banner></Banner>
+      <LatestTuition></LatestTuition>
     </Container>
   );
 }
