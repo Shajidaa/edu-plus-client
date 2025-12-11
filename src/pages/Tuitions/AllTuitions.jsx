@@ -38,7 +38,7 @@ const AllTuitions = () => {
   // Filter tuitions by search term (subject/location only)
   const filteredTuitions = tuitions.filter((tuition) => {
     if (!searchTerm) return true;
-    
+
     const searchLower = searchTerm.toLowerCase();
     return (
       tuition.subject?.toLowerCase().includes(searchLower) ||
@@ -53,9 +53,9 @@ const AllTuitions = () => {
     } else if (sortBy === "budget-low") {
       return (a.budget || 0) - (b.budget || 0);
     } else if (sortBy === "date-new") {
-      return new Date( b.created_at) - new Date( a.created_at);
+      return new Date(b.created_at) - new Date(a.created_at);
     } else if (sortBy === "date-old") {
-      return new Date( a.created_at) - new Date( b.created_at);
+      return new Date(a.created_at) - new Date(b.created_at);
     }
     return 0;
   });
@@ -165,17 +165,14 @@ const AllTuitions = () => {
       <Container>
         {/* Header Section */}
         <div className="text-center mb-12">
-          <GradientHeading
-            className="text-center mb-4"
-            text="All Tuitions"
-          />
+          <GradientHeading className="text-center mb-4" text="All Tuitions" />
           <p
             className="text-lg max-w-3xl mx-auto"
             style={{ color: "var(--color-text-muted)" }}
           >
             Find the tuition that suits your skills! Explore every listing with
-            detailed info so you can choose the best opportunity for your teaching
-            journey.
+            detailed info so you can choose the best opportunity for your
+            teaching journey.
           </p>
         </div>
 
@@ -210,7 +207,7 @@ const AllTuitions = () => {
                 }}
               />
             </div>
-            
+
             <select
               value={sortBy}
               onChange={(e) => {
@@ -233,160 +230,165 @@ const AllTuitions = () => {
           </div>
 
           {/* Results Count */}
-          <div className="mt-4 pt-4 border-t" style={{ borderColor: "var(--color-border)" }}>
+          <div
+            className="mt-4 pt-4 border-t"
+            style={{ borderColor: "var(--color-border)" }}
+          >
             <p
               className="text-sm font-medium"
               style={{ color: "var(--color-text-muted)" }}
             >
-              Showing {currentTuitions.length} of {sortedTuitions.length} tuitions
+              Showing {currentTuitions.length} of {sortedTuitions.length}{" "}
+              tuitions
               {searchTerm && (
                 <span className="ml-2">
-                  for "<span style={{ color: "var(--color-primary)" }}>{searchTerm}</span>"
+                  for "
+                  <span style={{ color: "var(--color-primary)" }}>
+                    {searchTerm}
+                  </span>
+                  "
                 </span>
               )}
             </p>
           </div>
         </div>
 
-      {/* Tuitions Grid */}
-      {currentTuitions.length > 0 ? (
-        <>
-          <div className="grid gap-5 grid-cols-1 lg:grid-cols-4 md:grid-cols-3">
-            {currentTuitions.map((tuition) => (
-              <TuitionCard key={tuition._id} tuition={tuition} />
-            ))}
-          </div>
-
-          {/* Pagination */}
-          {totalPages > 1 && (
-            <div
-              className="rounded-xl shadow-lg p-6 mt-8 border"
-              style={{
-                backgroundColor: "var(--color-card-bg)",
-                borderColor: "var(--color-border)",
-              }}
-            >
-              <div className="flex justify-center items-center gap-2">
-                <button
-                  className="btn btn-outline btn-sm hover:scale-105 transition-transform"
-                  disabled={currentPage === 1}
-                  onClick={() => goToPage(currentPage - 1)}
-                  style={{
-                    borderColor: "var(--color-primary)",
-                    color: "var(--color-primary)",
-                  }}
-                >
-                  <FiChevronLeft size={16} />
-                  Previous
-                </button>
-
-                <div className="flex gap-1">
-                  {getPageNumbers().map((page, index) => (
-                    <div key={index}>
-                      {page === "..." ? (
-                        <span 
-                          className="px-3 py-2 flex items-center"
-                          style={{ color: "var(--color-text-muted)" }}
-                        >
-                          <FiMoreHorizontal size={16} />
-                        </span>
-                      ) : (
-                        <button
-                          onClick={() => goToPage(page)}
-                          className={`btn btn-sm hover:scale-105 transition-all ${
-                            currentPage === page 
-                              ? "btn-primary shadow-lg" 
-                              : "btn-outline hover:btn-primary"
-                          }`}
-                          style={
-                            currentPage === page
-                              ? {
-                                  backgroundColor: "var(--color-primary)",
-                                  borderColor: "var(--color-primary)",
-                                  color: "white",
-                                }
-                              : {
-                                  borderColor: "var(--color-primary)",
-                                  color: "var(--color-primary)",
-                                }
-                          }
-                        >
-                          {page}
-                        </button>
-                      )}
-                    </div>
-                  ))}
-                </div>
-
-                <button
-                  className="btn btn-outline btn-sm hover:scale-105 transition-transform"
-                  disabled={currentPage === totalPages}
-                  onClick={() => goToPage(currentPage + 1)}
-                  style={{
-                    borderColor: "var(--color-primary)",
-                    color: "var(--color-primary)",
-                  }}
-                >
-                  Next
-                  <FiChevronRight size={16} />
-                </button>
-              </div>
-              
-              
+        {/* Tuitions Grid */}
+        {currentTuitions.length > 0 ? (
+          <>
+            <div className="grid gap-5 grid-cols-1 lg:grid-cols-4 md:grid-cols-3">
+              {currentTuitions.map((tuition) => (
+                <TuitionCard key={tuition._id} tuition={tuition} />
+              ))}
             </div>
-          )}
-        </>
-      ) : (
-        <div
-          className="text-center py-20 rounded-xl shadow-lg border"
-          style={{
-            backgroundColor: "var(--color-card-bg)",
-            borderColor: "var(--color-border)",
-          }}
-        >
-          <div className="max-w-md mx-auto">
-            <div
-              className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center"
-              style={{ backgroundColor: "var(--color-bg-soft)" }}
-            >
-              <FiSearch 
-                size={32} 
-                style={{ color: "var(--color-text-muted)" }}
-              />
-            </div>
-            <h3
-              className="text-2xl font-bold mb-3"
-              style={{ color: "var(--color-text-dark)" }}
-            >
-              No tuitions found
-            </h3>
-            <p
-              className="text-lg mb-6"
-              style={{ color: "var(--color-text-muted)" }}
-            >
-              {searchTerm 
-                ? `No tuitions match your search for "${searchTerm}". Try different keywords or clear your search.`
-                : "No tuitions are currently available. Check back later for new opportunities."
-              }
-            </p>
-            {searchTerm && (
-              <button
-                onClick={() => {
-                  setSearchTerm("");
-                  setCurrentPage(1);
-                }}
-                className="btn btn-primary hover:scale-105 transition-transform"
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div
+                className="rounded-xl shadow-lg p-6 mt-8 border"
                 style={{
-                  backgroundColor: "var(--color-primary)",
-                  borderColor: "var(--color-primary)",
+                  backgroundColor: "var(--color-card-bg)",
+                  borderColor: "var(--color-border)",
                 }}
               >
-                Clear Search
-              </button>
+                <div className="flex justify-center items-center gap-2">
+                  <button
+                    className="btn btn-outline btn-sm hover:scale-105 transition-transform"
+                    disabled={currentPage === 1}
+                    onClick={() => goToPage(currentPage - 1)}
+                    style={{
+                      borderColor: "var(--color-primary)",
+                      color: "var(--color-primary)",
+                    }}
+                  >
+                    <FiChevronLeft size={16} />
+                    Previous
+                  </button>
+
+                  <div className="flex gap-1">
+                    {getPageNumbers().map((page, index) => (
+                      <div key={index}>
+                        {page === "..." ? (
+                          <span
+                            className="px-3 py-2 flex items-center"
+                            style={{ color: "var(--color-text-muted)" }}
+                          >
+                            <FiMoreHorizontal size={16} />
+                          </span>
+                        ) : (
+                          <button
+                            onClick={() => goToPage(page)}
+                            className={`btn btn-sm hover:scale-105 transition-all ${
+                              currentPage === page
+                                ? "btn-primary shadow-lg"
+                                : "btn-outline hover:btn-primary"
+                            }`}
+                            style={
+                              currentPage === page
+                                ? {
+                                    backgroundColor: "var(--color-primary)",
+                                    borderColor: "var(--color-primary)",
+                                    color: "white",
+                                  }
+                                : {
+                                    borderColor: "var(--color-primary)",
+                                    color: "var(--color-primary)",
+                                  }
+                            }
+                          >
+                            {page}
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+
+                  <button
+                    className="btn btn-outline btn-sm hover:scale-105 transition-transform"
+                    disabled={currentPage === totalPages}
+                    onClick={() => goToPage(currentPage + 1)}
+                    style={{
+                      borderColor: "var(--color-primary)",
+                      color: "var(--color-primary)",
+                    }}
+                  >
+                    Next
+                    <FiChevronRight size={16} />
+                  </button>
+                </div>
+              </div>
             )}
+          </>
+        ) : (
+          <div
+            className="text-center py-20 rounded-xl shadow-lg border"
+            style={{
+              backgroundColor: "var(--color-card-bg)",
+              borderColor: "var(--color-border)",
+            }}
+          >
+            <div className="max-w-md mx-auto">
+              <div
+                className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center"
+                style={{ backgroundColor: "var(--color-bg-soft)" }}
+              >
+                <FiSearch
+                  size={32}
+                  style={{ color: "var(--color-text-muted)" }}
+                />
+              </div>
+              <h3
+                className="text-2xl font-bold mb-3"
+                style={{ color: "var(--color-text-dark)" }}
+              >
+                No tuitions found
+              </h3>
+              <p
+                className="text-lg mb-6"
+                style={{ color: "var(--color-text-muted)" }}
+              >
+                {searchTerm
+                  ? `No tuitions match your search for "${searchTerm}". Try different keywords or clear your search.`
+                  : "No tuitions are currently available. Check back later for new opportunities."}
+              </p>
+              {searchTerm && (
+                <button
+                  onClick={() => {
+                    setSearchTerm("");
+                    setCurrentPage(1);
+                  }}
+                  className="btn btn-primary hover:scale-105 transition-transform"
+                  style={{
+                    backgroundColor: "var(--color-primary)",
+                    borderColor: "var(--color-primary)",
+                  }}
+                >
+                  Clear Search
+                </button>
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        )}
       </Container>
     </div>
   );
