@@ -25,6 +25,7 @@ import AllTuitions from "../pages/Tuitions/AllTuitions";
 import TuitionDetails from "../pages/TuitionDetails";
 import PaymentSuccess from "../pages/Dashboard/studentDashboard/PaymentSuccess";
 import Spinner from "../components/Shared/Spinner";
+import DashboardIndex from "./DashboardIndex";
 
 const router = createBrowserRouter([
   {
@@ -66,9 +67,13 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      {
+        index: true,
+        element: <DashboardIndex />,
+      },
       // ----------------- STUDENT ROUTES -----------------
       {
-        // index: true,
+        path: "my-tuitions",
         element: (
           <RoleRoute allowedRoles={["student"]}>
             <MyTuitions />

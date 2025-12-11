@@ -81,7 +81,7 @@ const DashboardLayout = () => {
               <>
                 <li>
                   <NavLink
-                    to="/dashboard"
+                    to="/dashboard/my-tuitions"
                     onClick={() => setIsMobileSidebarOpen(false)}
                     className={({ isActive }) =>
                       `flex items-center gap-3 p-3 rounded-lg transition-all duration-200 ${

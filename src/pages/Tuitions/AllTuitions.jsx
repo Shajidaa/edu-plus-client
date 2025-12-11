@@ -1,13 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { FiSearch } from "react-icons/fi";
 
 import Container from "../../components/Shared/Container";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import TuitionCard from "../../components/TuitionCard";
-import { useState } from "react";
-import { FiSearch } from "react-icons/fi";
+import Spinner from "../../components/Shared/Spinner";
 const AllTuitions = () => {
   const axiosSecure = useAxiosSecure();
   const [searchTerm, setSearchTerm] = useState("");
+  // const [tuition, setTuition] = useState([]);
   const { data, isLoading, error } = useQuery({
     queryKey: ["allTuitions"],
     queryFn: async () => {
@@ -17,9 +19,21 @@ const AllTuitions = () => {
       return res.data;
     },
   });
+  // const sortByBudgetHighToLow = () => {
+  //   const sorted = [...data].sort((a, b) => b.amount - a.amount);
+  //   setTuition(sorted);
+  // };
 
-  if (isLoading) return <div>Loading...</div>;
+  // const sortByNewest = () => {
+  //   const sorted = [...data].sort(
+  //     (a, b) => new Date(b.created_at) - new Date(a.created_at)
+  //   );
+  //   setTuition(sorted);
+  // };
+
+  if (isLoading) return <Spinner />;
   if (error) return <div>Error: {error.message}</div>;
+
   // Filter tuitions based on search
   const filteredTuitions = data?.filter((tuition) => {
     const matchesSearch =
@@ -40,6 +54,7 @@ const AllTuitions = () => {
           journey.
         </p>
       </div>
+
       <div>
         {/* Search Section */}
         <div
@@ -51,7 +66,7 @@ const AllTuitions = () => {
         >
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             {/* Search Bar */}
-            <div className="flex-1 relative w-full">
+            <div className="flex-1 relative">
               <FiSearch
                 className="absolute left-3 z-10 top-1/2 -translate-y-1/2"
                 style={{ color: "var(--color-text-muted)" }}
@@ -62,7 +77,7 @@ const AllTuitions = () => {
                 placeholder="Search by subject, location, class, or student name..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="input input-bordered w-full pl-10 transition-all focus:border-primary"
+                className="input input-bordered pl-10 transition-all focus:border-primary"
                 style={{ backgroundColor: "var(--color-bg-soft)" }}
               />
             </div>
@@ -78,9 +93,10 @@ const AllTuitions = () => {
           </div>
         </div>
       </div>
+
       <div className="grid gap-5 grid-cols-1 lg:grid-cols-4 md:grid-cols-3">
         {filteredTuitions?.map((tuition) => (
-          <TuitionCard key={tuition._id} tuition={tuition}></TuitionCard>
+          <TuitionCard key={tuition._id} tuition={tuition} />
         ))}
       </div>
     </Container>
