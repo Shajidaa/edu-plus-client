@@ -26,7 +26,7 @@ const TuitionCard = ({ tuition }) => {
         {/* Header with Status Badge */}
         <div className="flex justify-between items-start mb-4">
           <div className="flex-1">
-            <h3 className="card-title text-2xl font-bold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
+            <h3 className="card-title text-2xl font-bold text-primary">
               {subject}
             </h3>
             <div className="flex items-center gap-2 mt-2 text-base-content/70">
