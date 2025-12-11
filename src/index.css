@@ -8,6 +8,7 @@
     --color-primary-hover: #1E40AF;
 
     --color-secondary: #F97316;
+    --color-success: #005a23;
     /* Bright Orange */
     --color-secondary-hover: #EA580C;
 
@@ -24,4 +25,8 @@
     /* Border & Card */
     --color-border: #E5E7EB;
     --color-card-bg: #FFFFFF;
+}
+
+.commonBtn {
+    @apply btn bg-orange-500 border-0 btn-lg gap-2 hover:bg-white text-primary hover:scale-105 transition-transform border-none
 }

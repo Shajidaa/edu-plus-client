@@ -172,14 +172,17 @@ function Navbar() {
               <>
                 <Link
                   to="/login"
-                  className="btn btn-sm sm:btn-md text-white border-none hover:opacity-90 transition-opacity"
-                  style={{ backgroundColor: "var(--color-secondary)" }}
+                  className={
+                    " btn  bg-orange-500 border-0  gap-2 hover:bg-white text-primary hover:scale-105 transition-transform border-none"
+                  }
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className="hidden sm:flex btn btn-sm sm:btn-md bg-transparent border-2 border-white text-white hover:bg-white hover:text-black transition-all"
+                  className={
+                    " btn  bg-orange-500 border-0  gap-2 hover:bg-white text-primary hover:scale-105 transition-transform border-none"
+                  }
                 >
                   Register
                 </Link>
@@ -243,13 +246,23 @@ function Navbar() {
 
           {/* Mobile Menu Footer - Auth Buttons */}
           {!user && (
-            <div className="p-4 border-t border-white/20 space-y-2">
-              <GradientButton to="/login" onClick={closeMenu}>
+            <div>
+              <Link
+                className={
+                  " btn bg-orange-500 border-0 btn-lg gap-2 hover:bg-white text-primary hover:scale-105 transition-transform border-none"
+                }
+                to="/login"
+                onClick={closeMenu}
+              >
                 Login
-              </GradientButton>
-              <GradientButton to="/register" onClick={closeMenu}>
+              </Link>
+              <Link
+                className=" btn bg-orange-500 border-0 btn-lg gap-2 hover:bg-white text-primary hover:scale-105 transition-transform border-none"
+                to="/register"
+                onClick={closeMenu}
+              >
                 Register
-              </GradientButton>
+              </Link>
             </div>
           )}
         </div>

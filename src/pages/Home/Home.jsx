@@ -1,15 +1,18 @@
 import Banner from "../../components/Home/Banner";
+import Call from "../../components/Home/Call";
 import LatestTuition from "../../components/Home/LatestTuition";
 import LatestTutor from "../../components/Home/LatestTutor";
-import Container from "../../components/Shared/Container";
+import PlatformSections from "../../components/Home/PlatformSections";
 
 function Home() {
   return (
-    <Container>
+    <>
       <Banner></Banner>
       <LatestTuition></LatestTuition>
       <LatestTutor></LatestTutor>
-    </Container>
+      <Call></Call>
+      <PlatformSections></PlatformSections>
+    </>
   );
 }
 

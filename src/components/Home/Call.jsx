@@ -23,14 +23,14 @@ const Call = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             to="/tuitions"
-            className="btn btn-outline btn-lg gap-2 text-white border-white hover:bg-white hover:text-primary"
+            className="btn bg-orange-500 border-0 btn-outline btn-lg gap-2 text-white border-white hover:bg-white hover:text-primary"
           >
             <FiBookOpen size={20} />
             Browse All Tuitions
           </Link>
           <Link
             to="/register"
-            className="btn btn-lg gap-2 bg-white text-primary hover:scale-105 transition-transform border-none"
+            className="btn bg-orange-500 border-0 btn-lg gap-2 hover:bg-white text-primary hover:scale-105 transition-transform border-none"
           >
             <FiUsers size={20} />
             Join as Tutor
