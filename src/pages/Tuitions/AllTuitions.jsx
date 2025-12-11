@@ -18,6 +18,7 @@ const AllTuitions = () => {
   const axiosSecure = useAxiosSecure();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
+  const [sortBy, setSortBy] = useState("");
   const itemsPerPage = 8;
 
   // Fetch all tuitions
@@ -45,11 +46,25 @@ const AllTuitions = () => {
     );
   });
 
+  // Sort tuitions by budget or date
+  const sortedTuitions = [...filteredTuitions].sort((a, b) => {
+    if (sortBy === "budget-high") {
+      return (b.budget || 0) - (a.budget || 0);
+    } else if (sortBy === "budget-low") {
+      return (a.budget || 0) - (b.budget || 0);
+    } else if (sortBy === "date-new") {
+      return new Date( b.created_at) - new Date( a.created_at);
+    } else if (sortBy === "date-old") {
+      return new Date( a.created_at) - new Date( b.created_at);
+    }
+    return 0;
+  });
+
   // Pagination calculations
-  const totalPages = Math.ceil(filteredTuitions.length / itemsPerPage);
+  const totalPages = Math.ceil(sortedTuitions.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentTuitions = filteredTuitions.slice(startIndex, endIndex);
+  const currentTuitions = sortedTuitions.slice(startIndex, endIndex);
 
   const goToPage = (page) => {
     if (page !== "..." && page >= 1 && page <= totalPages) {
@@ -121,9 +136,9 @@ const AllTuitions = () => {
         </p>
       </div>
 
-      {/* Search Section */}
-      <div className="mb-6">
-        <div className="relative">
+      {/* Search and Sort Section */}
+      <div className="mb-6 flex flex-col md:flex-row gap-4">
+        <div className="relative flex-1">
           <FiSearch
             className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
             size={20}
@@ -139,6 +154,21 @@ const AllTuitions = () => {
             className="input input-bordered w-full pl-10"
           />
         </div>
+        
+        <select
+          value={sortBy}
+          onChange={(e) => {
+            setSortBy(e.target.value);
+            setCurrentPage(1); 
+          }}
+          className="select select-bordered"
+        >
+          <option value="">Sort by</option>
+          <option value="budget-high">Budget: High to Low</option>
+          <option value="budget-low">Budget: Low to High</option>
+          <option value="date-new">Date: Newest First</option>
+          <option value="date-old">Date: Oldest First</option>
+        </select>
       </div>
 
       {/* Tuitions Grid */}
