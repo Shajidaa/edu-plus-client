@@ -108,68 +108,145 @@ const AllTuitions = () => {
 
   if (isLoading) {
     return (
-      <Container>
-        <Spinner />
-      </Container>
+      <div
+        className="min-h-screen py-8"
+        style={{ backgroundColor: "var(--color-bg-soft)" }}
+      >
+        <Container>
+          <div className="flex justify-center items-center py-20">
+            <div className="flex flex-col items-center gap-4">
+              <div
+                className="p-6 rounded-full"
+                style={{ backgroundColor: "var(--color-primary-hover)" }}
+              >
+                <Spinner />
+              </div>
+              <p
+                className="text-lg font-medium"
+                style={{ color: "var(--color-text-dark)" }}
+              >
+                Loading tuitions...
+              </p>
+            </div>
+          </div>
+        </Container>
+      </div>
     );
   }
 
   if (error) {
     return (
-      <Container>
-        <div>Error: {error.message}</div>
-      </Container>
+      <div
+        className="min-h-screen py-8"
+        style={{ backgroundColor: "var(--color-bg-soft)" }}
+      >
+        <Container>
+          <div className="text-center py-20">
+            <div
+              className="alert alert-error max-w-md mx-auto rounded-xl shadow-lg"
+              style={{
+                backgroundColor: "var(--color-error-bg)",
+                borderColor: "var(--color-error)",
+              }}
+            >
+              <span>Error loading tuitions: {error.message}</span>
+            </div>
+          </div>
+        </Container>
+      </div>
     );
   }
 
   return (
-    <Container>
-      <div>
-        <GradientHeading
-          className={"text-center"}
-          text={"All Tuitions"}
-        ></GradientHeading>
-        <p>
-          Find the tuition that suits your skills! Explore every listing with
-          detailed info so you can choose the best opportunity for your teaching
-          journey.
-        </p>
-      </div>
-
-      {/* Search and Sort Section */}
-      <div className="mb-6 flex flex-col md:flex-row gap-4">
-        <div className="relative flex-1">
-          <FiSearch
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-            size={20}
+    <div
+      className="min-h-screen py-8"
+      style={{ backgroundColor: "var(--color-bg-soft)" }}
+    >
+      <Container>
+        {/* Header Section */}
+        <div className="text-center mb-12">
+          <GradientHeading
+            className="text-center mb-4"
+            text="All Tuitions"
           />
-          <input
-            type="text"
-            placeholder="Search tuitions by subject or location..."
-            value={searchTerm}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-              setCurrentPage(1); // Reset to first page when searching
-            }}
-            className="input input-bordered w-full pl-10"
-          />
+          <p
+            className="text-lg max-w-3xl mx-auto"
+            style={{ color: "var(--color-text-muted)" }}
+          >
+            Find the tuition that suits your skills! Explore every listing with
+            detailed info so you can choose the best opportunity for your teaching
+            journey.
+          </p>
         </div>
-        
-        <select
-          value={sortBy}
-          onChange={(e) => {
-            setSortBy(e.target.value);
-            setCurrentPage(1); 
+
+        {/* Search and Sort Section */}
+        <div
+          className="rounded-xl shadow-lg p-6 mb-8 border"
+          style={{
+            backgroundColor: "var(--color-card-bg)",
+            borderColor: "var(--color-border)",
           }}
-          className="select select-bordered"
         >
-          <option value="">Sort by</option>
-          <option value="budget-high">Budget: High to Low</option>
-          <option value="budget-low">Budget: Low to High</option>
-          <option value="date-new">Date: Newest First</option>
-          <option value="date-old">Date: Oldest First</option>
-        </select>
-      </div>
+          <div className="flex flex-col lg:flex-row gap-4">
+            <div className="relative flex-1">
+              <FiSearch
+                className="absolute left-3 top-1/2 transform -translate-y-1/2"
+                style={{ color: "var(--color-text-muted)" }}
+                size={20}
+              />
+              <input
+                type="text"
+                placeholder="Search tuitions by subject or location..."
+                value={searchTerm}
+                onChange={(e) => {
+                  setSearchTerm(e.target.value);
+                  setCurrentPage(1);
+                }}
+                className="input input-bordered w-full pl-10 transition-all focus:border-primary"
+                style={{
+                  backgroundColor: "var(--color-bg-soft)",
+                  borderColor: "var(--color-border)",
+                  color: "var(--color-text-dark)",
+                }}
+              />
+            </div>
+            
+            <select
+              value={sortBy}
+              onChange={(e) => {
+                setSortBy(e.target.value);
+                setCurrentPage(1);
+              }}
+              className="select select-bordered min-w-[200px]"
+              style={{
+                backgroundColor: "var(--color-bg-soft)",
+                borderColor: "var(--color-border)",
+                color: "var(--color-text-dark)",
+              }}
+            >
+              <option value="">Sort by</option>
+              <option value="budget-high">Budget: High to Low</option>
+              <option value="budget-low">Budget: Low to High</option>
+              <option value="date-new">Date: Newest First</option>
+              <option value="date-old">Date: Oldest First</option>
+            </select>
+          </div>
+
+          {/* Results Count */}
+          <div className="mt-4 pt-4 border-t" style={{ borderColor: "var(--color-border)" }}>
+            <p
+              className="text-sm font-medium"
+              style={{ color: "var(--color-text-muted)" }}
+            >
+              Showing {currentTuitions.length} of {sortedTuitions.length} tuitions
+              {searchTerm && (
+                <span className="ml-2">
+                  for "<span style={{ color: "var(--color-primary)" }}>{searchTerm}</span>"
+                </span>
+              )}
+            </p>
+          </div>
+        </div>
 
       {/* Tuitions Grid */}
       {currentTuitions.length > 0 ? (
@@ -182,53 +259,136 @@ const AllTuitions = () => {
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="flex justify-center items-center gap-2 mt-8">
-              <button
-                className="btn btn-outline btn-sm"
-                disabled={currentPage === 1}
-                onClick={() => goToPage(currentPage - 1)}
-              >
-                <FiChevronLeft size={16} />
-                Previous
-              </button>
+            <div
+              className="rounded-xl shadow-lg p-6 mt-8 border"
+              style={{
+                backgroundColor: "var(--color-card-bg)",
+                borderColor: "var(--color-border)",
+              }}
+            >
+              <div className="flex justify-center items-center gap-2">
+                <button
+                  className="btn btn-outline btn-sm hover:scale-105 transition-transform"
+                  disabled={currentPage === 1}
+                  onClick={() => goToPage(currentPage - 1)}
+                  style={{
+                    borderColor: "var(--color-primary)",
+                    color: "var(--color-primary)",
+                  }}
+                >
+                  <FiChevronLeft size={16} />
+                  Previous
+                </button>
 
-              {getPageNumbers().map((page, index) => (
-                <div key={index}>
-                  {page === "..." ? (
-                    <span className="px-3 py-2">
-                      <FiMoreHorizontal size={16} />
-                    </span>
-                  ) : (
-                    <button
-                      onClick={() => goToPage(page)}
-                      className={`btn btn-sm ${
-                        currentPage === page ? "btn-primary" : "btn-outline"
-                      }`}
-                    >
-                      {page}
-                    </button>
-                  )}
+                <div className="flex gap-1">
+                  {getPageNumbers().map((page, index) => (
+                    <div key={index}>
+                      {page === "..." ? (
+                        <span 
+                          className="px-3 py-2 flex items-center"
+                          style={{ color: "var(--color-text-muted)" }}
+                        >
+                          <FiMoreHorizontal size={16} />
+                        </span>
+                      ) : (
+                        <button
+                          onClick={() => goToPage(page)}
+                          className={`btn btn-sm hover:scale-105 transition-all ${
+                            currentPage === page 
+                              ? "btn-primary shadow-lg" 
+                              : "btn-outline hover:btn-primary"
+                          }`}
+                          style={
+                            currentPage === page
+                              ? {
+                                  backgroundColor: "var(--color-primary)",
+                                  borderColor: "var(--color-primary)",
+                                  color: "white",
+                                }
+                              : {
+                                  borderColor: "var(--color-primary)",
+                                  color: "var(--color-primary)",
+                                }
+                          }
+                        >
+                          {page}
+                        </button>
+                      )}
+                    </div>
+                  ))}
                 </div>
-              ))}
 
-              <button
-                className="btn btn-outline btn-sm"
-                disabled={currentPage === totalPages}
-                onClick={() => goToPage(currentPage + 1)}
-              >
-                Next
-                <FiChevronRight size={16} />
-              </button>
+                <button
+                  className="btn btn-outline btn-sm hover:scale-105 transition-transform"
+                  disabled={currentPage === totalPages}
+                  onClick={() => goToPage(currentPage + 1)}
+                  style={{
+                    borderColor: "var(--color-primary)",
+                    color: "var(--color-primary)",
+                  }}
+                >
+                  Next
+                  <FiChevronRight size={16} />
+                </button>
+              </div>
+              
+              
             </div>
           )}
         </>
       ) : (
-        <div className="text-center py-12">
-          <h3>No tuitions available</h3>
-          <p>Check back later for new opportunities.</p>
+        <div
+          className="text-center py-20 rounded-xl shadow-lg border"
+          style={{
+            backgroundColor: "var(--color-card-bg)",
+            borderColor: "var(--color-border)",
+          }}
+        >
+          <div className="max-w-md mx-auto">
+            <div
+              className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center"
+              style={{ backgroundColor: "var(--color-bg-soft)" }}
+            >
+              <FiSearch 
+                size={32} 
+                style={{ color: "var(--color-text-muted)" }}
+              />
+            </div>
+            <h3
+              className="text-2xl font-bold mb-3"
+              style={{ color: "var(--color-text-dark)" }}
+            >
+              No tuitions found
+            </h3>
+            <p
+              className="text-lg mb-6"
+              style={{ color: "var(--color-text-muted)" }}
+            >
+              {searchTerm 
+                ? `No tuitions match your search for "${searchTerm}". Try different keywords or clear your search.`
+                : "No tuitions are currently available. Check back later for new opportunities."
+              }
+            </p>
+            {searchTerm && (
+              <button
+                onClick={() => {
+                  setSearchTerm("");
+                  setCurrentPage(1);
+                }}
+                className="btn btn-primary hover:scale-105 transition-transform"
+                style={{
+                  backgroundColor: "var(--color-primary)",
+                  borderColor: "var(--color-primary)",
+                }}
+              >
+                Clear Search
+              </button>
+            )}
+          </div>
         </div>
       )}
-    </Container>
+      </Container>
+    </div>
   );
 };
 
