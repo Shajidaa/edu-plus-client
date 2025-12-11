@@ -12,7 +12,7 @@ function Login() {
     formState: { errors },
   } = useForm();
 
-  const { signInFunc } = useContext(AuthContext);
+  const { signInFunc, signInWithGoogleFunc } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -31,6 +31,37 @@ function Login() {
     } catch (err) {
       console.log(err);
       toast.error(err?.message || "Login failed. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGoogle = async () => {
+    setIsLoading(true);
+    try {
+      const result = await signInWithGoogleFunc();
+      const loggedUser = result.user;
+
+      // backend এ POST করে user save/last_loggedIn update
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/users`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: loggedUser.displayName,
+          email: loggedUser.email,
+          // role না path korle backend default student assign korbe
+        }),
+      });
+
+      await res.json();
+
+      toast.success("Login Successful");
+      navigate(from, { replace: true });
+    } catch (err) {
+      console.error(err);
+      toast.error("Google login failed");
     } finally {
       setIsLoading(false);
     }
@@ -77,7 +108,7 @@ function Login() {
               </label>
               <div className="relative">
                 <FaEnvelope
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  className="absolute z-10 left-3 top-1/2 -translate-y-1/2 text-gray-400"
                   size={16}
                 />
                 <input
@@ -112,7 +143,7 @@ function Login() {
               </label>
               <div className="relative">
                 <FaLock
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  className="absolute z-10 left-3 top-1/2 -translate-y-1/2 text-gray-400"
                   size={16}
                 />
                 <input
@@ -132,12 +163,12 @@ function Login() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                  className="absolute z-50 right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                 >
                   {showPassword ? (
-                    <FaEyeSlash size={18} />
+                    <FaEyeSlash className="z-50" size={18} />
                   ) : (
-                    <FaEye size={18} />
+                    <FaEye className="" size={18} />
                   )}
                 </button>
               </div>
@@ -181,6 +212,41 @@ function Login() {
                 Create Account
               </Link>
             </p>
+            {/* social */}
+            <p>as student</p>
+            <button
+              onClick={handleGoogle}
+              className="btn bg-white text-black border-[#e5e5e5]"
+            >
+              <svg
+                aria-label="Google logo"
+                width="16"
+                height="16"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+              >
+                <g>
+                  <path d="m0 0H512V512H0" fill="#fff"></path>
+                  <path
+                    fill="#34a853"
+                    d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"
+                  ></path>
+                  <path
+                    fill="#4285f4"
+                    d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"
+                  ></path>
+                  <path
+                    fill="#fbbc02"
+                    d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"
+                  ></path>
+                  <path
+                    fill="#ea4335"
+                    d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"
+                  ></path>
+                </g>
+              </svg>
+              Login with Google
+            </button>
           </div>
         </div>
       </div>
