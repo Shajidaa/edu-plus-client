@@ -42,7 +42,7 @@ function Navbar() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  if (loading) return <Spinner></Spinner>;
+  // Don't hide navbar during loading - just show loading state in user section
 
   const menuItems = (
     <>
@@ -125,7 +125,12 @@ function Navbar() {
 
           {/* Right - Auth Buttons */}
           <div className="flex items-center gap-2 sm:gap-3">
-            {user ? (
+            {loading ? (
+              <div className="flex items-center gap-2">
+                <span className="loading loading-spinner loading-sm text-white"></span>
+                <span className="text-white text-sm hidden sm:inline">Loading...</span>
+              </div>
+            ) : user ? (
               <div className="dropdown dropdown-end">
                 <div
                   tabIndex={0}
@@ -245,7 +250,14 @@ function Navbar() {
           </div>
 
           {/* Mobile Menu Footer - Auth Buttons */}
-          {!user && (
+          {loading ? (
+            <div className="p-4 border-t border-white/20">
+              <div className="flex items-center justify-center gap-2">
+                <span className="loading loading-spinner loading-sm text-white"></span>
+                <span className="text-white text-sm">Loading...</span>
+              </div>
+            </div>
+          ) : !user && (
             <div>
               <Link
                 className={
