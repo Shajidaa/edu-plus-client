@@ -24,6 +24,7 @@ const ApplyTuitionModal = ({
       reset({
         tutorName: user.displayName || "",
         tutorEmail: user.email || "",
+        tutorImage: user.photoURL || "",
         experience: "",
         qualification: "",
         salary: "",
@@ -90,6 +91,15 @@ const ApplyTuitionModal = ({
                 readOnly
               />
             </div>
+          </div>
+          {/*photo */}
+          <div className="form-control">
+            <label className="label">Photo</label>
+            <input
+              {...register("tutorImage", { required: true })}
+              className="input input-bordered input-sm"
+              readOnly
+            />
           </div>
 
           {/* Experience */}
