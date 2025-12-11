@@ -20,6 +20,7 @@ import axios from "axios";
 import useRole from "../hooks/useRole";
 import ApplyTuitionModal from "../components/Modal/ApplyTuitionModal";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import Spinner from "../components/Shared/Spinner";
 
 const TuitionDetails = () => {
   const { id } = useParams();
@@ -89,24 +90,7 @@ const TuitionDetails = () => {
   };
 
   if (isLoading || isRoleLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="flex flex-col items-center gap-4">
-          <div
-            className="p-6 rounded-full"
-            style={{ backgroundColor: "var(--color-primary-hover)" }}
-          >
-            <span className="loading loading-spinner loading-lg text-primary"></span>
-          </div>
-          <p
-            className="text-lg font-medium"
-            style={{ color: "var(--color-text-dark)" }}
-          >
-            Loading tuition details...
-          </p>
-        </div>
-      </div>
-    );
+    return <Spinner></Spinner>;
   }
 
   if (error || !tuition) {

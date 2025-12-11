@@ -107,31 +107,7 @@ const AllTuitions = () => {
   };
 
   if (isLoading) {
-    return (
-      <div
-        className="min-h-screen py-8"
-        style={{ backgroundColor: "var(--color-bg-soft)" }}
-      >
-        <Container>
-          <div className="flex justify-center items-center py-20">
-            <div className="flex flex-col items-center gap-4">
-              <div
-                className="p-6 rounded-full"
-                style={{ backgroundColor: "var(--color-primary-hover)" }}
-              >
-                <Spinner />
-              </div>
-              <p
-                className="text-lg font-medium"
-                style={{ color: "var(--color-text-dark)" }}
-              >
-                Loading tuitions...
-              </p>
-            </div>
-          </div>
-        </Container>
-      </div>
-    );
+    return <Spinner></Spinner>;
   }
 
   if (error) {
