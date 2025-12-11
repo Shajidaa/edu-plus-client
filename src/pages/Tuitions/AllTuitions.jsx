@@ -6,6 +6,7 @@ import Container from "../../components/Shared/Container";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import TuitionCard from "../../components/TuitionCard";
 import Spinner from "../../components/Shared/Spinner";
+import GradientHeading from "../../components/Shared/GradientHeading";
 const AllTuitions = () => {
   const axiosSecure = useAxiosSecure();
   const [searchTerm, setSearchTerm] = useState("");
@@ -47,7 +48,11 @@ const AllTuitions = () => {
   return (
     <Container>
       <div>
-        <h1>All tuitions</h1>
+        <GradientHeading
+          className={"text-center"}
+          text={"All tuitions"}
+        ></GradientHeading>
+
         <p>
           Find the tuition that suits your skills! Explore every listing with
           detailed info so you can choose the best opportunity for your teaching
