@@ -14,9 +14,12 @@ import { FaCreditCard } from "react-icons/fa";
 import Spinner from "../../../components/Shared/Spinner";
 import useAuth from "../../../hooks/useAuth";
 import GradientHeading from "../../../components/Shared/GradientHeading";
+import { useState } from "react";
+import TutorDetailsModal from "../../../components/Modal/tutorDetailsModal";
 
 const AppliedTutors = () => {
   const { user, loading: userLoading } = useAuth();
+  const [selectedTutorId, setSelectedTutorId] = useState(null);
   const axiosSecure = useAxiosSecure();
   const {
     data: myApplications = [],
@@ -31,6 +34,8 @@ const AppliedTutors = () => {
       return res.data;
     },
   });
+  console.log(myApplications);
+
   const { data: paymentData = [], isLoading: paymentLoading } = useQuery({
     queryKey: ["payment", user?.email],
     queryFn: () =>
@@ -40,7 +45,7 @@ const AppliedTutors = () => {
   });
 
   if (isLoading || paymentLoading || userLoading) return <Spinner />;
-  const handleView = () => {};
+
   const handleApprove = async (id) => {
     try {
       await axiosSecure.patch(
@@ -278,15 +283,22 @@ const AppliedTutors = () => {
                       <td>
                         <div className="flex gap-2">
                           {/* View Button */}
-                          <button
+                          {/* <button
                             onClick={() => handleView(app._id)}
                             className="btn btn-ghost btn-sm hover:scale-105 transition-transform"
                             style={{ color: "var(--color-primary)" }}
                             title="View Details"
                           >
                             <FiEye size={18} />
+                          </button> */}
+                          <button
+                            onClick={() => setSelectedTutorId(app._id)}
+                            className="btn btn-ghost btn-sm hover:scale-105 transition-transform"
+                            style={{ color: "var(--color-primary)" }}
+                            title="View Details"
+                          >
+                            <FiEye size={18} />
                           </button>
-
                           {app.status !== "approved" && (
                             <>
                               <button
@@ -397,6 +409,13 @@ const AppliedTutors = () => {
           </div>
         )}
       </div>
+      {/* Popup Modal */}
+      {selectedTutorId && (
+        <TutorDetailsModal
+          id={selectedTutorId}
+          onClose={() => setSelectedTutorId(null)}
+        />
+      )}
     </div>
   );
 };

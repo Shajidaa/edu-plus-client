@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import Banner from "../../components/Home/Banner";
 import Call from "../../components/Home/Call";
@@ -20,10 +21,10 @@ function Home() {
 
   // Animation variants for each section
   const sectionVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       y: 50,
-      scale: 0.95
+      scale: 0.95,
     },
     visible: {
       opacity: 1,
@@ -73,9 +74,9 @@ function Home() {
         whileInView="visible"
         initial="hidden"
         viewport={{ once: true, amount: 0.3 }}
-        whileHover={{ 
+        whileHover={{
           scale: 1.02,
-          transition: { duration: 0.3 }
+          transition: { duration: 0.3 },
         }}
       >
         <LatestTuition />
@@ -87,10 +88,10 @@ function Home() {
         whileInView="visible"
         initial="hidden"
         viewport={{ once: true, amount: 0.3 }}
-        whileHover={{ 
+        whileHover={{
           rotateY: 2,
           scale: 1.01,
-          transition: { duration: 0.4 }
+          transition: { duration: 0.4 },
         }}
       >
         <LatestTutor />
@@ -105,7 +106,7 @@ function Home() {
         whileHover={{
           scale: 1.05,
           boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
-          transition: { duration: 0.3 }
+          transition: { duration: 0.3 },
         }}
       >
         <Call />
@@ -119,11 +120,11 @@ function Home() {
         viewport={{ once: true, amount: 0.3 }}
         whileHover={{
           y: -5,
-          transition: { 
+          transition: {
             type: "spring",
             stiffness: 300,
-            damping: 20
-          }
+            damping: 20,
+          },
         }}
       >
         <PlatformSections />
