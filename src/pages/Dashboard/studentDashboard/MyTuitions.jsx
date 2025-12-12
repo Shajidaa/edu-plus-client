@@ -15,6 +15,7 @@ import { FaPaperPlane } from "react-icons/fa";
 
 import Spinner from "../../../components/Shared/Spinner";
 import GradientHeading from "../../../components/Shared/GradientHeading";
+import Error from "../../Error";
 
 const MyTuitions = () => {
   const { user, loading } = useAuth();
@@ -40,19 +41,7 @@ const MyTuitions = () => {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div
-          className="alert max-w-md p-4 rounded-lg"
-          style={{
-            backgroundColor: "var(--color-card-bg)",
-            borderColor: "var(--color-border)",
-          }}
-        >
-          <span className="text-error">
-            Error loading tuitions. Please try again later.
-          </span>
-        </div>
-      </div>
+      <Error/>
     );
   }
 

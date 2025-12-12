@@ -18,6 +18,7 @@ import StudTuitionGetRow from "../../../components/TableRows/StudTuitionGetRow";
 import TuitionEdit from "../../../components/Modal/TuitionEdit";
 import Spinner from "../../../components/Shared/Spinner";
 import GradientHeading from "../../../components/Shared/GradientHeading";
+import Error from "../../Error";
 
 const PostTuition = () => {
   const { user, loading } = useAuth();
@@ -117,9 +118,7 @@ const PostTuition = () => {
   if (loading || tuitionDataLoading) return <Spinner />;
   if (error)
     return (
-      <div className="text-center py-8">
-        <p className="text-error">Error loading data. Please try again.</p>
-      </div>
+     <Error/>
     );
   return (
     <>

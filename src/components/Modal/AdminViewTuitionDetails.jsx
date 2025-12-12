@@ -96,9 +96,9 @@ const AdminViewTuitionDetails = ({ isOpen, onClose, tuitionId }) => {
 
         {/* Loading State */}
         {isLoading && (
-          <div className="flex justify-center items-center py-12">
+         
             <Spinner />
-          </div>
+          
         )}
 
         {/* Content */}

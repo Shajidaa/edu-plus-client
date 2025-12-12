@@ -27,7 +27,7 @@ const Earnings = () => {
         .get(`${import.meta.env.VITE_API_URL}/payment-tutor`)
         .then((res) => res.data),
   });
-  console.log(payTutorData);
+  // console.log(payTutorData);
 
   if (loading || paymentTutorLoading) {
     return <Spinner />;

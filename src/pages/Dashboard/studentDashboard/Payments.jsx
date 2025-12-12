@@ -12,6 +12,7 @@ import {
 import { FaReceipt } from "react-icons/fa";
 import Spinner from "../../../components/Shared/Spinner";
 import GradientHeading from "../../../components/Shared/GradientHeading";
+import Error from "../../Error";
 
 const Payments = () => {
   const { user, loading } = useAuth();
@@ -27,7 +28,7 @@ const Payments = () => {
         .get(`${import.meta.env.VITE_API_URL}/payment`)
         .then((res) => res.data),
   });
-  console.log(paymentData);
+  // console.log(paymentData);
 
   if (loading || paymentLoading) {
     return <Spinner />;
@@ -35,19 +36,7 @@ const Payments = () => {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div
-          className="alert max-w-md p-4 rounded-lg"
-          style={{
-            backgroundColor: "var(--color-card-bg)",
-            borderColor: "var(--color-border)",
-          }}
-        >
-          <span className="text-error">
-            Error loading payments. Please try again later.
-          </span>
-        </div>
-      </div>
+      <Error/>
     );
   }
 

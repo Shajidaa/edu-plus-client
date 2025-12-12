@@ -53,7 +53,7 @@ const ManageApplications = () => {
     );
   }
 
-  console.log(applications);
+  // console.log(applications);
 
   return (
     <div className="min-h-screen py-6 px-4">

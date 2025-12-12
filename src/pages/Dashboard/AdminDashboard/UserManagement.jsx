@@ -18,6 +18,7 @@ import UserEdit from "../../../components/Modal/UserEdit";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import GradientHeading from "../../../components/Shared/GradientHeading";
+import Error from "../../Error";
 
 const UserManagement = () => {
   const axiosSecure = useAxiosSecure();
@@ -45,19 +46,7 @@ const UserManagement = () => {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div
-          className="alert max-w-md p-4 rounded-lg"
-          style={{
-            backgroundColor: "var(--color-card-bg)",
-            borderColor: "var(--color-border)",
-          }}
-        >
-          <span className="text-error">
-            Error loading users. Please try again later.
-          </span>
-        </div>
-      </div>
+     <Error/>
     );
   }
 
