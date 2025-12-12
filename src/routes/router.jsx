@@ -29,13 +29,16 @@ import DashboardIndex from "./DashboardIndex";
 import Tutor from "../pages/Tutor/Tutor";
 import TutorDetails from "../pages/Tutor/TutorDetails";
 import About from "../pages/about";
+import Error from "../pages/Error";
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout></RootLayout>,
+  
     hydrateFallbackElement: <Spinner></Spinner>,
+    errorElement:<Error/>,
     children: [
       {
         index: true,
