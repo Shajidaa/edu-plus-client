@@ -154,13 +154,8 @@ function Navbar() {
                   </li>
                   <li onClick={closeMenu}>
                     <MyLink
-                      className={({ isActive }) =>
-                        `px-4 py-2 rounded-md transition-all font-medium text-orange-600 ${
-                          isActive
-                            ? "bg-(--color-secondary)"
-                            : "hover:bg-(--color-secondary-hover)"
-                        }`
-                      }
+                      className="btn btn-sm w-full text-white hover:opacity-90 transition-opacity"
+                      style={{ backgroundColor: "var(--color-secondary)" }}
                       path="/dashboard"
                     >
                       Dashboard
