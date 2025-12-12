@@ -9,7 +9,7 @@ import Register from "../pages/Auth/Register";
 import Profile from "../pages/Dashboard/studentDashboard/Profile";
 
 import PrivateRoute from "./PrivateRoute";
-import RoleRoute from "./roleRoute";
+import RoleRoute from "./RoleRoute";
 import MyTuitions from "../pages/Dashboard/studentDashboard/MyTuitions";
 import PostTuition from "../pages/Dashboard/studentDashboard/PostTuition";
 import AppliedTutors from "../pages/Dashboard/studentDashboard/AppliedTutors";
