@@ -13,7 +13,7 @@ const LatestTutorCard = ({ tutor }) => {
       }}
     >
       {/* Top Image Section */}
-      <div className="relative flex-grow w-full h-3/5 overflow-hidden">
+      <div className="relative grow w-full h-3/5 overflow-hidden">
         {/* Profile Image */}
         <img
           src={tutor.image}
