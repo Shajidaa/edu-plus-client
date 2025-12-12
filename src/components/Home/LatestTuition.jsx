@@ -14,6 +14,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import GradientHeading from "../Shared/GradientHeading";
+import TCard from "../TCard";
 
 const LatestTuition = () => {
   const axiosSecure = useAxiosSecure();
@@ -107,7 +108,7 @@ const LatestTuition = () => {
             >
               {latestTuitions.map((tuition) => (
                 <SwiperSlide key={tuition._id}>
-                  <TuitionCard tuition={tuition} />
+                  <TCard tuition={tuition} />
                 </SwiperSlide>
               ))}
             </Swiper>

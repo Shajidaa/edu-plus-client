@@ -20,8 +20,7 @@ function Register() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { updateUserProfileFunc, user, createUserFunc } =
-    useContext(AuthContext);
+  const { updateUserProfileFunc, createUserFunc } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [selectedRole, setSelectedRole] = useState("student");
 
