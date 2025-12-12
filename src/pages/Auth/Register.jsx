@@ -146,7 +146,7 @@ function Register() {
               </label>
               <div className="relative">
                 <FaUser
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  className="absolute z-10 left-3 top-1/2 -translate-y-1/2 text-gray-400"
                   size={16}
                 />
                 <input
@@ -179,7 +179,7 @@ function Register() {
               </label>
               <div className="relative">
                 <FaEnvelope
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  className="absolute z-10  left-3 top-1/2 -translate-y-1/2 text-gray-400"
                   size={16}
                 />
                 <input
@@ -218,7 +218,7 @@ function Register() {
                   className="flex items-center justify-center w-full px-4 py-3 border-2 border-dashed rounded-lg cursor-pointer transition-all hover:border-primary hover:bg-primary/5"
                   style={{ borderColor: "var(--color-border)" }}
                 >
-                  <FaImage className="mr-2 text-gray-400" size={18} />
+                  <FaImage className="mr-2 z-10  text-gray-400" size={18} />
                   <span
                     className="text-sm"
                     style={{ color: "var(--color-text-muted)" }}
@@ -250,7 +250,7 @@ function Register() {
               </label>
               <div className="relative">
                 <FaLock
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  className="absolute z-10  left-3 top-1/2 -translate-y-1/2 text-gray-400"
                   size={16}
                 />
                 <input
@@ -275,7 +275,7 @@ function Register() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 z-40 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                  className="absolute z-10  right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                 >
                   {showPassword ? (
                     <FaEyeSlash size={18} />

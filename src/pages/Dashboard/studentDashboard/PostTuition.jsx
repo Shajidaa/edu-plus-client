@@ -61,6 +61,7 @@ const PostTuition = () => {
         class: "",
         location: "",
         budget: "",
+        schedule: "",
       });
       refetch();
     } catch (error) {
@@ -116,19 +117,16 @@ const PostTuition = () => {
   };
 
   if (loading || tuitionDataLoading) return <Spinner />;
-  if (error)
-    return (
-     <Error/>
-    );
+  if (error) return <Error />;
   return (
     <>
-      <div className="min-h-screen py-6 px-4">
-        <div className="max-w-5xl mx-auto">
+      <div className="min-h-screen py-4 sm:py-6 lg:py-8 px-2 sm:px-4 lg:px-6">
+        <div className="container mx-auto max-w-7xl">
           {/* Header Section */}
-          <div className="text-center mb-6 sm:mb-8">
+          <div className="text-center mb-4 sm:mb-6 lg:mb-8 px-2">
             <GradientHeading text={" Post a Tuition Request"}></GradientHeading>
             <p
-              className="text-sm sm:text-base"
+              className="text-xs sm:text-sm lg:text-base mt-2 px-4"
               style={{ color: "var(--color-text-muted)" }}
             >
               Fill in the details to find your perfect tutor
@@ -136,24 +134,28 @@ const PostTuition = () => {
           </div>
 
           {/* Form Card */}
-          <div className="card bg-base-100 shadow-2xl">
-            <div className="card-body p-8">
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+          <div className="card bg-base-100 shadow-xl lg:shadow-2xl mx-2 sm:mx-0">
+            <div className="card-body p-4 sm:p-6 lg:p-8">
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="space-y-6 sm:space-y-8"
+              >
                 {/* Student Information Section */}
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-1 h-8 bg-primary rounded-full"></div>
-                    <h3 className="text-2xl font-bold text-base-content">
+                <div className="space-y-3 sm:space-y-4">
+                  <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                    <div className="w-1 h-6 sm:h-8 bg-primary rounded-full"></div>
+                    <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-base-content">
                       Student Information
                     </h3>
                   </div>
 
-                  <div className="bg-linear-to-br from-primary/5 to-secondary/5 p-6 rounded-xl border border-primary/10">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="form-control">
+                  <div className="bg-linear-to-br from-primary/5 to-secondary/5 p-4 sm:p-6 rounded-lg sm:rounded-xl border border-primary/10">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                      <div className="form-control w-full">
                         <label className="label">
-                          <span className="label-text font-semibold text-base flex items-center gap-2">
-                            <FaUser /> Student Name
+                          <span className="label-text font-semibold text-sm sm:text-base flex items-center gap-1 sm:gap-2">
+                            <FaUser className="text-xs sm:text-sm" /> Student
+                            Name
                           </span>
                         </label>
                         <input
@@ -161,20 +163,21 @@ const PostTuition = () => {
                           {...register("studentName", {
                             required: "Student name is required",
                           })}
-                          className="input input-bordered bg-base-100 focus:input-primary transition-all"
+                          className="input input-bordered bg-base-100 focus:input-primary transition-all w-full text-sm sm:text-base"
                           readOnly
                         />
                         {errors.studentName && (
-                          <span className="text-error text-sm mt-1 flex items-center gap-1">
+                          <span className="text-error text-xs sm:text-sm mt-1 flex items-center gap-1">
                             {errors.studentName.message}
                           </span>
                         )}
                       </div>
 
-                      <div className="form-control">
+                      <div className="form-control w-full">
                         <label className="label">
-                          <span className="label-text font-semibold text-base flex items-center gap-2">
-                            <FaEnvelope /> Student Email
+                          <span className="label-text font-semibold text-sm sm:text-base flex items-center gap-1 sm:gap-2">
+                            <FaEnvelope className="text-xs sm:text-sm" />{" "}
+                            Student Email
                           </span>
                         </label>
                         <input
@@ -182,11 +185,11 @@ const PostTuition = () => {
                           {...register("studentEmail", {
                             required: "Email is required",
                           })}
-                          className="input input-bordered bg-base-100 focus:input-primary transition-all"
+                          className="input input-bordered bg-base-100 focus:input-primary transition-all w-full text-sm sm:text-base"
                           readOnly
                         />
                         {errors.studentEmail && (
-                          <span className="text-error text-sm mt-1 flex items-center gap-1">
+                          <span className="text-error text-xs sm:text-sm mt-1 flex items-center gap-1">
                             {errors.studentEmail.message}
                           </span>
                         )}
@@ -196,20 +199,20 @@ const PostTuition = () => {
                 </div>
 
                 {/* Tuition Details Section */}
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-1 h-8 bg-secondary rounded-full"></div>
-                    <h3 className="text-2xl font-bold text-base-content">
+                <div className="space-y-3 sm:space-y-4">
+                  <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                    <div className="w-1 h-6 sm:h-8 bg-secondary rounded-full"></div>
+                    <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-base-content">
                       Tuition Details
                     </h3>
                   </div>
 
-                  <div className="bg-linear-to-br from-secondary/5 to-accent/5 p-6 rounded-xl border border-secondary/10">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="form-control">
+                  <div className="bg-linear-to-br from-secondary/5 to-accent/5 p-4 sm:p-6 rounded-lg sm:rounded-xl border border-secondary/10">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                      <div className="form-control w-full">
                         <label className="label">
-                          <span className="label-text font-semibold text-base flex items-center gap-2">
-                            <FaBook /> Subject
+                          <span className="label-text font-semibold text-sm sm:text-base flex items-center gap-1 sm:gap-2">
+                            <FaBook className="text-xs sm:text-sm" /> Subject
                           </span>
                         </label>
                         <input
@@ -218,19 +221,20 @@ const PostTuition = () => {
                           {...register("subject", {
                             required: "Subject is required",
                           })}
-                          className="input input-bordered bg-base-100 focus:input-secondary transition-all"
+                          className="input input-bordered bg-base-100 focus:input-secondary transition-all w-full text-sm sm:text-base"
                         />
                         {errors.subject && (
-                          <span className="text-error text-sm mt-1 flex items-center gap-1">
+                          <span className="text-error text-xs sm:text-sm mt-1 flex items-center gap-1">
                             {errors.subject.message}
                           </span>
                         )}
                       </div>
 
-                      <div className="form-control">
+                      <div className="form-control w-full">
                         <label className="label">
-                          <span className="label-text font-semibold text-base flex items-center gap-2">
-                            <FaGraduationCap /> Class/Grade
+                          <span className="label-text font-semibold text-sm sm:text-base flex items-center gap-1 sm:gap-2">
+                            <FaGraduationCap className="text-xs sm:text-sm" />{" "}
+                            Class/Grade
                           </span>
                         </label>
                         <input
@@ -239,19 +243,20 @@ const PostTuition = () => {
                           {...register("class", {
                             required: "Class/Grade is required",
                           })}
-                          className="input input-bordered bg-base-100 focus:input-secondary transition-all"
+                          className="input input-bordered bg-base-100 focus:input-secondary transition-all w-full text-sm sm:text-base"
                         />
                         {errors.class && (
-                          <span className="text-error text-sm mt-1 flex items-center gap-1">
+                          <span className="text-error text-xs sm:text-sm mt-1 flex items-center gap-1">
                             {errors.class.message}
                           </span>
                         )}
                       </div>
 
-                      <div className="form-control">
+                      <div className="form-control w-full">
                         <label className="label">
-                          <span className="label-text font-semibold text-base flex items-center gap-2">
-                            <FaMapMarkerAlt /> Location
+                          <span className="label-text font-semibold text-sm sm:text-base flex items-center gap-1 sm:gap-2">
+                            <FaMapMarkerAlt className="text-xs sm:text-sm" />{" "}
+                            Location
                           </span>
                         </label>
                         <input
@@ -260,23 +265,24 @@ const PostTuition = () => {
                           {...register("location", {
                             required: "Location is required",
                           })}
-                          className="input input-bordered bg-base-100 focus:input-secondary transition-all"
+                          className="input input-bordered bg-base-100 focus:input-secondary transition-all w-full text-sm sm:text-base"
                         />
                         {errors.location && (
-                          <span className="text-error text-sm mt-1 flex items-center gap-1">
+                          <span className="text-error text-xs sm:text-sm mt-1 flex items-center gap-1">
                             {errors.location.message}
                           </span>
                         )}
                       </div>
 
-                      <div className="form-control">
+                      <div className="form-control w-full">
                         <label className="label">
-                          <span className="label-text font-semibold text-base flex items-center gap-2">
-                            <FaMoneyBillWave /> Budget (month)
+                          <span className="label-text font-semibold text-sm sm:text-base flex items-center gap-1 sm:gap-2">
+                            <FaMoneyBillWave className="text-xs sm:text-sm" />{" "}
+                            Budget (month)
                           </span>
                         </label>
                         <div className="relative">
-                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-base-content/50 font-semibold">
+                          <span className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 text-base-content/50 font-semibold text-sm sm:text-base">
                             ৳
                           </span>
                           <input
@@ -289,11 +295,11 @@ const PostTuition = () => {
                                 message: "Budget must be a positive number",
                               },
                             })}
-                            className="input input-bordered bg-base-100 focus:input-secondary transition-all pl-8 w-full"
+                            className="input input-bordered bg-base-100 focus:input-secondary transition-all pl-6 sm:pl-8 w-full text-sm sm:text-base"
                           />
                         </div>
                         {errors.budget && (
-                          <span className="text-error text-sm mt-1 flex items-center gap-1">
+                          <span className="text-error text-xs sm:text-sm mt-1 flex items-center gap-1">
                             {errors.budget.message}
                           </span>
                         )}
@@ -303,25 +309,25 @@ const PostTuition = () => {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex justify-end gap-4 pt-4">
+                <div className="flex flex-col sm:flex-row justify-center sm:justify-end gap-3 sm:gap-4 pt-4 sm:pt-6">
                   <button
                     type="button"
                     onClick={() => reset()}
-                    className="btn btn-outline btn-lg gap-2 hover:scale-105 transition-transform"
+                    className="btn  bg-orange-500 border-0  hover:bg-white text-primary hover:scale-105 transition-transform border-none btn-sm sm:btn-md lg:btn-lg gap-1 sm:gap-2  w-full sm:w-auto order-2 sm:order-1"
                   >
-                    <FaRedo />
-                    Reset
+                    <FaRedo className="text-xs sm:text-sm" />
+                    <span className="text-sm sm:text-base">Reset</span>
                   </button>
                   <button
                     type="submit"
-                    className="btn text-white font-bold btn-lg gap-2 hover:scale-105 transition-transform shadow-lg border-none"
+                    className="btn text-white font-bold btn-sm sm:btn-md lg:btn-lg gap-1 sm:gap-2 hover:scale-105 transition-transform shadow-lg border-none w-full sm:w-auto order-1 sm:order-2"
                     style={{
                       background:
                         "linear-gradient(to right, var(--color-primary), var(--color-secondary))",
                     }}
                   >
-                    <FaPaperPlane />
-                    Post Tuition
+                    <FaPaperPlane className="text-xs sm:text-sm" />
+                    <span className="text-sm sm:text-base">Post Tuition</span>
                   </button>
                 </div>
               </form>
@@ -330,12 +336,16 @@ const PostTuition = () => {
         </div>
       </div>
 
-      <StudTuitionGetRow
-        tuitionData={tuitionData}
-        refetch={refetch}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-      ></StudTuitionGetRow>
+      {tuitionData.length > 0 && (
+        <div className="mt-6 sm:mt-8 lg:mt-10 px-2 sm:px-4 lg:px-6">
+          <StudTuitionGetRow
+            tuitionData={tuitionData}
+            refetch={refetch}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+          />
+        </div>
+      )}
 
       {/* Edit Modal */}
       <TuitionEdit

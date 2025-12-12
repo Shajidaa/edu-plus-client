@@ -49,10 +49,10 @@ const StudTuitionGetRow = ({ tuitionData, refetch, onEdit }) => {
   };
 
   return (
-    <div className="overflow-x-auto rounded-box bg-gray-100 text-black border border-base-content/5 ">
+    <div className="overflow-x-auto container mx-auto max-w-7xl rounded-box bg-gray-100 text-black border border-base-content/5 ">
       <table className="table">
         {/* head */}
-        <thead>
+        <thead className="bg-primary">
           <tr>
             <th></th>
             <th className="text-black">Subject</th>
