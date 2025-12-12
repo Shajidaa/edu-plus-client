@@ -10,6 +10,7 @@ import {
 } from "react-icons/fi";
 import Spinner from "../../../components/Shared/Spinner";
 import useAuth from "../../../hooks/useAuth";
+import GradientHeading from "../../../components/Shared/GradientHeading";
 
 const ManageApplications = () => {
   const axiosSecure = useAxiosSecure();

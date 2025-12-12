@@ -23,12 +23,13 @@ function Register() {
   const { updateUserProfileFunc, user, createUserFunc } =
     useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
-  const [setSelectedRole] = useState("student");
+  const [selectedRole, setSelectedRole] = useState("student");
+
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state || "/";
-  console.log(user);
+  // console.log(user);
 
   const onSubmit = async (data) => {
     const { name, image, email, role, password } = data;
@@ -49,9 +50,9 @@ function Register() {
 
       navigate(from, { replace: true });
       toast.success("Signup Successfully");
-      console.log(result);
+      // console.log(result);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       toast.error(err?.message);
     } finally {
       setIsLoading(false);
