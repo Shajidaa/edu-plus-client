@@ -11,7 +11,7 @@ const TuitionManagement = () => {
     queryKey: ["allTuitionsAdmin"],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `${import.meta.env.VITE_API_URL}/all-tuitions?admin=true`
+        `${import.meta.env.VITE_API_URL}/all-tuitions-admin?admin=true`
       );
       return res.data;
     },
