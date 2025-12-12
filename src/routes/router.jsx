@@ -88,6 +88,8 @@ const router = createBrowserRouter([
         <DashboardLayout />
       </PrivateRoute>
     ),
+    hydrateFallbackElement: <Spinner></Spinner>,
+    errorElement: <Error />,
     children: [
       {
         index: true,
