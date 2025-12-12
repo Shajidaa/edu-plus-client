@@ -15,7 +15,8 @@ import Spinner from "../../../components/Shared/Spinner";
 import useAuth from "../../../hooks/useAuth";
 import GradientHeading from "../../../components/Shared/GradientHeading";
 import { useState } from "react";
-import TutorDetailsModal from "../../../components/Modal/tutorDetailsModal";
+// import TutorDetailsModal from "../../../components/Modal/tutorDetailsModal";
+import TutorDetailsModal from "../../../components/Modal/TutorDetailsModal";
 
 const AppliedTutors = () => {
   const { user, loading: userLoading } = useAuth();
