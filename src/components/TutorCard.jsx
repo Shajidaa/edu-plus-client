@@ -44,7 +44,7 @@ const TutorCard = ({ tutor }) => {
           {/* Contact Button */}
           <div className="mt-6">
             {" "}
-            <GradientButton to={`/tutors/${tutor._id}`}>
+            <GradientButton className={"w-full"} to={`/tutors/${tutor._id}`}>
               View Profile{" "}
             </GradientButton>
           </div>

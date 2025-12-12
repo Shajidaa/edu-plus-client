@@ -396,8 +396,8 @@ const UserEdit = ({ isOpen, onClose, user, refetch }) => {
             <button
               type="button"
               onClick={handleClose}
-              className="btn btn-ghost"
-              style={{ color: "var(--color-text-muted)" }}
+              className="btn bg-orange-500 border-0 btn-lg gap-2
+                   hover:bg-white text-primary hover:scale-105 transition-transform border-none"
             >
               Cancel
             </button>

@@ -15,6 +15,8 @@ import Container from "../Shared/Container";
 import Spinner from "../Shared/Spinner";
 import LatestTutorCard from "../LatestTutorCard";
 import GradientHeading from "../Shared/GradientHeading";
+import TCard from "../TCard";
+import TutorCard from "../TutorCard";
 
 const LatestTutor = () => {
   const axiosSecure = useAxiosSecure();
@@ -107,7 +109,7 @@ const LatestTutor = () => {
             >
               {latestTutorData.map((tutor) => (
                 <SwiperSlide key={tutor._id}>
-                  <LatestTutorCard tutor={tutor} />
+                  <TutorCard tutor={tutor} />
                 </SwiperSlide>
               ))}
             </Swiper>

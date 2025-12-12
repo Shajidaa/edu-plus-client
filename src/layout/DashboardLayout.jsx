@@ -19,6 +19,7 @@ import {
 } from "react-icons/fa";
 import useRole from "../hooks/useRole";
 import Spinner from "../components/Shared/Spinner";
+import ThemeToggle from "../components/Shared/ThemeToggle";
 import { AuthContext } from "../providers/AuthContext";
 
 const DashboardLayout = () => {
@@ -331,6 +332,7 @@ const DashboardLayout = () => {
             </h1>
           </div>
           <div className="flex items-center gap-3">
+            <ThemeToggle variant="dashboard" />
             <div
               className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-white font-bold shadow-lg"
               style={{

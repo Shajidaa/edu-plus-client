@@ -6,6 +6,7 @@ import Container from "./Container";
 import MyLink from "./MyLink";
 import Spinner from "./Spinner";
 import GradientButton from "./GradientButton";
+import ThemeToggle from "./ThemeToggle";
 import { FaGraduationCap } from "react-icons/fa";
 
 function Navbar() {
@@ -124,8 +125,9 @@ function Navbar() {
             <ul className="menu menu-horizontal px-1 gap-1">{menuItems}</ul>
           </div>
 
-          {/* Right - Auth Buttons */}
+          {/* Right - Theme Toggle & Auth Buttons */}
           <div className="flex items-center gap-2 sm:gap-3">
+            <ThemeToggle />
             {loading ? (
               <div className="flex items-center gap-2">
                 <span className="loading loading-spinner loading-sm text-white"></span>
@@ -248,6 +250,14 @@ function Navbar() {
           {/* Mobile Menu Items */}
           <div className="flex-1 overflow-y-auto py-4">
             <ul className="menu flex flex-col gap-1 px-2">{menuItems}</ul>
+            
+            {/* Theme Toggle in Mobile Menu */}
+            <div className="px-4 py-2 mt-4 border-t border-white/20">
+              <div className="flex items-center justify-between">
+                <span className="text-white text-sm">Theme</span>
+                <ThemeToggle />
+              </div>
+            </div>
           </div>
 
           {/* Mobile Menu Footer - Auth Buttons */}
