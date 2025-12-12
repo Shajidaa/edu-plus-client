@@ -5,7 +5,7 @@ const LatestTutorCard = ({ tutor }) => {
   return (
     <Link
       to={`/tutors/${tutor._id}`}
-      className="group w-full max-w-sm mx-auto overflow-hidden shadow-2xl rounded-3xl relative h-[520px] flex flex-col transition-all duration-300 hover:shadow-3xl hover:scale-105"
+      className="group w-full max-w-sm mx-auto overflow-hidden shadow-2xl rounded-3xl relative h-80 flex flex-col transition-all duration-300 hover:shadow-3xl hover:scale-105"
       style={{
         background:
           "linear-gradient(135deg, var(--color-primary-hover) 0%, var(--color-card-bg) 100%)",
@@ -28,7 +28,7 @@ const LatestTutorCard = ({ tutor }) => {
         />
 
         {/* Overlay Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-orange/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div className="absolute inset-0 bg-linear-to-t from-orange/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </div>
 
       {/* Bottom Section */}
