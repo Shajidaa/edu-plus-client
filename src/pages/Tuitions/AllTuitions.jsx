@@ -35,8 +35,7 @@ const AllTuitions = () => {
       const res = await axiosSecure.get(
         `${import.meta.env.VITE_API_URL}/all-tuitions`
       );
-     
-  
+
       return res.data;
     },
   });
@@ -56,7 +55,8 @@ const AllTuitions = () => {
     setCurrentPage(1);
   };
 
-  const hasActiveFilters = filters.class || filters.subject || filters.location || searchTerm;
+  const hasActiveFilters =
+    filters.class || filters.subject || filters.location || searchTerm;
   // Ensure data is an array - handle different possible data structures
   let tuitions = [];
   if (Array.isArray(data)) {
@@ -65,22 +65,20 @@ const AllTuitions = () => {
     tuitions = data.tuitions;
   } else if (data && Array.isArray(data.data)) {
     tuitions = data.data;
-  } else if (data && typeof data === 'object') {
+  } else if (data && typeof data === "object") {
     // If data is an object, try to find an array property
-    const arrayProps = Object.values(data).filter(val => Array.isArray(val));
+    const arrayProps = Object.values(data).filter((val) => Array.isArray(val));
     if (arrayProps.length > 0) {
       tuitions = arrayProps[0];
     }
   }
-  
-
 
   // Filter tuitions by search term and filters
   const filteredTuitions = tuitions.filter((tuition) => {
     // Search filter
     if (searchTerm) {
       const searchLower = searchTerm.toLowerCase();
-      const matchesSearch = 
+      const matchesSearch =
         tuition.subject?.toLowerCase().includes(searchLower) ||
         tuition.location?.toLowerCase().includes(searchLower) ||
         tuition.class?.toString().toLowerCase().includes(searchLower);
@@ -93,12 +91,18 @@ const AllTuitions = () => {
     }
 
     // Subject filter
-    if (filters.subject && tuition.subject?.toLowerCase() !== filters.subject.toLowerCase()) {
+    if (
+      filters.subject &&
+      tuition.subject?.toLowerCase() !== filters.subject.toLowerCase()
+    ) {
       return false;
     }
 
     // Location filter
-    if (filters.location && tuition.location?.toLowerCase() !== filters.location.toLowerCase()) {
+    if (
+      filters.location &&
+      tuition.location?.toLowerCase() !== filters.location.toLowerCase()
+    ) {
       return false;
     }
 
@@ -166,16 +170,7 @@ const AllTuitions = () => {
   };
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: "var(--color-bg-soft)" }}>
-        <div className="text-center">
-          <Spinner />
-          <p className="mt-4 text-lg" style={{ color: "var(--color-text-muted)" }}>
-            Loading tuitions...
-          </p>
-        </div>
-      </div>
-    );
+    return <Spinner />;
   }
 
   if (error) {
@@ -191,15 +186,19 @@ const AllTuitions = () => {
               style={{
                 backgroundColor: "#fee2e2",
                 borderColor: "#ef4444",
-                color: "#dc2626"
+                color: "#dc2626",
               }}
             >
               <div>
-                <h3 className="font-bold text-lg mb-2">Error Loading Tuitions</h3>
+                <h3 className="font-bold text-lg mb-2">
+                  Error Loading Tuitions
+                </h3>
                 <p className="mb-2">Message: {error.message}</p>
-                <p className="text-sm">API URL: {import.meta.env.VITE_API_URL}/all-tuitions</p>
-                <button 
-                  onClick={() => window.location.reload()} 
+                <p className="text-sm">
+                  API URL: {import.meta.env.VITE_API_URL}/all-tuitions
+                </p>
+                <button
+                  onClick={() => window.location.reload()}
                   className="btn btn-sm btn-error mt-4"
                 >
                   Retry
@@ -231,7 +230,6 @@ const AllTuitions = () => {
           </p>
         </div>
 
-    
         {/* Search and Filter Section */}
         <div
           className="rounded-xl shadow-lg p-4 sm:p-6 mb-8 border"
@@ -268,18 +266,29 @@ const AllTuitions = () => {
             <div className="flex gap-2">
               <button
                 onClick={() => setShowFilters(!showFilters)}
-                className={`btn btn-outline ${showFilters ? 'btn-primary' : ''} flex items-center gap-2`}
+                className={`btn btn-outline ${
+                  showFilters ? "btn-primary" : ""
+                } flex items-center gap-2`}
                 style={{
                   borderColor: "var(--color-primary)",
                   color: showFilters ? "white" : "var(--color-primary)",
-                  backgroundColor: showFilters ? "var(--color-primary)" : "transparent",
+                  backgroundColor: showFilters
+                    ? "var(--color-primary)"
+                    : "transparent",
                 }}
               >
                 <FiFilter size={16} />
                 Filters
                 {hasActiveFilters && (
                   <span className="badge badge-sm bg-red-500 text-white border-none">
-                    {[filters.class, filters.subject, filters.location, searchTerm].filter(Boolean).length}
+                    {
+                      [
+                        filters.class,
+                        filters.subject,
+                        filters.location,
+                        searchTerm,
+                      ].filter(Boolean).length
+                    }
                   </span>
                 )}
               </button>
@@ -308,17 +317,23 @@ const AllTuitions = () => {
 
           {/* Expandable Filters */}
           {showFilters && (
-            <div className="border-t pt-4" style={{ borderColor: "var(--color-border)" }}>
+            <div
+              className="border-t pt-4"
+              style={{ borderColor: "var(--color-border)" }}
+            >
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div>
                   <label className="label">
-                    <span className="label-text font-medium" style={{ color: "var(--color-text-dark)" }}>
+                    <span
+                      className="label-text font-medium"
+                      style={{ color: "var(--color-text-dark)" }}
+                    >
                       Class/Grade
                     </span>
                   </label>
-                  <select 
-                    name="class" 
-                    value={filters.class} 
+                  <select
+                    name="class"
+                    value={filters.class}
                     onChange={handleFilterChange}
                     className="select select-bordered w-full"
                     style={{
@@ -345,13 +360,16 @@ const AllTuitions = () => {
 
                 <div>
                   <label className="label">
-                    <span className="label-text font-medium" style={{ color: "var(--color-text-dark)" }}>
+                    <span
+                      className="label-text font-medium"
+                      style={{ color: "var(--color-text-dark)" }}
+                    >
                       Subject
                     </span>
                   </label>
-                  <select 
-                    name="subject" 
-                    value={filters.subject} 
+                  <select
+                    name="subject"
+                    value={filters.subject}
                     onChange={handleFilterChange}
                     className="select select-bordered w-full"
                     style={{
@@ -376,13 +394,16 @@ const AllTuitions = () => {
 
                 <div>
                   <label className="label">
-                    <span className="label-text font-medium" style={{ color: "var(--color-text-dark)" }}>
+                    <span
+                      className="label-text font-medium"
+                      style={{ color: "var(--color-text-dark)" }}
+                    >
                       Location
                     </span>
                   </label>
-                  <select 
-                    name="location" 
-                    value={filters.location} 
+                  <select
+                    name="location"
+                    value={filters.location}
                     onChange={handleFilterChange}
                     className="select select-bordered w-full"
                     style={{
@@ -445,7 +466,7 @@ const AllTuitions = () => {
         {hasActiveFilters && (
           <div className="mb-6">
             <div className="flex flex-wrap gap-2">
-              <span 
+              <span
                 className="text-sm font-medium"
                 style={{ color: "var(--color-text-muted)" }}
               >
@@ -454,7 +475,7 @@ const AllTuitions = () => {
               {searchTerm && (
                 <span className="badge badge-primary gap-2">
                   Search: {searchTerm}
-                  <button 
+                  <button
                     onClick={() => {
                       setSearchTerm("");
                       setCurrentPage(1);
@@ -468,9 +489,9 @@ const AllTuitions = () => {
               {filters.class && (
                 <span className="badge badge-secondary gap-2">
                   Class: {filters.class}
-                  <button 
+                  <button
                     onClick={() => {
-                      setFilters({...filters, class: ""});
+                      setFilters({ ...filters, class: "" });
                       setCurrentPage(1);
                     }}
                     className="text-white hover:text-gray-200"
@@ -482,9 +503,9 @@ const AllTuitions = () => {
               {filters.subject && (
                 <span className="badge badge-accent gap-2">
                   Subject: {filters.subject}
-                  <button 
+                  <button
                     onClick={() => {
-                      setFilters({...filters, subject: ""});
+                      setFilters({ ...filters, subject: "" });
                       setCurrentPage(1);
                     }}
                     className="text-white hover:text-gray-200"
@@ -496,9 +517,9 @@ const AllTuitions = () => {
               {filters.location && (
                 <span className="badge badge-info gap-2">
                   Location: {filters.location}
-                  <button 
+                  <button
                     onClick={() => {
-                      setFilters({...filters, location: ""});
+                      setFilters({ ...filters, location: "" });
                       setCurrentPage(1);
                     }}
                     className="text-white hover:text-gray-200"
@@ -530,8 +551,12 @@ const AllTuitions = () => {
               >
                 <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
                   {/* Page Info */}
-                  <div className="text-sm" style={{ color: "var(--color-text-muted)" }}>
-                    Page {currentPage} of {totalPages} ({sortedTuitions.length} total tuitions)
+                  <div
+                    className="text-sm"
+                    style={{ color: "var(--color-text-muted)" }}
+                  >
+                    Page {currentPage} of {totalPages} ({sortedTuitions.length}{" "}
+                    total tuitions)
                   </div>
 
                   {/* Pagination Controls */}

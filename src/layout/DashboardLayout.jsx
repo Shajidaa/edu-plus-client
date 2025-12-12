@@ -152,24 +152,6 @@ const DashboardLayout = () => {
                     )}
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink
-                    to="/dashboard/profile"
-                    onClick={() => setIsMobileSidebarOpen(false)}
-                    className={({ isActive }) =>
-                      `flex items-center gap-3 p-3 rounded-lg transition-all duration-200 ${
-                        isActive
-                          ? "bg-white/20 text-white shadow-lg"
-                          : "text-white/80 hover:bg-white/10 hover:text-white"
-                      }`
-                    }
-                  >
-                    <FaUser size={18} className="shrink-0" />
-                    {isSidebarOpen && (
-                      <span className="font-medium">Profile</span>
-                    )}
-                  </NavLink>
-                </li>
               </>
             )}
 
@@ -292,7 +274,22 @@ const DashboardLayout = () => {
                 </li>
               </>
             )}
-
+            <li>
+              <NavLink
+                to="/dashboard/profile"
+                onClick={() => setIsMobileSidebarOpen(false)}
+                className={({ isActive }) =>
+                  `flex items-center gap-3 p-3 rounded-lg transition-all duration-200 ${
+                    isActive
+                      ? "bg-white/20 text-white shadow-lg"
+                      : "text-white/80 hover:bg-white/10 hover:text-white"
+                  }`
+                }
+              >
+                <FaUser size={18} className="shrink-0" />
+                {isSidebarOpen && <span className="font-medium">Profile</span>}
+              </NavLink>
+            </li>
             {/* Divider */}
             <li className="pt-4 mt-4 border-t border-white/20"></li>
           </ul>

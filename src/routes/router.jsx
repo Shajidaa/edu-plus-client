@@ -134,14 +134,6 @@ const router = createBrowserRouter([
           </RoleRoute>
         ),
       },
-      {
-        path: "profile",
-        element: (
-          <RoleRoute allowedRoles={["student"]}>
-            <Profile />,
-          </RoleRoute>
-        ),
-      },
 
       // ----------------- TUTOR ROUTES -----------------
       {
@@ -192,6 +184,11 @@ const router = createBrowserRouter([
             <Reports />
           </RoleRoute>
         ),
+      },
+
+      {
+        path: "profile",
+        element: <Profile />,
       },
     ],
   },
