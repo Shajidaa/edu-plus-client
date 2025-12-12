@@ -7,7 +7,7 @@ import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 
 import Profile from "../pages/Dashboard/studentDashboard/Profile";
-import Settings from "../pages/Dashboard/Settings";
+
 import PrivateRoute from "./PrivateRoute";
 import RoleRoute from "./roleRoute";
 import MyTuitions from "../pages/Dashboard/studentDashboard/MyTuitions";
@@ -31,14 +31,13 @@ import TutorDetails from "../pages/Tutor/TutorDetails";
 import About from "../pages/about";
 import Error from "../pages/Error";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout></RootLayout>,
-  
+
     hydrateFallbackElement: <Spinner></Spinner>,
-    errorElement:<Error/>,
+    errorElement: <Error />,
     children: [
       {
         index: true,
@@ -70,7 +69,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <About/>,
+        element: <About />,
       },
       {
         path: "/tutors/:id",
@@ -79,10 +78,6 @@ const router = createBrowserRouter([
             <TutorDetails></TutorDetails>
           </PrivateRoute>
         ),
-      },
-      {
-        path: "/payment-success",
-        element: <PaymentSuccess></PaymentSuccess>,
       },
     ],
   },
@@ -128,6 +123,14 @@ const router = createBrowserRouter([
         element: (
           <RoleRoute allowedRoles={["student"]}>
             <Payments />
+          </RoleRoute>
+        ),
+      },
+      {
+        path: "payment-success",
+        element: (
+          <RoleRoute allowedRoles={["student"]}>
+            <PaymentSuccess></PaymentSuccess>
           </RoleRoute>
         ),
       },
@@ -189,11 +192,6 @@ const router = createBrowserRouter([
             <Reports />
           </RoleRoute>
         ),
-      },
-
-      {
-        path: "settings",
-        element: <Settings />,
       },
     ],
   },
