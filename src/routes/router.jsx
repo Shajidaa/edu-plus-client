@@ -28,7 +28,7 @@ import Spinner from "../components/Shared/Spinner";
 import DashboardIndex from "./DashboardIndex";
 import Tutor from "../pages/Tutor/Tutor";
 import TutorDetails from "../pages/Tutor/TutorDetails";
-import About from "../pages/about";
+import About from "../pages/About";
 import Error from "../pages/Error";
 
 const router = createBrowserRouter([
