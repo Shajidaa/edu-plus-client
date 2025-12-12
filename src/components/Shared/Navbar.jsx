@@ -153,7 +153,18 @@ function Navbar() {
                     </span>
                   </li>
                   <li onClick={closeMenu}>
-                    <MyLink path="/dashboard">Dashboard</MyLink>
+                    <MyLink
+                      className={({ isActive }) =>
+                        `px-4 py-2 rounded-md transition-all font-medium text-white ${
+                          isActive
+                            ? "bg-(--color-secondary)"
+                            : "hover:bg-(--color-secondary-hover)"
+                        }`
+                      }
+                      path="/dashboard"
+                    >
+                      Dashboard
+                    </MyLink>
                   </li>
                   <div className="divider my-1"></div>
                   <li>
