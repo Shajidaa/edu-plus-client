@@ -1,6 +1,6 @@
 # EduPlus - Online Tutoring Platform
 
-![EduPlus Banner](https://via.placeholder.com/1200x400/4F46E5/FFFFFF?text=EduPlus+-+Learn+Better+with+the+Ideal+Tutor)
+
 
 ## 🎓 About EduPlus
 
@@ -21,7 +21,7 @@ EduPlus is a comprehensive online tutoring platform that connects students with 
 ## 🚀 Live Demo
 
 - **Frontend**: [EduPlus Live Site](https://your-live-site-url.com)
-- **Admin Panel**: [Admin Dashboard](https://your-live-site-url.com/dashboard)
+
 
 ## 🛠️ Tech Stack
 
@@ -48,32 +48,6 @@ EduPlus is a comprehensive online tutoring platform that connects students with 
 - **Vite** - Build tool and dev server
 - **npm** - Package manager
 
-## 📁 Project Structure
-
-```
-src/
-├── components/          # Reusable UI components
-│   ├── Home/           # Homepage components
-│   ├── Shared/         # Shared components (Navbar, Footer)
-│   ├── Modal/          # Modal components
-│   ├── Chart/          # Chart and analytics components
-│   └── TableRows/      # Table row components
-├── pages/              # Page components
-│   ├── Auth/           # Authentication pages
-│   ├── Dashboard/      # Dashboard pages
-│   │   ├── AdminDashboard/
-│   │   ├── studentDashboard/
-│   │   └── TutorDashboard/
-│   ├── Home/           # Homepage
-│   ├── Tutor/          # Tutor pages
-│   └── Tuitions/       # Tuition pages
-├── hooks/              # Custom React hooks
-├── layout/             # Layout components
-├── providers/          # Context providers
-├── routes/             # Routing configuration
-├── utils/              # Utility functions
-└── assets/             # Static assets
-```
 
 ## 🔧 Installation & Setup
 
@@ -106,11 +80,7 @@ VITE_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
 VITE_FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
 VITE_FIREBASE_APP_ID=your_firebase_app_id
 
-# API Configuration
-VITE_API_BASE_URL=your_backend_api_url
 
-# Stripe Configuration
-VITE_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
 ```
 
 ### 4. Firebase Setup
