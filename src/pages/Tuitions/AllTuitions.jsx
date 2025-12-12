@@ -14,6 +14,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import TuitionCard from "../../components/TuitionCard";
 import Spinner from "../../components/Shared/Spinner";
 import GradientHeading from "../../components/Shared/GradientHeading";
+import Error from "../Error";
 
 const AllTuitions = () => {
   const axiosSecure = useAxiosSecure();
@@ -174,41 +175,7 @@ const AllTuitions = () => {
   }
 
   if (error) {
-    return (
-      <div
-        className="min-h-screen py-8"
-        style={{ backgroundColor: "var(--color-bg-soft)" }}
-      >
-        <Container>
-          <div className="text-center py-20">
-            <div
-              className="alert alert-error max-w-lg mx-auto rounded-xl shadow-lg p-6"
-              style={{
-                backgroundColor: "#fee2e2",
-                borderColor: "#ef4444",
-                color: "#dc2626",
-              }}
-            >
-              <div>
-                <h3 className="font-bold text-lg mb-2">
-                  Error Loading Tuitions
-                </h3>
-                <p className="mb-2">Message: {error.message}</p>
-                <p className="text-sm">
-                  API URL: {import.meta.env.VITE_API_URL}/all-tuitions
-                </p>
-                <button
-                  onClick={() => window.location.reload()}
-                  className="btn btn-sm btn-error mt-4"
-                >
-                  Retry
-                </button>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </div>
-    );
+    return <Error />;
   }
 
   return (
@@ -664,11 +631,8 @@ const AllTuitions = () => {
               {hasActiveFilters && (
                 <button
                   onClick={clearFilters}
-                  className="btn btn-primary hover:scale-105 transition-transform"
-                  style={{
-                    backgroundColor: "var(--color-primary)",
-                    borderColor: "var(--color-primary)",
-                  }}
+                  className=" btn bg-orange-500 border-0 btn-lg gap-2
+                   hover:bg-white text-primary hover:scale-105 transition-transform border-none"
                 >
                   Clear All Filters
                 </button>
