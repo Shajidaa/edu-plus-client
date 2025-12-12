@@ -15,6 +15,7 @@ import {
   FaHome,
   FaBars,
   FaTimes,
+  FaGraduationCap,
 } from "react-icons/fa";
 import useRole from "../hooks/useRole";
 import Spinner from "../components/Shared/Spinner";
@@ -326,10 +327,10 @@ const DashboardLayout = () => {
               <FaBars size={20} style={{ color: "var(--color-text-dark)" }} />
             </button>
             <h1
-              className="text-xl sm:text-2xl font-bold"
+              className="text-xl flex justify-center items-center sm:text-2xl font-bold"
               style={{ color: "var(--color-text-dark)" }}
             >
-              EduPlus
+              <FaGraduationCap className="" /> EduPlus
             </h1>
           </div>
           <div className="flex items-center gap-3">
@@ -340,19 +341,37 @@ const DashboardLayout = () => {
                   "linear-gradient(to right, var(--color-primary), var(--color-secondary))",
               }}
             >
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost btn-circle avatar border-2 border-white hover:border-white/80 transition-all hover:scale-105"
-                aria-label="User menu"
-              >
-                <div className="w-8 sm:w-10 rounded-full overflow-hidden">
-                  <img
-                    alt={user?.displayName || "User"}
-                    src={user?.photoURL}
-                    className="w-full h-full object-cover"
-                  />
+              <div className="dropdown dropdown-end">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar border-2 border-white hover:border-white/80 transition-all hover:scale-105"
+                  aria-label="User menu"
+                >
+                  <div className="w-8 sm:w-10 rounded-full overflow-hidden">
+                    <img
+                      alt={user?.displayName || "User"}
+                      src={user?.photoURL}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </div>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content rounded-box z-[1] mt-3 w-52 p-2 shadow-xl border border-gray-200"
+                  style={{ backgroundColor: "var(--color-card-bg)" }}
+                >
+                  <li className="menu-title px-4 py-2">
+                    <span className="text-sm font-semibold truncate">
+                      {user?.displayName}
+                    </span>
+                  </li>
+                  <li className="px-2 py-1">
+                    <span className="text-xs text-gray-500 truncate">
+                      {user?.email}
+                    </span>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
