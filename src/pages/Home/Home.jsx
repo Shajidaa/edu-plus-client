@@ -112,21 +112,7 @@ function Home() {
         <Call />
       </motion.div>
 
-      {/* Platform Sections with bounce effect */}
-      <motion.div
-        variants={sectionVariants}
-        whileInView="visible"
-        initial="hidden"
-        viewport={{ once: true, amount: 0.3 }}
-        whileHover={{
-          y: -5,
-          transition: {
-            type: "spring",
-            stiffness: 300,
-            damping: 20,
-          },
-        }}
-      >
+      <motion.div>
         <PlatformSections />
       </motion.div>
     </motion.div>

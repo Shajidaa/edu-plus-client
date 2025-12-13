@@ -153,13 +153,13 @@ function Navbar() {
                     </span>
                   </li>
                   <li onClick={closeMenu}>
-                    <MyLink
+                    <Link
                       className="btn btn-sm w-full text-white hover:opacity-90 transition-opacity"
                       style={{ backgroundColor: "var(--color-secondary)" }}
                       path="/dashboard"
                     >
                       Dashboard
-                    </MyLink>
+                    </Link>
                   </li>
                   <div className="divider my-1"></div>
                   <li>
