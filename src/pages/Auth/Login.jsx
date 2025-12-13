@@ -25,11 +25,11 @@ function Login() {
     setIsLoading(true);
     try {
       const { user } = await signInFunc(email, password);
-      console.log(user);
+    
       navigate(from, { replace: true });
       toast.success("Login Successful");
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       toast.error(err?.message || "Login failed. Please try again.");
     } finally {
       setIsLoading(false);
@@ -163,12 +163,12 @@ function Login() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute z-10 right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                  className="absolute z-50 right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                 >
                   {showPassword ? (
-                    <FaEyeSlash size={18} />
+                    <FaEyeSlash className="z-50" size={18} />
                   ) : (
-                    <FaEye size={18} />
+                    <FaEye className="" size={18} />
                   )}
                 </button>
               </div>
@@ -214,18 +214,18 @@ function Login() {
             </p>
             {/* Divider */}
             <div className="flex items-center my-6">
-              <div
-                className="flex-1 h-px"
+              <div 
+                className="flex-1 h-px" 
                 style={{ backgroundColor: "var(--color-border)" }}
               ></div>
-              <span
+              <span 
                 className="px-4 text-sm font-medium"
                 style={{ color: "var(--color-text-muted)" }}
               >
                 Or continue with
               </span>
-              <div
-                className="flex-1 h-px"
+              <div 
+                className="flex-1 h-px" 
                 style={{ backgroundColor: "var(--color-border)" }}
               ></div>
             </div>
@@ -273,7 +273,7 @@ function Login() {
             </button>
 
             {/* Student Note */}
-            <p
+            <p 
               className="text-xs text-center mt-3 italic"
               style={{ color: "var(--color-text-muted)" }}
             >

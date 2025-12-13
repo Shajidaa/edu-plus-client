@@ -35,7 +35,7 @@ const AppliedTutors = () => {
       return res.data;
     },
   });
-  console.log(myApplications);
+  // console.log(myApplications);
 
   const { data: paymentData = [], isLoading: paymentLoading } = useQuery({
     queryKey: ["payment", user?.email],

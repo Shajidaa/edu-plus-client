@@ -15,7 +15,7 @@ const Reports = () => {
           .get(`${import.meta.env.VITE_API_URL}/all-payment`)
           .then((res) => res.data),
     });
-  console.log(allPaymentData);
+  // console.log(allPaymentData);
 
   if (loading || allPaymentDataLoading) {
     return <Spinner />;
