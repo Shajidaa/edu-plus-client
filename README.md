@@ -1,7 +1,5 @@
 # EduPlus - Online Tutoring Platform
 
-
-
 ## 🎓 About EduPlus
 
 EduPlus is a comprehensive online tutoring platform that connects students with qualified tutors for personalized learning experiences. Our platform facilitates seamless tuition booking, payment processing, and educational management for students, tutors, and administrators.
@@ -20,12 +18,12 @@ EduPlus is a comprehensive online tutoring platform that connects students with 
 
 ## 🚀 Live Demo
 
-- **Frontend**: [EduPlus Live Site](https://your-live-site-url.com)
-
+- **Frontend**: [EduPlus Live Site](https://edu-plus-client.vercel.app/)
 
 ## 🛠️ Tech Stack
 
 ### Frontend
+
 - **React 19** - Latest React with modern features
 - **Vite** - Fast build tool and development server
 - **React Router DOM** - Client-side routing
@@ -38,37 +36,42 @@ EduPlus is a comprehensive online tutoring platform that connects students with 
 - **Lottie React** - Lottie animations
 
 ### Backend & Services
+
 - **Firebase Authentication** - User authentication
 - **Axios** - HTTP client for API requests
 - **Stripe** - Payment processing
 - **React Query (TanStack Query)** - Server state management
 
 ### Development Tools
+
 - **ESLint** - Code linting
 - **Vite** - Build tool and dev server
 - **npm** - Package manager
 
-
 ## 🔧 Installation & Setup
 
 ### Prerequisites
+
 - Node.js (v18 or higher)
 - npm or yarn
 - Firebase account
 - Stripe account (for payments)
 
 ### 1. Clone the Repository
+
 ```bash
-git clone https://github.com/yourusername/eduplus.git
+git clone https://github.com/Shajidaa/edu-plus-client
 cd eduplus
 ```
 
 ### 2. Install Dependencies
+
 ```bash
 npm install
 ```
 
 ### 3. Environment Configuration
+
 Create a `.env` file in the root directory:
 
 ```env
@@ -84,12 +87,14 @@ VITE_FIREBASE_APP_ID=your_firebase_app_id
 ```
 
 ### 4. Firebase Setup
+
 1. Create a Firebase project at [Firebase Console](https://console.firebase.google.com/)
 2. Enable Authentication with Email/Password and Google providers
 3. Set up Firestore database
 4. Add your domain to authorized domains
 
 ### 5. Run Development Server
+
 ```bash
 npm run dev
 ```
@@ -99,16 +104,19 @@ The application will be available at `http://localhost:5173`
 ## 🏗️ Build & Deployment
 
 ### Build for Production
+
 ```bash
 npm run build
 ```
 
 ### Preview Production Build
+
 ```bash
 npm run preview
 ```
 
 ### Deploy to Netlify/Vercel
+
 1. Build the project: `npm run build`
 2. Deploy the `dist` folder to your hosting platform
 3. Configure environment variables on your hosting platform
@@ -116,6 +124,7 @@ npm run preview
 ## 👥 User Roles & Features
 
 ### 🎓 Students
+
 - Browse and search available tuitions
 - Apply for tuitions with tutors
 - Make secure payments via Stripe
@@ -124,6 +133,7 @@ npm run preview
 - View payment history
 
 ### 👨‍🏫 Tutors
+
 - Create and manage tutor profiles
 - Post available tuition slots
 - Review and manage student applications
@@ -132,6 +142,7 @@ npm run preview
 - Update availability and subjects
 
 ### 👨‍💼 Administrators
+
 - User management (students and tutors)
 - Tuition oversight and moderation
 - Payment and transaction monitoring
@@ -173,11 +184,6 @@ npm run preview
 - **Performance Metrics** - Platform usage statistics
 - **Custom Reports** - Exportable data reports
 
-
-
-
-
-
 ## 📝 Scripts
 
 ```bash
@@ -195,20 +201,20 @@ npm run test:watch   # Run tests in watch mode
 ## 🐛 Known Issues & Troubleshooting
 
 ### Common Issues
+
 1. **Firebase Configuration**: Ensure all environment variables are correctly set
 2. **Payment Issues**: Verify Stripe keys and webhook configuration
 3. **Build Errors**: Clear node_modules and reinstall dependencies
 4. **Authentication Problems**: Check Firebase project settings
 
-
-
-
 ## 👨‍💻 Author
 
 **Your Name**
+
 - GitHub: [@shajidaa](https://github.com/Shajidaa)
 - LinkedIn: [Shajida Akter Lopa](https://www.linkedin.com/in/shajida-akter-lopa/)
 - Email: shajidaislam34@gmail.com
+
 ## 🙏 Acknowledgments
 
 - React team for the amazing framework
@@ -217,9 +223,8 @@ npm run test:watch   # Run tests in watch mode
 - Stripe for secure payment processing
 - All contributors and users of EduPlus
 
-
 ---
 
 **Made with ❤️ for better education**
 
-For more information,  contact us at [shajidaislam34@gmail.com](mailto:shajidaislam34@gmail.com).
+For more information, contact us at [shajidaislam34@gmail.com](mailto:shajidaislam34@gmail.com).
