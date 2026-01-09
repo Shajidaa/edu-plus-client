@@ -29,6 +29,8 @@ import DashboardIndex from "./DashboardIndex";
 import Tutor from "../pages/Tutor/Tutor";
 import TutorDetails from "../pages/Tutor/TutorDetails";
 import About from "../pages/About";
+import Blogs from "../pages/Blogs";
+import BlogDetail from "../pages/BlogDetail";
 import Error from "../pages/Error";
 
 const router = createBrowserRouter([
@@ -70,6 +72,14 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/blogs",
+        element: <Blogs />,
+      },
+      {
+        path: "/blogs/:id",
+        element: <BlogDetail />,
       },
       {
         path: "/tutors/:id",
