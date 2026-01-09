@@ -1,4 +1,4 @@
-import { FaCalendarAlt, FaUser, FaClock, FaArrowRight, FaBookOpen, FaGraduationCap, FaLightbulb, FaUsers, FaSearch, FaFilter } from "react-icons/fa";
+import { FaCalendarAlt, FaUser, FaClock, FaArrowRight, FaBookOpen, FaGraduationCap, FaLightbulb, FaUsers, FaSearch } from "react-icons/fa";
 import Container from "../components/Shared/Container";
 import GradientHeading from "../components/Shared/GradientHeading";
 import { useState, useEffect } from "react";
@@ -50,8 +50,10 @@ const Blogs = () => {
     setFilteredBlogs(filtered);
   }, [blogs, selectedCategory, searchTerm]);
 
-  const featuredPost = blogs.length > 0 ? blogs[0] : null;
-  const regularPosts = filteredBlogs.slice(1);
+  // Determine how to display articles based on count and category
+  const shouldShowFeatured = selectedCategory === "All" && filteredBlogs.length > 3;
+  const featuredPost = shouldShowFeatured ? filteredBlogs[0] : null;
+  const regularPosts = shouldShowFeatured ? filteredBlogs.slice(1) : filteredBlogs;
 
   // Generate categories dynamically from blog data
   const categories = [
@@ -59,7 +61,7 @@ const Blogs = () => {
     ...Array.from(new Set(blogs.map(blog => blog.category))).map(category => ({
       name: category,
       count: blogs.filter(blog => blog.category === category).length,
-      icon: category === "Education Technology" ? FaLightbulb :
+      icon: category === "Study Environment" ? FaLightbulb :
             category === "Study Tips" ? FaGraduationCap :
             category === "Tutoring" ? FaUsers :
             category === "Mathematics" ? FaBookOpen :
@@ -256,7 +258,7 @@ const Blogs = () => {
               <div className="mb-6 text-center">
                 <p style={{ color: "var(--color-text-muted)" }}>
                   {filteredBlogs.length === 0 ? "No articles found" : 
-                   `Showing ${filteredBlogs.length - (featuredPost && filteredBlogs.includes(featuredPost) ? 1 : 0)} article${filteredBlogs.length - (featuredPost && filteredBlogs.includes(featuredPost) ? 1 : 0) !== 1 ? 's' : ''}`}
+                   `Showing ${filteredBlogs.length} article${filteredBlogs.length !== 1 ? 's' : ''}`}
                   {searchTerm && ` for "${searchTerm}"`}
                   {selectedCategory !== "All" && ` in ${selectedCategory}`}
                 </p>
@@ -411,7 +413,7 @@ const Blogs = () => {
       </section>
 
       {/* Newsletter Section */}
-      <section 
+      {/* <section 
         className="py-12 sm:py-16 md:py-20 lg:py-24 text-white relative overflow-hidden"
         style={{ 
           background: "linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%)"
@@ -440,7 +442,7 @@ const Blogs = () => {
             </div>
           </div>
         </Container>
-      </section>
+      </section> */}
     </div>
   );
 };
