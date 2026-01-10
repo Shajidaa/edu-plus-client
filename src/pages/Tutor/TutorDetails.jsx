@@ -41,10 +41,10 @@ const TutorDetails = () => {
 
   return (
     <div
-      className="min-h-screen py-8"
+      className="min-h-screen  py-8"
       style={{ backgroundColor: "var(--color-bg-soft)" }}
     >
-      <Container>
+      <Container >
         {/* Back Button */}
         <div className="mb-6">
           <button

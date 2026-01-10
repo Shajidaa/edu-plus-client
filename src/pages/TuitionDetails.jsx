@@ -21,6 +21,7 @@ import useRole from "../hooks/useRole";
 import ApplyTuitionModal from "../components/Modal/ApplyTuitionModal";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import Spinner from "../components/Shared/Spinner";
+import Container from "../components/Shared/Container";
 
 const TuitionDetails = () => {
   const { id } = useParams();
@@ -120,7 +121,7 @@ const TuitionDetails = () => {
       className="min-h-screen py-8 px-4"
       style={{ backgroundColor: "var(--color-bg-soft)" }}
     >
-      <div className="max-w-6xl mx-auto">
+      <Container >
         {/* Header Section */}
         <div className="mb-8">
           <button
@@ -490,7 +491,7 @@ const TuitionDetails = () => {
             </div>
           </div>
         </div>
-      </div>
+      </Container>
 
       {/* MODAL */}
       <ApplyTuitionModal
