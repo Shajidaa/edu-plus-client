@@ -70,7 +70,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="min-h-screen  py-8 px-4">
+    <div className="min-h-screen  py-8 ">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">

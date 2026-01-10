@@ -21,7 +21,7 @@ const TuitionManagement = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div>
+    <div className="max-w-7xl mx-auto">
       {/* Header Section */}
       <div className="mb-6 text-center sm:mb-8">
         <GradientHeading text={"Tuition Management"}></GradientHeading>

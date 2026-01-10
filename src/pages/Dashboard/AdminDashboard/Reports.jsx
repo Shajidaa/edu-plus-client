@@ -21,7 +21,7 @@ const Reports = () => {
     return <Spinner />;
   }
   return (
-    <div>
+    <div className="max-w-7xl mx-auto">
       <ReportTable allPaymentData={allPaymentData}></ReportTable>
     </div>
   );
