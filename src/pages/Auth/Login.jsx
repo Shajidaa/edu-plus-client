@@ -24,7 +24,7 @@ function Login() {
 
     setIsLoading(true);
     try {
-      const { user } = await signInFunc(email, password);
+      await signInFunc(email, password);
     
       navigate(from, { replace: true });
       toast.success("Login Successful");
@@ -62,6 +62,36 @@ function Login() {
     } catch (err) {
       console.error(err);
       toast.error("Google login failed");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleDemoLogin = async (role) => {
+    const demoCredentials = {
+      student: {
+        email: "student@demo.com",
+        password: "Demo123"
+      },
+      tutor: {
+        email: "tutor@gmail.com", 
+        password: "Demo123"
+      },
+      admin: {
+        email: "admin@demo.com",
+        password: "Demo123"
+      }
+    };
+
+    const { email, password } = demoCredentials[role];
+    
+    setIsLoading(true);
+    try {
+      await signInFunc(email, password);
+      navigate(from, { replace: true });
+      toast.success(`Logged in as ${role.charAt(0).toUpperCase() + role.slice(1)} Demo`);
+    } catch (err) {
+      toast.error(`${role.charAt(0).toUpperCase() + role.slice(1)} demo login failed. Please try again.`);
     } finally {
       setIsLoading(false);
     }
@@ -271,6 +301,50 @@ function Login() {
                 {isLoading ? "Signing in..." : "Continue with Google"}
               </span>
             </button>
+
+            {/* Demo Users Section */}
+            <div className="mt-6">
+              <div className="flex items-center mb-4">
+                <div 
+                  className="flex-1 h-px" 
+                  style={{ backgroundColor: "var(--color-border)" }}
+                ></div>
+                <span 
+                  className="px-4 text-sm font-medium"
+                  style={{ color: "var(--color-text-muted)" }}
+                >
+                  Try Demo Accounts
+                </span>
+                <div 
+                  className="flex-1 h-px" 
+                  style={{ backgroundColor: "var(--color-border)" }}
+                ></div>
+              </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <button
+                  onClick={() => handleDemoLogin('student')}
+                  disabled={isLoading}
+                  className="btn btn-sm bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 hover:border-blue-300 transition-all duration-200 disabled:opacity-70"
+                >
+                  Student Demo
+                </button>
+                <button
+                  onClick={() => handleDemoLogin('tutor')}
+                  disabled={isLoading}
+                  className="btn btn-sm bg-green-50 hover:bg-green-100 text-green-700 border border-green-200 hover:border-green-300 transition-all duration-200 disabled:opacity-70"
+                >
+                  Tutor Demo
+                </button>
+                <button
+                  onClick={() => handleDemoLogin('admin')}
+                  disabled={isLoading}
+                  className="btn btn-sm bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 hover:border-purple-300 transition-all duration-200 disabled:opacity-70"
+                >
+                  Admin Demo
+                </button>
+              </div>
+            </div>
 
             {/* Student Note */}
             <p 
