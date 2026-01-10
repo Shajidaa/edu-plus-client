@@ -154,7 +154,7 @@ const Blogs = () => {
                       </div>
                     </div>
                     <h2 
-                      className="text-xl sm:text-2xl lg:text-3xl font-bold mb-4 leading-tight"
+                      className="text-xl  sm:text-2xl lg:text-3xl font-bold mb-4 leading-tight"
                       style={{ color: "var(--color-text-dark)" }}
                     >
                       {featuredPost.title}
@@ -397,52 +397,11 @@ const Blogs = () => {
               </div>
             )}
 
-            {/* Load More Button */}
-            {regularPosts.length > 0 && regularPosts.length >= 6 && (
-              <div className="text-center mt-8 sm:mt-12">
-                <button 
-                  className="px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-medium text-white transition-all duration-300 hover:scale-105"
-                  style={{ backgroundColor: "var(--color-primary)" }}
-                >
-                  Load More Articles
-                </button>
-              </div>
-            )}
           </div>
         </Container>
       </section>
 
-      {/* Newsletter Section */}
-      {/* <section 
-        className="py-12 sm:py-16 md:py-20 lg:py-24 text-white relative overflow-hidden"
-        style={{ 
-          background: "linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%)"
-        }}
-      >
-        <div className="absolute inset-0 bg-black/10"></div>
-        <Container className="relative z-10">
-          <div className="text-center max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
-              Stay Updated with Educational Insights
-            </h2>
-            <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 opacity-90 leading-relaxed px-2">
-              Subscribe to our newsletter and get the latest educational tips, study guides, and learning resources delivered to your inbox
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md sm:max-w-lg mx-auto">
-              <input 
-                type="email" 
-                placeholder="Enter your email address"
-                className="flex-1 px-4 py-3 rounded-lg text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/50"
-              />
-              <button 
-                className="px-6 py-3 bg-white text-primary font-medium rounded-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105"
-              >
-                Subscribe
-              </button>
-            </div>
-          </div>
-        </Container>
-      </section> */}
+   
     </div>
   );
 };

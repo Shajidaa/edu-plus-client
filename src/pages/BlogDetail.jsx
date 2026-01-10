@@ -71,7 +71,7 @@ const BlogDetail = () => {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "var(--color-bg-soft)" }}>
+    <Container className="min-h-screen" style={{ backgroundColor: "var(--color-bg-soft)" }}>
       {/* Header */}
       <section className="py-8">
         <Container>
@@ -91,7 +91,7 @@ const BlogDetail = () => {
       {/* Article Content */}
       <section className="pb-12">
         <Container>
-          <div className="max-w-4xl mx-auto px-4">
+          <div className="">
             {/* Article Header */}
             <div className="mb-8">
               <div className="flex flex-wrap items-center gap-4 mb-6 text-sm" style={{ color: "var(--color-text-muted)" }}>
@@ -311,7 +311,7 @@ const BlogDetail = () => {
           </Container>
         </section>
       )}
-    </div>
+    </Container>
   );
 };
 
