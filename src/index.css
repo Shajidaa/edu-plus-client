@@ -43,8 +43,8 @@
     --color-primary-hover: #3B82F6;
 
     --color-secondary: var(--color-purple);
+    /* --color-secondary-hover: #7C3AED; */
     --color-secondary-hover: #7C3AED;
-
     /* Dark Background Colors */
     --color-bg-main: #0F172A;
     --color-bg-soft: #1E293B;

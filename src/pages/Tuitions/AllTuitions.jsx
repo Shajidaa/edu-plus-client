@@ -540,7 +540,7 @@ if (isLoading) {
                       onClick={() => goToPage(currentPage - 1)}
                       style={{
                         borderColor: "var(--color-primary)",
-                        color: "var(--color-primary)",
+                       
                       }}
                     >
                       <FiChevronLeft size={16} />
@@ -591,7 +591,7 @@ if (isLoading) {
                       onClick={() => goToPage(currentPage + 1)}
                       style={{
                         borderColor: "var(--color-primary)",
-                        color: "var(--color-primary)",
+                      
                       }}
                     >
                       <span className="hidden sm:inline">Next</span>

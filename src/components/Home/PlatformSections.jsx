@@ -98,7 +98,7 @@ const PlatformSections = () => {
                           sm:text-sm font-medium self-start animate-pulse mb-4 sm:mb-6"
               style={{
                 backgroundColor: "var(--color-primary-hover)",
-                color: "var(--color-secondary)",
+              
               }}
             >
               <FiZap className="text-sm sm:text-base" />
@@ -237,7 +237,7 @@ const PlatformSections = () => {
                           sm:text-sm font-medium self-start animate-pulse mb-4 sm:mb-6"
               style={{
                 backgroundColor: "var(--color-primary-hover)",
-                color: "var(--color-secondary)",
+                
               }}
             >
               <FiZap className="text-sm sm:text-base" />

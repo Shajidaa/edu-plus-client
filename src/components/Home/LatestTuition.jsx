@@ -48,7 +48,7 @@ const LatestTuition = () => {
                               sm:text-sm font-medium self-start animate-pulse"
           style={{
             backgroundColor: "var(--color-primary-hover)",
-            color: "var(--color-secondary)",
+        
           }}
         >
           <FiZap className="text-sm sm:text-base" />

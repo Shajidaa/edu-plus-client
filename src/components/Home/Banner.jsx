@@ -20,10 +20,10 @@ const Banner = () => {
             <div
               className="inline-flex items-center gap-2 
               px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs 
-              sm:text-sm font-medium self-start animate-pulse"
+              sm:text-sm font-medium self-start dark:text-white animate-pulse"
               style={{
                 backgroundColor: "var(--color-primary-hover)",
-                color: "var(--color-secondary)",
+              
               }}
             >
               <FaStar className="text-sm sm:text-base" />
