@@ -15,6 +15,7 @@ import TuitionCard from "../../components/TuitionCard";
 import Spinner from "../../components/Shared/Spinner";
 import GradientHeading from "../../components/Shared/GradientHeading";
 import Error from "../Error";
+import SkeletonTuition from "../../components/Loader/SkeletonTuition";
 
 const AllTuitions = () => {
   const axiosSecure = useAxiosSecure();
@@ -170,9 +171,14 @@ const AllTuitions = () => {
     return pages;
   };
 
-  if (isLoading) {
-    return <Spinner />;
+if (isLoading) {
+    return <Container className="grid my-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {[...Array(8)].map((_, i) => (
+                <SkeletonTuition key={i} />
+              ))}
+            </Container>;
   }
+
 
   if (error) {
     return <Error />;

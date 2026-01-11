@@ -15,6 +15,7 @@ import {
 } from "react-icons/fi";
 import GradientButton from "../../components/Shared/GradientButton";
 import TutorCard from "../../components/TutorCard";
+import SkeletonTutor from "../../components/Loader/SkeletonTutor";
 
 const Tutor = () => {
   const axiosSecure = useAxiosSecure();
@@ -33,9 +34,14 @@ const Tutor = () => {
 
   const tutors = Array.isArray(tutorData) ? tutorData : [];
 
-  if (isLoading) {
-    return <Spinner></Spinner>;
+if (isLoading) {
+    return <Container className="grid my-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {[...Array(8)].map((_, i) => (
+                <SkeletonTutor key={i} />
+              ))}
+            </Container>;
   }
+
 
   if (error) {
     return (
