@@ -17,6 +17,7 @@ import LatestTutorCard from "../LatestTutorCard";
 import GradientHeading from "../Shared/GradientHeading";
 import TCard from "../TCard";
 import TutorCard from "../TutorCard";
+import SkeletonTutor from "../Loader/SkeletonTutor";
 
 const LatestTutor = () => {
   const axiosSecure = useAxiosSecure();
@@ -32,7 +33,11 @@ const LatestTutor = () => {
   });
 
   if (isLoading) {
-    return <Spinner></Spinner>;
+    return  <Container className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {[...Array(4)].map((_, i) => (
+                <SkeletonTutor key={i} />
+              ))}
+            </Container>
   }
   return (
     <section className="py-16">
@@ -67,7 +72,7 @@ const LatestTutor = () => {
               </Link>
             </div>
 
-            <Swiper
+           <Swiper
               loop={latestTutorData.length > 3}
               autoplay={{
                 delay: 3000,
@@ -112,7 +117,7 @@ const LatestTutor = () => {
                   <TutorCard tutor={tutor} />
                 </SwiperSlide>
               ))}
-            </Swiper>
+            </Swiper> 
           </div>
         )}
       </Container>
