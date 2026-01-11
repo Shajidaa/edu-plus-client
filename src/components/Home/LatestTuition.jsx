@@ -15,6 +15,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import GradientHeading from "../Shared/GradientHeading";
 import TCard from "../TCard";
+import SkeletonTuition from "../Loader/SkeletonTuition";
 
 const LatestTuition = () => {
   const axiosSecure = useAxiosSecure();
@@ -30,7 +31,11 @@ const LatestTuition = () => {
   });
 
   if (isLoading) {
-    return <Spinner></Spinner>;
+    return <Container className="grid my-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {[...Array(4)].map((_, i) => (
+                <SkeletonTuition key={i} />
+              ))}
+            </Container>;
   }
 
   return (
