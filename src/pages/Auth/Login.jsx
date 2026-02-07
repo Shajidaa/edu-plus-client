@@ -77,6 +77,10 @@ function Login() {
         email: "tutor@gmail.com",
         password: "Demo123",
       },
+      admin: {
+        email: "admin@demo.com",
+        password: "Demo123",
+      },
     };
 
     const { email, password } = demoCredentials[role];
@@ -335,6 +339,13 @@ function Login() {
                   className="btn btn-sm bg-green-50 hover:bg-green-100 text-green-700 border border-green-200 hover:border-green-300 transition-all duration-200 disabled:opacity-70"
                 >
                   Tutor Demo
+                </button>
+                <button
+                  onClick={() => handleDemoLogin("admin")}
+                  disabled={isLoading}
+                  className="btn btn-sm bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 hover:border-purple-300 transition-all duration-200 disabled:opacity-70"
+                >
+                  Admin Demo
                 </button>
               </div>
             </div>
