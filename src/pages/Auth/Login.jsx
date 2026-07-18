@@ -51,7 +51,6 @@ function Login() {
         body: JSON.stringify({
           name: loggedUser.displayName,
           email: loggedUser.email,
-          // role না path korle backend default student assign korbe
         }),
       });
 

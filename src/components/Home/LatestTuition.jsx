@@ -24,18 +24,20 @@ const LatestTuition = () => {
     queryKey: ["allLatestTuitions"],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `${import.meta.env.VITE_API_URL}/latest-tuitions`
+        `${import.meta.env.VITE_API_URL}/latest-tuitions`,
       );
       return res.data;
     },
   });
 
   if (isLoading) {
-    return <Container className="grid my-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {[...Array(4)].map((_, i) => (
-                <SkeletonTuition key={i} />
-              ))}
-            </Container>;
+    return (
+      <Container className="grid my-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {[...Array(4)].map((_, i) => (
+          <SkeletonTuition key={i} />
+        ))}
+      </Container>
+    );
   }
 
   return (
@@ -48,7 +50,6 @@ const LatestTuition = () => {
                               sm:text-sm font-medium self-start animate-pulse"
           style={{
             backgroundColor: "var(--color-primary-hover)",
-        
           }}
         >
           <FiZap className="text-sm sm:text-base" />

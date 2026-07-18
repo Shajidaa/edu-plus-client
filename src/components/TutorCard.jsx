@@ -1,4 +1,4 @@
-import { FiMail } from "react-icons/fi";
+import { FiBook, FiMail } from "react-icons/fi";
 import GradientButton from "./Shared/GradientButton";
 
 const TutorCard = ({ tutor }) => {
@@ -40,7 +40,17 @@ const TutorCard = ({ tutor }) => {
               </span>
             </div>
           )}
-
+          {tutor.subject && (
+            <div className="flex items-center gap-3">
+              <FiBook size={16} style={{ color: "var(--color-primary)" }} />
+              <span
+                className="text-sm"
+                style={{ color: "var(--color-text-muted)" }}
+              >
+                {tutor.subject}
+              </span>
+            </div>
+          )}
           {/* Contact Button */}
           <div className="mt-6">
             {" "}

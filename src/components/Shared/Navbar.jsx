@@ -11,6 +11,7 @@ function Navbar() {
   const { user, loading, logOutFunc } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  // console.log(user);
 
   const logOut = () => {
     logOutFunc();
