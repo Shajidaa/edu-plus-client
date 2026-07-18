@@ -114,7 +114,7 @@ const LatestTuition = () => {
             >
               {latestTuitions.map((tuition) => (
                 <SwiperSlide key={tuition._id}>
-                  <TCard tuition={tuition} />
+                  <TuitionCard tuition={tuition} />
                 </SwiperSlide>
               ))}
             </Swiper>
