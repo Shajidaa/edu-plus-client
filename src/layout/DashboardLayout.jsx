@@ -21,6 +21,7 @@ import useRole from "../hooks/useRole";
 import Spinner from "../components/Shared/Spinner";
 import ThemeToggle from "../components/Shared/ThemeToggle";
 import { AuthContext } from "../providers/AuthContext";
+import WhatsAppLiveWidget from "../components/Shared/WhatsAppWidget";
 
 const DashboardLayout = () => {
   const { user, loading: userLoading } = useContext(AuthContext);
@@ -382,6 +383,7 @@ const DashboardLayout = () => {
           style={{ backgroundColor: "var(--color-bg-soft)" }}
         >
           <Outlet />
+          <WhatsAppLiveWidget />
         </main>
       </div>
     </div>
