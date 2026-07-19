@@ -127,3 +127,8 @@
 .dark .drawer-side {
     background-color: var(--color-primary);
 }
+
+/* Example to hide the top Google bar if it appears */
+.goog-te-banner-frame {
+    display: none !important;
+}

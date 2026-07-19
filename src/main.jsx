@@ -43,5 +43,5 @@ createRoot(document.getElementById("root")).render(
         </AuthProvider>
       </ThemeProvider>
     </QueryClientProvider>
-  </div>
+  </div>,
 );

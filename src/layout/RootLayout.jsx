@@ -2,6 +2,7 @@ import { Outlet } from "react-router";
 import Navbar from "../components/Shared/Navbar";
 import Footer from "../components/Footer/Footer";
 import WhatsAppLiveWidget from "../components/Shared/WhatsAppWidget";
+import AIChatWidget from "../components/Shared/AIChatWidget";
 
 const RootLayout = () => {
   return (
@@ -15,6 +16,7 @@ const RootLayout = () => {
       <Navbar />
       <Outlet />
       <WhatsAppLiveWidget />
+      {/* <AIChatWidget /> */}
       <Footer />
     </div>
   );

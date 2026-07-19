@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { FaWhatsapp, FaTimes, FaPaperPlane } from "react-icons/fa";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const AGENT_IMAGE =
   "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=100&h=100&auto=format&fit=crop";
@@ -13,7 +13,12 @@ export default function WhatsAppLiveWidget() {
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (!message.trim()) return;
+    const phoneNumber = import.meta.env.VITE_PHONE_NUMBER;
 
+    if (!phoneNumber) {
+      console.error("WhatsApp phone number is not defined in .env file");
+      return;
+    }
     const encodedMsg = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${import.meta.env.VITE_PHONE_NUMBER}?text=${encodedMsg}`;
 
