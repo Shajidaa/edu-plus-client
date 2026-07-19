@@ -18,7 +18,10 @@ const getSessionId = () => {
 export default function AIChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role: "assistant", text: "Hi! 👋 I'm your EduPlus AI assistant. How can I help you today?" },
+    {
+      role: "assistant",
+      text: "Hi! 👋 I'm your EduPlus AI assistant. How can I help you today?",
+    },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -48,7 +51,10 @@ export default function AIChatWidget() {
     } catch {
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", text: "Sorry, something went wrong. Please try again." },
+        {
+          role: "assistant",
+          text: "Sorry, something went wrong. Please try again.",
+        },
       ]);
     } finally {
       setLoading(false);
@@ -56,7 +62,10 @@ export default function AIChatWidget() {
   };
 
   return (
-    <div className="fixed bottom-28 right-6 flex flex-col items-start font-sans" style={{ zIndex: 9999 }}>
+    <div
+      className="fixed bottom-28 right-6 flex flex-col items-start font-sans"
+      style={{ zIndex: 999 }}
+    >
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -74,7 +83,9 @@ export default function AIChatWidget() {
                 </div>
                 <div>
                   <h3 className="text-sm font-bold">EduPlus AI</h3>
-                  <p className="text-[10px] text-indigo-200">Always here to help</p>
+                  <p className="text-[10px] text-indigo-200">
+                    Always here to help
+                  </p>
                 </div>
               </div>
               <button
@@ -86,9 +97,15 @@ export default function AIChatWidget() {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50" style={{ minHeight: 0 }}>
+            <div
+              className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50"
+              style={{ minHeight: 0 }}
+            >
               {messages.map((msg, i) => (
-                <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+                <div
+                  key={i}
+                  className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                >
                   <div
                     className={`max-w-[80%] px-4 py-2 rounded-2xl text-sm leading-relaxed shadow-sm ${
                       msg.role === "user"
@@ -105,9 +122,18 @@ export default function AIChatWidget() {
                 <div className="flex justify-start">
                   <div className="bg-white border border-gray-200 px-4 py-2 rounded-2xl rounded-bl-none shadow-sm">
                     <span className="flex gap-1 items-center">
-                      <span className="w-2 h-2 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-                      <span className="w-2 h-2 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-                      <span className="w-2 h-2 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                      <span
+                        className="w-2 h-2 bg-indigo-400 rounded-full animate-bounce"
+                        style={{ animationDelay: "0ms" }}
+                      />
+                      <span
+                        className="w-2 h-2 bg-indigo-400 rounded-full animate-bounce"
+                        style={{ animationDelay: "150ms" }}
+                      />
+                      <span
+                        className="w-2 h-2 bg-indigo-400 rounded-full animate-bounce"
+                        style={{ animationDelay: "300ms" }}
+                      />
                     </span>
                   </div>
                 </div>
@@ -116,7 +142,10 @@ export default function AIChatWidget() {
             </div>
 
             {/* Input */}
-            <form onSubmit={sendMessage} className="p-3 bg-white border-t flex gap-2 shrink-0">
+            <form
+              onSubmit={sendMessage}
+              className="p-3 bg-white border-t flex gap-2 shrink-0"
+            >
               <input
                 type="text"
                 value={input}

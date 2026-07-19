@@ -16,7 +16,7 @@ const RootLayout = () => {
       <Navbar />
       <Outlet />
       <WhatsAppLiveWidget />
-      {/* <AIChatWidget /> */}
+      <AIChatWidget />
       <Footer />
     </div>
   );

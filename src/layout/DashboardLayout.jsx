@@ -22,6 +22,7 @@ import Spinner from "../components/Shared/Spinner";
 import ThemeToggle from "../components/Shared/ThemeToggle";
 import { AuthContext } from "../providers/AuthContext";
 import WhatsAppLiveWidget from "../components/Shared/WhatsAppWidget";
+import AIChatWidget from "../components/Shared/AIChatWidget";
 
 const DashboardLayout = () => {
   const { user, loading: userLoading } = useContext(AuthContext);
@@ -384,6 +385,7 @@ const DashboardLayout = () => {
         >
           <Outlet />
           <WhatsAppLiveWidget />
+          <AIChatWidget />
         </main>
       </div>
     </div>
