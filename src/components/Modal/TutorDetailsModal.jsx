@@ -28,7 +28,7 @@ const TutorDetailsModal = ({ id, onClose }) => {
   });
 
   if (isLoading) return <Spinner />;
-  console.log(tutor);
+  // console.log(tutor);
 
   return (
     <>

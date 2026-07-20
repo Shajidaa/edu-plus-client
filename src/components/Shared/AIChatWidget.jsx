@@ -72,7 +72,7 @@ export default function AIChatWidget() {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="mb-4 w-80 sm:w-96 overflow-hidden rounded-2xl bg-white shadow-2xl border border-gray-100 flex flex-col"
+            className="mb-4 w-72 md:w-80 overflow-hidden rounded-2xl bg-white shadow-2xl border border-gray-100 flex flex-col"
             style={{ maxHeight: "520px" }}
           >
             {/* Header */}
